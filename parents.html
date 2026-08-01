@@ -5,15 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parent Hub | Olentangy Girls Cross Country</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        /* Specific Page Overrides matching Home Page Design */
+        .hero-section {
+            background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover-photo.jpg') no-repeat center center;
+            background-size: cover;
+            padding: 6rem 2rem 10rem 2rem;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .hero-section h2 {
+            font-size: 2.75rem;
+            margin: 0 0 1rem 0;
+            color: #ffffff;
+        }
+
+        .hero-section p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        .overlap-container {
+            margin-top: -6rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Accordion Styles */
+        .accordion-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            background: #ffffff;
+        }
+        .accordion-header {
+            padding: 1.25rem 1.5rem;
+            background-color: #f8fafc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-navy);
+            transition: background-color 0.2s;
+            user-select: none;
+        }
+        .accordion-header:hover {
+            background-color: #f1f5f9;
+        }
+        .accordion-header h3 {
+            font-size: 1.15rem;
+            margin: 0;
+        }
+        .accordion-icon {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary-navy);
+            transition: transform 0.3s ease;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out;
+            background: #ffffff;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .accordion-body {
+            padding: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Expanded Footer */
+        .expanded-footer {
+            background-color: var(--primary-navy);
+            color: #e2e8f0;
+            padding: 4rem 2rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+        }
+        .footer-grid h4 {
+            color: var(--primary-gold);
+            margin: 0 0 1.25rem 0;
+            font-size: 1.1rem;
+        }
+        .footer-grid p, .footer-grid a {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin: 0 0 0.5rem 0;
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s ease;
+        }
+        .footer-grid a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .footer-bottom-bar {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #f1f5f9;">
     <!-- Utility Bar -->
     <div class="utility-bar">
         <span>Need Help? <a href="mailto:ohsgxctreasurer@gmail.com">Contact Booster Treasurer</a></span>
-        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank">FinalForms</a> | <a href="https://oyaa.org/cross-country/" target="_blank">OYAA</a></span>
+        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank" rel="noopener noreferrer">FinalForms</a> | <a href="#">OYAA</a></span>
     </div>
 
-    <!-- Header & Navigation (Sticky) -->
+    <!-- Header & Navigation -->
     <header>
         <div class="nav-container">
             <div class="brand">
@@ -27,7 +148,7 @@
                 <ul id="navMenu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="schedule.html">Schedule</a></li>
-                    <li><a href="team.html">Coaches & Team</a></li>
+                    <li><a href="team.html">Coaches &amp; Team</a></li>
                     <li><a href="parents.html" class="active">Parent Hub</a></li>
                     <li><a href="support.html">Support</a></li>
                 </ul>
@@ -35,14 +156,15 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="section-box">
-            
-            <div class="section-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem;">
-                <h2>Parent & Booster Resource Center</h2>
-                <span class="badge badge-race">2026 SEASON INFO</span>
-            </div>
+    <!-- Full-Width Hero Section -->
+    <div class="hero-section">
+        <h2>Parent &amp; Booster Resource Center</h2>
+        <p>Access camp schedules, fee payment options, pasta dinner traditions, and essential forms for the 2026 season.</p>
+    </div>
+
+    <!-- Main Content (Overlapping Container) -->
+    <div class="container overlap-container">
+        <div class="section-box" style="padding: 2.5rem; border: none; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
             
             <p style="color: var(--text-muted); margin-bottom: 2rem;">
                 Click below to expand any section for camp details, fee breakdowns, traditions, and frequently asked questions.
@@ -55,54 +177,62 @@
                     <span class="accordion-icon">+</span>
                 </div>
                 <div class="accordion-content">
-                    <p><strong>Dates:</strong> Thursday, July 30th and Friday, July 31st, 2026</p>
-                    <p><strong>Location:</strong> Camp Lazarus (4422 Columbus Pike, Delaware, OH 43015)</p>
-                    <p><strong>Time:</strong> Begins each morning at 8:00 AM</p>
-                    <p><strong>Details:</strong> Team members should pack a lunch. Dinner will be provided. A Medical Release Form is required for every participant.</p>
+                    <div class="accordion-body">
+                        <p><strong>Dates:</strong> Thursday, July 30th and Friday, July 31st, 2026</p>
+                        <p><strong>Location:</strong> Camp Lazarus (4422 Columbus Pike, Delaware, OH 43015)</p>
+                        <p><strong>Time:</strong> Begins each morning at 8:00 AM</p>
+                        <p><strong>Details:</strong> Team members should pack a lunch. Dinner will be provided. A Medical Release Form is required for every participant.</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Accordion Section 2: Parent Night -->
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <h3>🍔 Parent Night & Celebration</h3>
+                    <h3>🍔 Parent Night &amp; Celebration</h3>
                     <span class="accordion-icon">+</span>
                 </div>
                 <div class="accordion-content">
-                    <p><strong>When:</strong> Following Camp on Friday, July 31st, 2026 at 5:30 PM</p>
-                    <p><strong>Events:</strong> Family dinner followed by a short meeting presented by the boosters and team camp skits. Please plan to attend!</p>
-                    <p style="margin-top: 1rem;"><em>Questions?</em> Email boosters at <a href="mailto:olentangygirlsxc@gmail.com" style="color: var(--primary-gold); font-weight: bold;">olentangygirlsxc@gmail.com</a></p>
+                    <div class="accordion-body">
+                        <p><strong>When:</strong> Following Camp on Friday, July 31st, 2026 at 5:30 PM</p>
+                        <p><strong>Events:</strong> Family dinner followed by a short meeting presented by the boosters and team camp skits. Please plan to attend!</p>
+                        <p style="margin-top: 1rem;"><em>Questions?</em> Email boosters at <a href="mailto:olentangygirlsxc@gmail.com" style="color: var(--primary-navy); font-weight: bold; text-decoration: underline;">olentangygirlsxc@gmail.com</a></p>
+                    </div>
                 </div>
             </div>
 
             <!-- Accordion Section 3: Fees & Forms -->
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <h3>📋 Fees, Forms & Registration</h3>
+                    <h3>📋 Fees, Forms &amp; Registration</h3>
                     <span class="accordion-icon">+</span>
                 </div>
                 <div class="accordion-content">
-                    <p><strong>Booster & Camp Fee:</strong> $120 fee due by July 29, 2026. Covers camp costs, food, facility use, t-shirts, senior banners, replacement uniforms, website, and End-of-Year Celebration.</p>
-                    <p style="margin-top: 0.75rem;"><strong>Payment Methods:</strong></p>
-                    <ul style="padding-left: 1.25rem; margin-top: 0.5rem; margin-bottom: 1rem;">
-                        <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Check:</strong> Written to OAB with “OHS Girls XC Camp and Booster Fee” in memo line.</li>
-                        <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Cash:</strong> Give to Coaching Staff in a sealed envelope with athlete's name.</li>
-                        <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Zelle ID:</strong> <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">ohsgxctreasurer@gmail.com</code> (designate runner's name).</li>
-                        <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Venmo:</strong> <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">@ohsgirlsxc</code> (designate runner's name).</li>
-                    </ul>
-                    <p style="margin-top: 0.75rem;"><strong>Required Forms:</strong> OHSAA Physical Form and <a href="https://olentangy-oh.finalforms.com" target="_blank" style="color: var(--primary-gold); font-weight: bold;">FinalForms</a> registration must be completed prior to mandatory practice.</p>
+                    <div class="accordion-body">
+                        <p><strong>Booster &amp; Camp Fee:</strong> $120 fee due by July 29, 2026. Covers camp costs, food, facility use, t-shirts, senior banners, replacement uniforms, website, and End-of-Year Celebration.</p>
+                        <p style="margin-top: 0.75rem;"><strong>Payment Methods:</strong></p>
+                        <ul style="padding-left: 1.25rem; margin-top: 0.5rem; margin-bottom: 1rem;">
+                            <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Check:</strong> Written to OAB with “OHS Girls XC Camp and Booster Fee” in memo line.</li>
+                            <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Cash:</strong> Give to Coaching Staff in a sealed envelope with athlete's name.</li>
+                            <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Zelle ID:</strong> <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">ohsgxctreasurer@gmail.com</code> (designate runner's name).</li>
+                            <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Venmo:</strong> <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">@ohsgirlsxc</code> (designate runner's name).</li>
+                        </ul>
+                        <p style="margin-top: 0.75rem;"><strong>Required Forms:</strong> OHSAA Physical Form and <a href="https://olentangy-oh.finalforms.com" target="_blank" rel="noopener noreferrer" style="color: var(--primary-navy); font-weight: bold; text-decoration: underline;">FinalForms</a> registration must be completed prior to mandatory practice.</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Accordion Section 4: Traditions -->
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <h3>🍝 Pasta Dinners & Chocolate Milk Tradition</h3>
+                    <h3>🍝 Pasta Dinners &amp; Chocolate Milk Tradition</h3>
                     <span class="accordion-icon">+</span>
                 </div>
                 <div class="accordion-content">
-                    <p><strong>Pasta Dinners:</strong> Every Thursday after practice. Hosted at homes or parks. Team arrives around 5:00 PM. Boosters provide serving ware and pasta (scheduled with Carrabba’s). Hosts provide drinks and desserts.</p>
-                    <p style="margin-top: 0.75rem;"><strong>Chocolate Milk Tradition:</strong> One gallon provided by boosters after every meet to replenish muscle tissue with an optimal 3:1 carb-to-protein recovery ratio.</p>
+                    <div class="accordion-body">
+                        <p><strong>Pasta Dinners:</strong> Every Thursday after practice. Hosted at homes or parks. Team arrives around 5:00 PM. Boosters provide serving ware and pasta (scheduled with Carrabba’s). Hosts provide drinks and desserts.</p>
+                        <p style="margin-top: 0.75rem;"><strong>Chocolate Milk Tradition:</strong> One gallon provided by boosters after every meet to replenish muscle tissue with an optimal 3:1 carb-to-protein recovery ratio.</p>
+                    </div>
                 </div>
             </div>
 
@@ -113,25 +243,67 @@
                     <span class="accordion-icon">+</span>
                 </div>
                 <div class="accordion-content">
-                    <h4 style="color: var(--primary-navy); margin-bottom: 0.25rem; font-size: 1rem;">Transportation to Off-Site Practices</h4>
-                    <p style="margin-bottom: 1rem;">If she doesn't drive yet, she'll be assigned to another team member who is a Senior or Junior with a driver's license to safely transport her. Off-site practices happen at Highbanks Metro Park, Alum Creek Below the Dam, Marina/Beach, or Liberty Park (Wednesday/Friday practices and lifting are at OHS).</p>
-                    
-                    <h4 style="color: var(--primary-navy); margin-bottom: 0.25rem; font-size: 1rem;">Race Day Expectations</h4>
-                    <p style="margin-bottom: 1rem;">Athletes run a 5k (3.1 miles). Athletes must ride the team bus to meets and sign out with parents before leaving. Parents should <strong>NOT</strong> enter the athlete tent area during the 45 minutes before a meet and 30 minutes after.</p>
+                    <div class="accordion-body">
+                        <h4 style="color: var(--primary-navy); margin-bottom: 0.25rem; font-size: 1rem;">Transportation to Off-Site Practices</h4>
+                        <p style="margin-bottom: 1rem;">If she doesn't drive yet, she'll be assigned to another team member who is a Senior or Junior with a driver's license to safely transport her. Off-site practices happen at Highbanks Metro Park, Alum Creek Below the Dam, Marina/Beach, or Liberty Park (Wednesday/Friday practices and lifting are at OHS).</p>
+                        
+                        <h4 style="color: var(--primary-navy); margin-bottom: 0.25rem; font-size: 1rem;">Race Day Expectations</h4>
+                        <p style="margin-bottom: 1rem;">Athletes run a 5k (3.1 miles). Athletes must ride the team bus to meets and sign out with parents before leaving. Parents should <strong>NOT</strong> enter the athlete tent area during the 45 minutes before a meet and 30 minutes after.</p>
 
-                    <h4 style="color: var(--primary-navy); margin-bottom: 0.25rem; font-size: 1rem;">Where should parents hang out during races?</h4>
-                    <p>Visit the <strong>Parent Tent</strong>, set up away from the team area, where parents mingle, check viewing locations, enjoy snacks, and celebrate accomplishments.</p>
+                        <h4 style="color: var(--primary-navy); margin-bottom: 0.25rem; font-size: 1rem;">Where should parents hang out during races?</h4>
+                        <p>Visit the <strong>Parent Tent</strong>, set up away from the team area, where parents mingle, check viewing locations, enjoy snacks, and celebrate accomplishments.</p>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; margin-top: 2rem;">
-        <p>&copy; 2026 Olentangy Girls Cross Country Booster Club.</p>
+    <!-- Expanded Footer -->
+    <footer class="expanded-footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Olentangy Girls XC Boosters</h4>
+                <p>A non-profit booster organization dedicated to supporting student-athlete development, equipment needs, team meals, and memorable seasonal events.</p>
+            </div>
+            <div>
+                <h4>Quick Navigation</h4>
+                <a href="index.html">Home Dashboard</a>
+                <a href="schedule.html">Meet Schedule</a>
+                <a href="team.html">Coaches &amp; Team</a>
+                <a href="parents.html">Parent Hub &amp; Camp Info</a>
+                <a href="support.html">Booster Support</a>
+            </div>
+            <div>
+                <h4>Contact &amp; Location</h4>
+                <p style="margin-bottom: 0.2rem; color: #ffffff; font-weight: bold;">Mailing Address:</p>
+                <p>675 Lewis Center Rd<br>Lewis Center, OH 43035</p>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            &copy; 2026 Olentangy Girls Cross Country Booster Club. All rights reserved.
+        </div>
     </footer>
     
-    <script src="./assets/js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const accordionHeaders = document.querySelectorAll(".accordion-header");
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener("click", function () {
+                    const item = this.closest(".accordion-item");
+                    const content = item.querySelector(".accordion-content");
+                    
+                    item.classList.toggle("active");
+                    
+                    if (item.classList.contains("active")) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.maxHeight = null;
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

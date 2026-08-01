@@ -3,14 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coaches & Team | Olentangy Girls Cross Country</title>
+    <title>Coaches &amp; Team | Olentangy Girls Cross Country</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        /* Specific Page Overrides matching Home Page Design */
+        .hero-section {
+            background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover-photo.jpg') no-repeat center center;
+            background-size: cover;
+            padding: 6rem 2rem 10rem 2rem;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .hero-section h2 {
+            font-size: 2.75rem;
+            margin: 0 0 1rem 0;
+            color: #ffffff;
+        }
+
+        .hero-section p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        .overlap-container {
+            margin-top: -6rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Team & Coach Grid Styles */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .team-card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .team-img-wrapper {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .team-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .team-card-body {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .team-card h3 {
+            color: var(--primary-navy);
+            font-size: 1.35rem;
+            margin-bottom: 0.25rem;
+        }
+        .team-role {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #b45309;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+        .team-card p {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Expandable Accordion Bio Styles */
+        .bio-accordion {
+            margin-top: auto;
+            border-top: 1px solid #e2e8f0;
+        }
+        .bio-header {
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-navy);
+            font-size: 0.95rem;
+            user-select: none;
+            transition: color 0.2s ease;
+        }
+        .bio-header:hover {
+            color: var(--primary-gold);
+        }
+        .bio-icon {
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        .bio-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .bio-body {
+            padding-bottom: 1rem;
+        }
+        .team-card.active .bio-content {
+            max-height: 600px;
+        }
+        .team-card.active .bio-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Roster Section Styles */
+        .roster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .roster-grade-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .roster-grade-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary-navy);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .roster-grade-header h4 {
+            color: var(--primary-navy);
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        .grade-badge {
+            background-color: var(--primary-gold);
+            color: var(--primary-navy);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+        .roster-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .roster-list li {
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            border-bottom: 1px dashed #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .roster-list li:last-child {
+            border-bottom: none;
+        }
+        .captain-star {
+            color: #b45309;
+            font-weight: bold;
+            margin-left: 0.25rem;
+        }
+
+        /* Expanded Footer */
+        .expanded-footer {
+            background-color: var(--primary-navy);
+            color: #e2e8f0;
+            padding: 4rem 2rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+        }
+        .footer-grid h4 {
+            color: var(--primary-gold);
+            margin: 0 0 1.25rem 0;
+            font-size: 1.1rem;
+        }
+        .footer-grid p, .footer-grid a {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin: 0 0 0.5rem 0;
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s ease;
+        }
+        .footer-grid a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .footer-bottom-bar {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #f1f5f9;">
     <!-- Utility Bar -->
     <div class="utility-bar">
         <span>Need Help? <a href="mailto:ohsgxctreasurer@gmail.com">Contact Booster Treasurer</a></span>
-        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank">FinalForms</a></span>
+        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank" rel="noopener noreferrer">FinalForms</a> | <a href="#">OYAA</a></span>
     </div>
 
     <!-- Header & Navigation -->
@@ -27,7 +255,7 @@
                 <ul id="navMenu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="schedule.html">Schedule</a></li>
-                    <li><a href="team.html" class="active">Coaches & Team</a></li>
+                    <li><a href="team.html" class="active">Coaches &amp; Team</a></li>
                     <li><a href="parents.html">Parent Hub</a></li>
                     <li><a href="support.html">Support</a></li>
                 </ul>
@@ -35,84 +263,193 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="section-box">
-            
-            <!-- Section Header -->
-            <div class="section-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem;">
-                <h2>Coaching Staff & Team Leadership</h2>
-                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase;">Olentangy Braves</span>
-            </div>
-            
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">
-                Meet the dedicated coaching staff guiding our student-athletes toward athletic excellence, personal growth, and team unity.
-            </p>
+    <!-- Full-Width Hero Section -->
+    <div class="hero-section">
+        <h2>Coaches &amp; Team Roster</h2>
+        <p>Meet the dedicated coaching staff and the exceptional student-athletes representing Olentangy Girls Cross Country for the 2026 season.</p>
+    </div>
 
-            <!-- Coaches Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+    <!-- Main Content (Overlapping Container) -->
+    <div class="container overlap-container">
+        <div class="section-box" style="padding: 2.5rem; border: none; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+            
+            <!-- Coaching Section -->
+            <div style="border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 2rem;">
+                <h3 style="color: var(--primary-navy); font-size: 1.75rem; margin-bottom: 0.5rem;">Coaching Staff</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Experienced leadership fostering athletic endurance, teamwork, and character development.</p>
+            </div>
+
+            <div class="team-grid">
                 
-                <!-- Coach Card: Dwight Dewese -->
-                <div style="border: 1px solid var(--border-color); border-top: 4px solid var(--primary-navy); border-radius: 8px; overflow: hidden; background: var(--bg-light); display: flex; flex-direction: column;">
-                    
-                    <!-- Coach Photo Using Local Path -->
-                    <img src="./assets/img/coach-dewese.jpg" alt="Head Coach Dwight Dewese" style="width: 100%; height: 280px; object-fit: cover; border-bottom: 1px solid var(--border-color);">
-                    
-                    <div style="padding: 2rem;">
-                        <h3 style="color: var(--primary-navy); margin: 0 0 0.5rem 0; font-size: 1.4rem;">Dwight Dewese</h3>
-                        <p style="color: var(--primary-navy); font-size: 0.95rem; margin-top: 0; font-weight: 500;">Head Coach</p>
+                <!-- Coach Dewese Card -->
+                <div class="team-card">
+                    <div class="team-img-wrapper">
+                        <img src="./assets/img/coach-dewese.jpg" alt="Coach Dewese">
+                    </div>
+                    <div class="team-card-body">
+                        <h3>Coach Dewese</h3>
+                        <span class="team-role">Head Coach</span>
+                        <p>Dedicated to building competitive distance runners while emphasizing sportsmanship, academic excellence, and lifelong fitness habits.</p>
                         
-                        <p style="font-size: 0.95rem; margin: 1.5rem 0; color: var(--text-main);">
-                            <strong>Email:</strong> <a href="mailto:dwight_dewese@olsd.us" style="color: var(--text-muted); text-decoration: underline;">dwight_dewese@olsd.us</a>
-                        </p>
-                        
-                        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
-                            Coach Dewese leads the program with an emphasis on discipline, race strategy, and building a supportive team culture where every runner can thrive.
-                        </p>
+                        <div class="bio-accordion">
+                            <div class="bio-header">
+                                <span>Read Full Biography</span>
+                                <span class="bio-icon">+</span>
+                            </div>
+                            <div class="bio-content">
+                                <div class="bio-body">
+                                    <p>Dewese brings an incredible 45 years of coaching experience to the table, with 41 years spent at Olentangy! He has passionately coached cross country, track, volleyball, and basketball, inspiring countless athletes along the way.</p>
+                                    <p style="margin-top: 0.75rem;">A proud graduate of The Ohio State University with a degree in education, Coach Dewese comes from a family of educators—both of his parents were teachers, and his father also coached basketball and baseball! As one of four boys with names all starting with "D," he has a fun and unique family dynamic.</p>
+                                    <p style="margin-top: 0.75rem;">Coach and his wonderful wife, Caroline, have celebrated over 43 years of marriage and are proud parents of a daughter who teaches at Oak Creek, along with a grandson who is currently thriving in high school within the district!</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Coach Card: Jennifer Sosa -->
-                <div style="border: 1px solid var(--border-color); border-top: 4px solid var(--primary-gold); border-radius: 8px; overflow: hidden; background: var(--bg-light); display: flex; flex-direction: column;">
-                    
-                    <!-- Coach Photo Using Local Path -->
-                    <img src="./assets/img/coach-sosa.jpg" alt="Assistant Coach Jennifer Sosa" style="width: 100%; height: 280px; object-fit: cover; border-bottom: 1px solid var(--border-color);">
-                    
-                    <div style="padding: 2rem;">
-                        <h3 style="color: var(--primary-navy); margin: 0 0 0.5rem 0; font-size: 1.4rem;">Jennifer Sosa</h3>
-                        <p style="color: var(--primary-navy); font-size: 0.95rem; margin-top: 0; font-weight: 500;">Assistant Coach</p>
+                <!-- Coach Sosa Card -->
+                <div class="team-card">
+                    <div class="team-img-wrapper">
+                        <img src="./assets/img/coach-sosa.jpg" alt="Coach Sosa">
+                    </div>
+                    <div class="team-card-body">
+                        <h3>Coach Sosa</h3>
+                        <span class="team-role">Assistant Coach</span>
+                        <p>Focuses on technical training pacing strategies, injury prevention, and building a supportive team culture across all grade levels.</p>
                         
-                        <p style="font-size: 0.95rem; margin: 1.5rem 0; color: var(--text-main);">
-                            <strong>Email:</strong> <a href="mailto:jennifer_sosa@olsd.us" style="color: var(--text-muted); text-decoration: underline;">jennifer_sosa@olsd.us</a>
-                        </p>
-                        
-                        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
-                            Coach Sosa focuses on conditioning, technique refinement, and motivating athletes to achieve their personal bests throughout the cross country season.
-                        </p>
+                        <div class="bio-accordion">
+                            <div class="bio-header">
+                                <span>Read Full Biography</span>
+                                <span class="bio-icon">+</span>
+                            </div>
+                            <div class="bio-content">
+                                <div class="bio-body">
+                                    <p>Coach Sosa is an inspiring educator at Olentangy High School, bringing creativity and enthusiasm to her students every day! A proud graduate of The Ohio State University in Art Education, she encourages young artists through interactive classes such as Art 1, Sculpture, Modeling and Animation, Digital Art and Design, and AP Art History.</p>
+                                    <p style="margin-top: 0.75rem;">As she enters her exciting fourteenth year at OHS, she has also devoted 13 wonderful years to coaching the girls track team and is preparing for another phenomenal season with the cross country team.</p>
+                                    <p style="margin-top: 0.75rem;">Originally from New York, she and her husband John are the proud parents of three energetic boys, adding even more joy to their lively family life!</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Program Philosophy Panel -->
-            <div style="border: 1px solid var(--border-color); border-left: 5px solid var(--primary-navy); border-radius: 8px; padding: 2rem; background: var(--bg-light); margin-top: 1.5rem;">
-                <h3 style="color: var(--primary-navy); margin: 0 0 1rem 0; font-size: 1.2rem;">Program Philosophy: "Above the Line" & "Ohana"</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                    Our program operates on the principle of being <strong>"Above the Line"</strong>—making intentional, positive choices that elevate ourselves and those around us.
-                </p>
-                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0; margin-top: 1rem;">
-                    We also embrace the concept of <strong>"Ohana"</strong>, meaning family. No runner stands alone; we train together and support one another on and off the course.
-                </p>
+            <!-- Current Roster Section -->
+            <div style="border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; margin: 3rem 0 2rem 0;">
+                <h3 style="color: var(--primary-navy); font-size: 1.75rem; margin-bottom: 0.5rem;">Current Roster</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">2026 Olentangy Girls Cross Country Team Members (* Denotes Captain).</p>
+            </div>
+
+            <!-- Dynamic Roster Container -->
+            <div class="roster-grid" id="rosterContainer">
+                <!-- Data populated via roster.json and JavaScript below -->
+                <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: var(--text-muted);">
+                    Loading team roster...
+                </div>
             </div>
 
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; margin-top: 2rem;">
-        <p>&copy; 2026 Olentangy Girls Cross Country Booster Club.</p>
+    <!-- Expanded Footer -->
+    <footer class="expanded-footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Olentangy Girls XC Boosters</h4>
+                <p>A non-profit booster organization dedicated to supporting student-athlete development, equipment needs, team meals, and memorable seasonal events.</p>
+            </div>
+            <div>
+                <h4>Quick Navigation</h4>
+                <a href="index.html">Home Dashboard</a>
+                <a href="schedule.html">Meet Schedule</a>
+                <a href="team.html">Coaches &amp; Team</a>
+                <a href="parents.html">Parent Hub &amp; Camp Info</a>
+                <a href="support.html">Booster Support</a>
+            </div>
+            <div>
+                <h4>Contact &amp; Location</h4>
+                <p style="margin-bottom: 0.2rem; color: #ffffff; font-weight: bold;">Mailing Address:</p>
+                <p>675 Lewis Center Rd<br>Lewis Center, OH 43035</p>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            &copy; 2026 Olentangy Girls Cross Country Booster Club. All rights reserved.
+        </div>
     </footer>
     
-    <script src="./assets/js/main.js"></script>
+    <!-- Scripts for Bio Accordion & Dynamic Roster Loading -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Bio Accordion Logic
+            const bioHeaders = document.querySelectorAll(".bio-header");
+            bioHeaders.forEach(header => {
+                header.addEventListener("click", function () {
+                    const card = this.closest(".team-card");
+                    const content = card.querySelector(".bio-content");
+                    const spanText = this.querySelector("span");
+                    
+                    card.classList.toggle("active");
+                    
+                    if (card.classList.contains("active")) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        spanText.textContent = "Collapse Biography";
+                    } else {
+                        content.style.maxHeight = null;
+                        spanText.textContent = "Read Full Biography";
+                    }
+                });
+            });
+
+            // Dynamic Roster Loader (Pulls from assets/data/roster.json)
+            const rosterContainer = document.getElementById("rosterContainer");
+            
+            fetch("./assets/data/roster.json")
+                .then(response => {
+                    if (!response.ok) throw new Error("Could not load roster data");
+                    return response.json();
+                })
+                .then(athletes => {
+                    // Group athletes by grade (12, 11, 10, 9)
+                    const grades = [12, 11, 10, 9];
+                    let htmlContent = "";
+
+                    grades.forEach(grade => {
+                        const gradeAthletes = athletes.filter(a => a.grade === grade);
+                        // Sort alphabetically by last name / first name
+                        gradeAthletes.sort((a, b) => a.name.localeCompare(b.name));
+
+                        htmlContent += `
+                            <div class="roster-grade-box">
+                                <div class="roster-grade-header">
+                                    <h4>Grade</h4>
+                                    <span class="grade-badge">${grade}</span>
+                                </div>
+                                <ul class="roster-list">
+                        `;
+
+                        if (gradeAthletes.length > 0) {
+                            gradeAthletes.forEach(athlete => {
+                                const captainMark = athlete.isCaptain ? '<span class="captain-star" title="Captain">*</span>' : '';
+                                htmlContent += `<li><span>${athlete.name}</span> ${captainMark}</li>`;
+                            });
+                        } else {
+                            htmlContent += `<li style="color: var(--text-muted); font-style: italic;">No athletes listed</li>`;
+                        }
+
+                        htmlContent += `
+                                </ul>
+                            </div>
+                        `;
+                    });
+
+                    rosterContainer.innerHTML = htmlContent;
+                })
+                .catch(error => {
+                    console.error("Error loading roster:", error);
+                    rosterContainer.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #dc2626;">Unable to load roster data at this moment. Please check back shortly.</div>`;
+                });
+        });
+    </script>
 </body>
 </html>

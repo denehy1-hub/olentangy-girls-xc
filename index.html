@@ -8,7 +8,7 @@
     <style>
         /* Specific Homepage Overrides for Hero and Footer Layout */
         .hero-section {
-            background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover photo.jpg') no-repeat center center;
+            background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover-photo.jpg') no-repeat center center;
             background-size: cover;
             padding: 6rem 2rem 10rem 2rem;
             text-align: center;
@@ -44,6 +44,7 @@
             font-weight: 700;
             text-decoration: none;
             transition: opacity 0.2s;
+            display: inline-block;
         }
 
         .btn-outline {
@@ -55,6 +56,7 @@
             font-weight: 700;
             text-decoration: none;
             transition: background-color 0.2s, color 0.2s;
+            display: inline-block;
         }
 
         .btn-outline:hover {
@@ -87,12 +89,70 @@
             color: var(--primary-gold);
         }
 
+        /* Instagram Banner Style */
+        .insta-banner {
+            background: linear-gradient(135deg, var(--primary-navy), #001b3a);
+            color: var(--white);
+            border-radius: 8px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .insta-banner h3 {
+            color: var(--primary-gold);
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .insta-banner p {
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+        .btn-insta {
+            background-color: #E1306C;
+            color: white;
+            padding: 0.75rem 1.75rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn-insta:hover {
+            opacity: 0.9;
+        }
+
+        /* Sponsors Section Style */
+        .sponsors-section {
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        .sponsors-section h3 {
+            color: var(--primary-navy);
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+        .sponsors-img-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .sponsors-img-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
         /* Expanded Footer */
         .expanded-footer {
             background-color: var(--primary-navy);
             color: #e2e8f0;
             padding: 4rem 2rem 2rem 2rem;
-            margin-top: 4rem;
+            margin-top: 0;
         }
 
         .footer-grid {
@@ -200,6 +260,21 @@
                 <a href="support.html" class="card-link">Support the Braves &rarr;</a>
             </div>
 
+        </div>
+
+        <!-- Instagram Callout Banner -->
+        <div class="insta-banner">
+            <h3>📸 Follow Our Season on Instagram</h3>
+            <p>Catch live race updates, behind-the-scenes moments, and photo galleries from every meet!</p>
+            <a href="https://instagram.com" target="_blank" class="btn-insta">Follow @olentangygirlsxc</a>
+        </div>
+    </div>
+
+    <!-- Sponsors Showcase Section -->
+    <div class="sponsors-section">
+        <h3>Thank You To Our Incredible Sponsors</h3>
+        <div class="sponsors-img-container">
+            <img src="./assets/img/sponsors.jpg" alt="Olentangy Girls XC Sponsors">
         </div>
     </div>
 

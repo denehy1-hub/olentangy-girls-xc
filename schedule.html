@@ -3,15 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Master Schedule - Olentangy Girls XC</title>
+    <title>Schedule | Olentangy Girls Cross Country</title>
     <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-<body>
+    <style>
+        /* Specific Page Overrides matching Home Page Design */
+        .hero-section {
+            background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover-photo.jpg') no-repeat center center;
+            background-size: cover;
+            padding: 6rem 2rem 10rem 2rem;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .hero-section h2 {
+            font-size: 2.75rem;
+            margin: 0 0 1rem 0;
+            color: #ffffff;
+        }
 
+        .hero-section p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        .overlap-container {
+            margin-top: -6rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .filter-btn {
+            background-color: #f1f5f9;
+            color: var(--text-dark);
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-navy);
+            color: var(--white);
+            border-color: var(--primary-navy);
+        }
+
+        /* Schedule Table Style */
+        .schedule-table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 2.5rem;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+        .schedule-table th {
+            background-color: var(--primary-navy);
+            color: var(--white);
+            padding: 1.1rem;
+            font-weight: 600;
+        }
+        .schedule-table td {
+            padding: 1.1rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--text-dark);
+        }
+        .schedule-table tr:hover {
+            background-color: #f8fafc;
+        }
+        .cat-badge {
+            display: inline-block;
+            padding: 0.3rem 0.65rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .cat-race { background-color: #dbeafe; color: #1e40af; }
+        .cat-practice { background-color: #dcfce7; color: #166534; }
+        .cat-social { background-color: #fef3c7; color: #92400e; }
+        
+        /* ICS Calendar Card */
+        .ics-card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .ics-card h3 {
+            color: var(--primary-navy);
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+        .ics-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: var(--primary-navy);
+            padding: 0.8rem 1.75rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        .btn-gold:hover {
+            background-color: #e6c547;
+            opacity: 0.95;
+        }
+
+        /* Expanded Footer */
+        .expanded-footer {
+            background-color: var(--primary-navy);
+            color: #e2e8f0;
+            padding: 4rem 2rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+        }
+        .footer-grid h4 {
+            color: var(--primary-gold);
+            margin: 0 0 1.25rem 0;
+            font-size: 1.1rem;
+        }
+        .footer-grid p, .footer-grid a {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin: 0 0 0.5rem 0;
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s ease;
+        }
+        .footer-grid a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .footer-bottom-bar {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body style="background-color: #f1f5f9;">
     <!-- Utility Bar -->
     <div class="utility-bar">
         <span>Need Help? <a href="mailto:ohsgxctreasurer@gmail.com">Contact Booster Treasurer</a></span>
-        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank">FinalForms</a> | <a href="https://oyaa.org/cross-country/" target="_blank">OYAA</a></span>
+        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank" rel="noopener noreferrer">FinalForms</a> | <a href="#">OYAA</a></span>
     </div>
 
     <!-- Header & Navigation -->
@@ -36,63 +206,145 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="section-box">
-            
-            <div class="section-header">
-                <h2>2026 Season Master Schedule</h2>
-                <span class="badge badge-race">LIVE TRACKER</span>
-            </div>
-            
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-                This schedule pulls directly from our secure master tracker. Filter events below by category.
-            </p>
+    <!-- Full-Width Hero Section -->
+    <div class="hero-section">
+        <h2>2026 Season Master Schedule</h2>
+        <p>View upcoming invitationals, departure times, and location maps. Filter by category or sync directly to your personal calendar feed.</p>
+    </div>
 
-            <!-- Filter Buttons -->
-            <div class="filter-tabs">
-                <button class="filter-btn active-filter" onclick="filterSchedule('all')">All Events</button>
-                <button class="filter-btn" onclick="filterSchedule('race')">🏁 Races &amp; Meets</button>
-                <button class="filter-btn" onclick="filterSchedule('practice')">🏃‍♀️ Practices &amp; Camp</button>
-                <button class="filter-btn" onclick="filterSchedule('social')">🍲 Socials &amp; Dinners</button>
+    <!-- Main Content (Overlapping Container) -->
+    <div class="container overlap-container">
+        <div class="section-box" style="padding: 2.5rem; border: none; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+            
+            <!-- Filters -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="race">🏁 Races &amp; Meets</button>
+                <button class="filter-btn" data-filter="practice">🏃 Practices &amp; Camp</button>
+                <button class="filter-btn" data-filter="social">🍔 Socials &amp; Dinners</button>
             </div>
 
             <!-- Schedule Table -->
-            <table id="scheduleTable">
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Event Name</th>
-                        <th>Location / Details</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="scheduleBody">
-                    <tr>
-                        <td colspan="4" style="text-align: center; color: var(--text-muted);">Loading schedule data...</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="schedule-table-wrapper">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Category</th>
+                            <th style="width: 30%;">Event Name</th>
+                            <th style="width: 35%;">Location / Details</th>
+                            <th style="width: 15%;">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleTableBody">
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                                Loading schedule data...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <!-- Calendar Sync Widget -->
-            <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div class="ics-card">
                 <div>
-                    <h3 style="margin: 0 0 0.25rem 0; font-size: 1.1rem; color: var(--primary-navy);">📅 Sync with Your Personal Calendar</h3>
-                    <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Download the official <code>.ics</code> schedule file or sync directly to Apple, Google, or Outlook calendars.</p>
+                    <h3>📅 Sync with Your Personal Calendar</h3>
+                    <p>Download the official <code>.ics</code> schedule file or sync directly to Apple, Google, or Outlook calendars.</p>
                 </div>
-                <div>
-                    <a href="./assets/data/schedule.ics" download="olentangy_girls_xc_2026.ics" style="background: var(--primary-gold); color: var(--primary-navy); padding: 0.75rem 1.25rem; border-radius: 6px; font-weight: bold; text-decoration: none; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">Download .ics File</a>
-                </div>
+                <a href="./assets/data/schedule.ics" class="btn-gold" style="white-space: nowrap; text-align: center;">Download .ics File</a>
             </div>
 
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 Olentangy Girls Cross Country Booster Club.</p>
+    <!-- Expanded Footer -->
+    <footer class="expanded-footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Olentangy Girls XC Boosters</h4>
+                <p>A non-profit booster organization dedicated to supporting student-athlete development, equipment needs, team meals, and memorable seasonal events.</p>
+            </div>
+            <div>
+                <h4>Quick Navigation</h4>
+                <a href="index.html">Home Dashboard</a>
+                <a href="schedule.html">Meet Schedule</a>
+                <a href="team.html">Coaches &amp; Team</a>
+                <a href="parents.html">Parent Hub &amp; Camp Info</a>
+                <a href="support.html">Booster Support</a>
+            </div>
+            <div>
+                <h4>Contact &amp; Location</h4>
+                <p style="margin-bottom: 0.2rem; color: #ffffff; font-weight: bold;">Mailing Address:</p>
+                <p>675 Lewis Center Rd<br>Lewis Center, OH 43035</p>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            &copy; 2026 Olentangy Girls Cross Country Booster Club. All rights reserved.
+        </div>
     </footer>
-    
-    <script src="./assets/js/main.js"></script>
+
+    <!-- Schedule Data Loader Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let allEvents = [];
+            const tableBody = document.getElementById("scheduleTableBody");
+            const filterButtons = document.querySelectorAll(".filter-btn");
+
+            function getCategoryClass(category) {
+                const catLower = (category || "").toLowerCase();
+                if (catLower.includes("race") || catLower.includes("meet")) return "cat-race";
+                if (catLower.includes("practice") || catLower.includes("camp")) return "cat-practice";
+                return "cat-social";
+            }
+
+            function renderTable(events) {
+                if (!events || events.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">No schedule events found. Please check back shortly or run the data sync workflow.</td></tr>`;
+                    return;
+                }
+
+                tableBody.innerHTML = events.map(event => `
+                    <tr>
+                        <td><span class="cat-badge ${getCategoryClass(event.category)}">${event.category || 'Event'}</span></td>
+                        <td><strong>${event.eventName || ''}</strong></td>
+                        <td>${event.location || 'TBD'}</td>
+                        <td>${event.date || ''}</td>
+                    </tr>
+                `).join('');
+            }
+
+            fetch("./assets/data/schedule.json")
+                .then(response => {
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    return response.json();
+                })
+                .then(data => {
+                    allEvents = data;
+                    renderTable(allEvents);
+                })
+                .catch(error => {
+                    console.error("Error loading schedule:", error);
+                    tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: #dc2626;">Syncing latest schedule data. Please check back shortly.</td></tr>`;
+                });
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener("click", function () {
+                    filterButtons.forEach(b => b.classList.remove("active"));
+                    this.classList.add("active");
+
+                    const filter = this.getAttribute("data-filter");
+                    if (filter === "all") {
+                        renderTable(allEvents);
+                    } else {
+                        const filtered = allEvents.filter(event => {
+                            const cat = (event.category || "").toLowerCase();
+                            return cat.includes(filter);
+                        });
+                        renderTable(filtered);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

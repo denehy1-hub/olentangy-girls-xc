@@ -1,77 +1,304 @@
 /* ==========================================
-   Hero Banner with Cover Photo Background
+   Root Variables & Base Reset
    ========================================== */
-.hero-banner {
-    position: relative;
-    background: linear-gradient(rgba(20, 40, 70, 0.75), rgba(20, 40, 70, 0.75)), url('../img/cover photo.jpg') no-repeat center center;
-    background-size: cover;
-    padding: 100px 20px;
-    text-align: center;
-    color: #ffffff;
-    min-height: 480px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+:root {
+    --primary-navy: #002855;
+    --primary-gold: #ffc107;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --bg-light: #f1f5f9;
+    --white: #ffffff;
 }
 
-.hero-content {
-    max-width: 850px;
-    margin: 0 auto;
-    z-index: 2;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.hero-banner h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #ffffff;
-    letter-spacing: -0.5px;
-}
-
-.hero-banner p {
-    font-size: 1.15rem;
-    line-height: 1.6;
-    margin-bottom: 35px;
-    color: #e2e8f0;
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    line-height: 1.5;
 }
 
 /* ==========================================
-   Hero Buttons
+   Utility Bar
    ========================================== */
-.hero-buttons {
+.utility-bar {
+    background-color: #001b3a;
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    padding: 0.5rem 2rem;
     display: flex;
-    gap: 15px;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.utility-bar a {
+    color: var(--primary-gold);
+    text-decoration: none;
+}
+
+.utility-bar a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   Header & Navigation
+   ========================================== */
+header {
+    background-color: var(--white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Fixed Logo Size Constraints */
+.brand-logo-img {
+    max-height: 50px;
+    width: auto;
+    display: block;
+}
+
+.brand-text h1 {
+    font-size: 1.25rem;
+    color: var(--primary-navy);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.brand-text span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
     flex-wrap: wrap;
 }
 
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-weight: 600;
+nav ul li a {
     text-decoration: none;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    cursor: pointer;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
 }
 
-.btn-yellow {
-    background-color: #ffc107; /* Matches your Schedule button color */
-    color: #1f2328;
-    border: 2px solid #ffc107;
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--primary-navy);
 }
 
-.btn-yellow:hover {
-    background-color: #e0a800;
-    border-color: #e0a800;
+nav ul li a.active {
+    border-bottom: 2px solid var(--primary-gold);
+    padding-bottom: 0.2rem;
+}
+
+/* ==========================================
+   Hero Section with Cover Photo Background
+   ========================================== */
+.hero-section {
+    position: relative;
+    background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('../img/cover-photo.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 6rem 2rem 10rem 2rem;
+    text-align: center;
+    color: var(--white);
+}
+
+.hero-section h2 {
+    font-size: 2.75rem;
+    margin: 0 0 1rem 0;
+    color: var(--white);
+    font-weight: 800;
+}
+
+.hero-section p {
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e2e8f0;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-gold {
+    background-color: var(--primary-gold);
+    color: var(--primary-navy);
+    padding: 0.8rem 1.75rem;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.btn-gold:hover {
+    opacity: 0.9;
 }
 
 .btn-outline {
     background-color: transparent;
-    color: #ffffff;
-    border: 2px solid #ffffff;
+    color: var(--white);
+    border: 2px solid var(--white);
+    padding: 0.8rem 1.75rem;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .btn-outline:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: var(--white);
+    color: var(--primary-navy);
+}
+
+/* ==========================================
+   Main Containers & Cards Layout
+   ========================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.overlap-container {
+    margin-top: -6rem;
+    position: relative;
+    z-index: 10;
+}
+
+.section-box {
+    background-color: var(--white);
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.12) !important;
+}
+
+.card-link {
+    color: var(--primary-navy);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    display: inline-block;
+}
+
+.card-link:hover {
+    color: var(--primary-gold);
+}
+
+/* ==========================================
+   Expanded Footer
+   ========================================== */
+.expanded-footer {
+    background-color: var(--primary-navy);
+    color: #e2e8f0;
+    padding: 4rem 2rem 2rem 2rem;
+    margin-top: 4rem;
+}
+
+.footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    text-align: left;
+}
+
+.footer-grid h4 {
+    color: var(--primary-gold);
+    margin: 0 0 1.25rem 0;
+    font-size: 1.1rem;
+}
+
+.footer-grid p, 
+.footer-grid a {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin: 0 0 0.5rem 0;
+    text-decoration: none;
+    display: block;
+}
+
+.footer-grid a:hover {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+.footer-bottom-bar {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+/* ==========================================
+   Responsive adjustments
+   ========================================== */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 4rem 1rem 8rem 1rem;
+    }
+    
+    .hero-section h2 {
+        font-size: 2.1rem;
+    }
+    
+    .nav-container {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .brand {
+        justify-content: center;
+    }
+    
+    nav ul {
+        justify-content: center;
+    }
 }

@@ -3,15 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support & Contact | Olentangy Girls Cross Country</title>
+    <title>Support &amp; Sponsorships | Olentangy Girls Cross Country</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        /* Specific Page Overrides matching Home Page Design */
+        .hero-section {
+            background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover-photo.jpg') no-repeat center center;
+            background-size: cover;
+            padding: 6rem 2rem 10rem 2rem;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .hero-section h2 {
+            font-size: 2.75rem;
+            margin: 0 0 1rem 0;
+            color: #ffffff;
+        }
+
+        .hero-section p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        .overlap-container {
+            margin-top: -6rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .support-card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .support-card h3 {
+            color: var(--primary-navy);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+        .support-card p {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        .support-btn {
+            background-color: var(--primary-navy);
+            color: var(--white);
+            padding: 0.7rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        .support-btn:hover {
+            background-color: #001b3a;
+            color: var(--primary-gold);
+        }
+
+        /* Expanded Footer */
+        .expanded-footer {
+            background-color: var(--primary-navy);
+            color: #e2e8f0;
+            padding: 4rem 2rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+        }
+        .footer-grid h4 {
+            color: var(--primary-gold);
+            margin: 0 0 1.25rem 0;
+            font-size: 1.1rem;
+        }
+        .footer-grid p, .footer-grid a {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin: 0 0 0.5rem 0;
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s ease;
+        }
+        .footer-grid a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .footer-bottom-bar {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #f1f5f9;">
+    <!-- Utility Bar -->
     <div class="utility-bar">
         <span>Need Help? <a href="mailto:ohsgxctreasurer@gmail.com">Contact Booster Treasurer</a></span>
-        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank">FinalForms</a></span>
+        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank" rel="noopener noreferrer">FinalForms</a> | <a href="#">OYAA</a></span>
     </div>
 
+    <!-- Header & Navigation -->
     <header>
         <div class="nav-container">
             <div class="brand">
@@ -21,12 +138,11 @@
                     <span>Athletic Booster Club</span>
                 </div>
             </div>
-            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
             <nav>
                 <ul id="navMenu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="schedule.html">Schedule</a></li>
-                    <li><a href="team.html">Coaches & Team</a></li>
+                    <li><a href="team.html">Coaches &amp; Team</a></li>
                     <li><a href="parents.html">Parent Hub</a></li>
                     <li><a href="support.html" class="active">Support</a></li>
                 </ul>
@@ -34,25 +150,74 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="section-box">
-            <div class="section-header">
-                <h2>Support &amp; Contact Information</h2>
-            </div>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-                Have questions about booster contributions, corporate sponsorships, or team events? Reach out to our leadership team below.
+    <!-- Full-Width Hero Section -->
+    <div class="hero-section">
+        <h2>Support Our Braves</h2>
+        <p>Partner with our booster organization through sponsorships, meal volunteering, or direct contributions to support student-athlete success.</p>
+    </div>
+
+    <!-- Main Content (Overlapping Container) -->
+    <div class="container overlap-container">
+        <div class="section-box" style="padding: 2.5rem; border: none; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+            
+            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+                The Olentangy Girls Cross Country Booster Club relies heavily on family contributions, corporate sponsorships, and community volunteers to keep our program running at an elite level. Your support directly funds team meals, training equipment, uniforms, entry fees, and seasonal celebrations.
             </p>
-            <div style="background: #F8FAFC; padding: 2rem; border-radius: 8px; border-top: 4px solid var(--navy);">
-                <h3 style="color: var(--navy); margin-bottom: 0.5rem;">Olentangy Girls Cross Country Boosters</h3>
-                <p style="margin-bottom: 0.5rem;"><strong>Mailing Address:</strong> 675 Lewis Center Rd, Lewis Center, OH 43035</p>
-                <p><strong>Primary Booster Contact:</strong> <a href="mailto:ohsgxctreasurer@gmail.com" style="color: var(--blue-accent);">ohsgxctreasurer@gmail.com</a></p>
+
+            <div class="support-grid">
+                
+                <!-- Option 1: Fees & Donations -->
+                <div class="support-card">
+                    <h3>💳 Fees &amp; Direct Contributions</h3>
+                    <p>Contribute toward your runner's seasonal fees, camp registration, or make a direct donation to the booster fund via Zelle, Venmo, check, or cash.</p>
+                    <a href="mailto:ohsgxctreasurer@gmail.com" class="support-btn">Contact Treasurer</a>
+                </div>
+
+                <!-- Option 2: Corporate Sponsorships -->
+                <div class="support-card">
+                    <h3>🤝 Corporate Sponsorships</h3>
+                    <p>Are you a local business owner? Partner with our program to feature your company logo on our website, social media shoutouts, and banner displays.</p>
+                    <a href="mailto:ohsgxctreasurer@gmail.com" class="support-btn">Become a Sponsor</a>
+                </div>
+
+                <!-- Option 3: Team Meals & Snacks -->
+                <div class="support-card">
+                    <h3>🍝 Pasta Dinners &amp; Fuel</h3>
+                    <p>Help host a Thursday night pasta dinner, donate drinks or desserts, or contribute to our post-race chocolate milk and snack station fund.</p>
+                    <a href="mailto:olentangygirlsxc@gmail.com" class="support-btn">Volunteer to Host</a>
+                </div>
+
             </div>
+
         </div>
     </div>
 
-    <footer>
-        <div class="footer-bottom"><p>&copy; 2026 Olentangy Girls Cross Country Booster Club.</p></div>
+    <!-- Expanded Footer -->
+    <footer class="expanded-footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Olentangy Girls XC Boosters</h4>
+                <p>A non-profit booster organization dedicated to supporting student-athlete development, equipment needs, team meals, and memorable seasonal events.</p>
+            </div>
+            <div>
+                <h4>Quick Navigation</h4>
+                <a href="index.html">Home Dashboard</a>
+                <a href="schedule.html">Meet Schedule</a>
+                <a href="team.html">Coaches &amp; Team</a>
+                <a href="parents.html">Parent Hub &amp; Camp Info</a>
+                <a href="support.html">Booster Support</a>
+            </div>
+            <div>
+                <h4>Contact &amp; Location</h4>
+                <p style="margin-bottom: 0.2rem; color: #ffffff; font-weight: bold;">Mailing Address:</p>
+                <p>675 Lewis Center Rd<br>Lewis Center, OH 43035</p>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            &copy; 2026 Olentangy Girls Cross Country Booster Club. All rights reserved.
+        </div>
     </footer>
+    
     <script src="./assets/js/main.js"></script>
 </body>
 </html>
