@@ -13,9 +13,12 @@ def fetch_and_convert():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
     try:
-        response = urllib.request.urlopen(CSV_URL)
+        req = urllib.request.Request(
+            CSV_URL,
+            headers={'User-Agent': 'Mozilla/5.0'}
+        )
+        response = urllib.request.urlopen(req)
         content = response.read().decode('utf-8')
-        print(f"Raw CSV content snippet: {content[:300]}")
         
         lines = content.splitlines()
         reader = csv.DictReader(lines)
@@ -23,12 +26,13 @@ def fetch_and_convert():
         
         schedule_data = []
         for row in reader:
-            print(f"Processing row: {row}")
+            # Clean keys by stripping spaces and lowercasing
             clean_row = {k.strip().lower(): (v.strip() if v else "") for k, v in row.items() if k}
             
             category = clean_row.get("category", "")
-            event_name = clean_row.get("event name", "") or clean_row.get("event", "") or clean_row.get("meet", "")
-            location = clean_row.get("location / details", "") or clean_row.get("location", "") or clean_row.get("details", "")
+            # Look for 'eventname' (matching your column) as well as fallbacks
+            event_name = clean_row.get("eventname", "") or clean_row.get("event name", "") or clean_row.get("event", "")
+            location = clean_row.get("location", "") or clean_row.get("location / details", "")
             date = clean_row.get("date", "")
             
             if event_name:

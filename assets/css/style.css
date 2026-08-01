@@ -129,14 +129,31 @@ nav a.active {
     background: #ffffff;
 }
 .accordion-header {
-    padding: 1.25rem 1.5rem;
-    background: #f8fafc;
-    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    user-select: none;
-    transition: background 0.2s ease;
+    cursor: pointer;
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+}
+
+.accordion-icon {
+    font-size: 1.25rem;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    border-radius: 50%;
+    color: var(--primary-navy);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    background: var(--primary-gold);
+    color: #fff;
 }
 .accordion-header:hover {
     background: #f1f5f9;
