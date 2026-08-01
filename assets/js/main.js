@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let masterScheduleData = [];
 
 async function loadMasterSchedule() {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyUpWY9jk6kNZ5Mnjfeui6IqJtW4Igh_nVuhKo-bGHwZ5Tbo1ALcOyQ8bktY5frQGiD/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzBMZ6CvUu9PNUc3cTlvhJjOuwV36ZC';
     
     if (scriptURL.includes('YOUR_GOOGLE_APPS_SCRIPT')) {
         return; 
