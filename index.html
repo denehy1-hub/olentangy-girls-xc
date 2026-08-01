@@ -5,12 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Olentangy Girls Cross Country</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        /* Specific Homepage Overrides for Hero and Footer Layout */
+        .hero-section {
+            background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('https://images.unsplash.com/photo-1552674605-15c2145b9ce4?q=80&w=2000&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+            padding: 6rem 2rem 10rem 2rem;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .hero-section h2 {
+            font-size: 2.75rem;
+            margin: 0 0 1rem 0;
+            color: #ffffff;
+        }
+
+        .hero-section p {
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: var(--primary-navy);
+            padding: 0.8rem 1.75rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 0.8rem 1.75rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .btn-outline:hover {
+            background-color: #ffffff;
+            color: var(--primary-navy);
+        }
+
+        .btn-gold:hover {
+            opacity: 0.9;
+        }
+
+        /* Overlap effect for cards */
+        .overlap-container {
+            margin-top: -6rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card-link {
+            color: var(--primary-navy);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: auto;
+            padding-top: 1.5rem;
+            display: inline-block;
+        }
+
+        .card-link:hover {
+            color: var(--primary-gold);
+        }
+
+        /* Expanded Footer */
+        .expanded-footer {
+            background-color: var(--primary-navy);
+            color: #e2e8f0;
+            padding: 4rem 2rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+        }
+
+        .footer-grid h4 {
+            color: var(--primary-gold);
+            margin: 0 0 1.25rem 0;
+            font-size: 1.1rem;
+        }
+
+        .footer-grid p, .footer-grid a {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin: 0 0 0.5rem 0;
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-grid a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .footer-bottom-bar {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #f1f5f9;">
     <!-- Utility Bar -->
     <div class="utility-bar">
         <span>Need Help? <a href="mailto:ohsgxctreasurer@gmail.com">Contact Booster Treasurer</a></span>
-        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank">FinalForms</a></span>
+        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank">FinalForms</a> | <a href="#">OYAA</a></span>
     </div>
 
     <!-- Header & Navigation -->
@@ -35,59 +163,70 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        
-        <!-- Hero Section -->
-        <div class="section-box" style="margin-bottom: 2rem;">
-            <div class="section-header">
-                <h2>Racing for Excellence</h2>
-            </div>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-                Welcome to the official digital headquarters for Olentangy High School Girls Cross Country. Streamlined navigation, schedules, and resources for athletes, families, and supporters.
-            </p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="schedule.html" class="filter-btn active-filter" style="text-decoration: none; display: inline-block;">View 2026 Schedule</a>
-                <a href="parents.html" class="filter-btn" style="text-decoration: none; display: inline-block;">Access Parent & Camp Info</a>
-            </div>
+    <!-- Full-Width Hero Section -->
+    <div class="hero-section">
+        <h2>Pacing for Excellence</h2>
+        <p>Welcome to the official digital headquarters for Olentangy High School Girls Cross Country. Streamlined navigation, schedules, and resources for athletes, families, and supporters.</p>
+        <div class="hero-buttons">
+            <a href="schedule.html" class="btn-gold">View 2026 Schedule</a>
+            <a href="parents.html" class="btn-outline">Access Parent & Camp Info</a>
         </div>
+    </div>
 
+    <!-- Main Content (Overlapping Cards) -->
+    <div class="container overlap-container">
+        
         <!-- Feature Cards Grid -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
             
             <!-- Schedule Card -->
-            <div class="section-box" style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <h3 style="color: var(--primary-navy); margin-top: 0; font-size: 1.25rem;">🗓️ Master Schedule</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">View upcoming invitationals, departure times, and location maps for the full season.</p>
-                </div>
-                <a href="schedule.html" style="color: var(--primary-gold); font-weight: bold; text-decoration: none; margin-top: 1rem; display: inline-block;">Jump to Schedule &rarr;</a>
+            <div class="section-box" style="padding: 2rem; display: flex; flex-direction: column; height: 100%; border: none; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: var(--primary-navy); margin: 0 0 1rem 0; font-size: 1.25rem;">🗓️ Master Schedule</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">View upcoming invitationals, departure times, and location maps for the full season.</p>
+                <a href="schedule.html" class="card-link">Jump to Schedule &rarr;</a>
             </div>
 
             <!-- Parent Hub Card -->
-            <div class="section-box" style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <h3 style="color: var(--primary-navy); margin-top: 0; font-size: 1.25rem;">📋 Parent Hub & Camp</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Access camp schedules, pasta dinner sign-ups, fees, and required FinalForms.</p>
-                </div>
-                <a href="parents.html" style="color: var(--primary-gold); font-weight: bold; text-decoration: none; margin-top: 1rem; display: inline-block;">View Parent Info &rarr;</a>
+            <div class="section-box" style="padding: 2rem; display: flex; flex-direction: column; height: 100%; border: none; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: var(--primary-navy); margin: 0 0 1rem 0; font-size: 1.25rem;">📋 Parent Hub & Camp</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">Access camp schedules, pasta dinner sign-ups, fees, and required FinalForms.</p>
+                <a href="parents.html" class="card-link">View Parent Info &rarr;</a>
             </div>
 
             <!-- Support Card -->
-            <div class="section-box" style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <h3 style="color: var(--primary-navy); margin-top: 0; font-size: 1.25rem;">🤝 Booster Support</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Get involved with team meals, post-race chocolate milk, and corporate sponsorships.</p>
-                </div>
-                <a href="support.html" style="color: var(--primary-gold); font-weight: bold; text-decoration: none; margin-top: 1rem; display: inline-block;">Support the Braves &rarr;</a>
+            <div class="section-box" style="padding: 2rem; display: flex; flex-direction: column; height: 100%; border: none; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: var(--primary-navy); margin: 0 0 1rem 0; font-size: 1.25rem;">🤝 Booster Support</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">Get involved with team meals, post-race chocolate milk, and corporate sponsorships.</p>
+                <a href="support.html" class="card-link">Support the Braves &rarr;</a>
             </div>
 
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Olentangy Girls Cross Country Booster Club.</p>
+    <!-- Expanded Footer -->
+    <footer class="expanded-footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Olentangy Girls XC Boosters</h4>
+                <p>A non-profit booster organization dedicated to supporting student-athlete development, equipment needs, team meals, and memorable seasonal events.</p>
+            </div>
+            <div>
+                <h4>Quick Navigation</h4>
+                <a href="index.html">Home Dashboard</a>
+                <a href="schedule.html">Meet Schedule</a>
+                <a href="team.html">Coaches & Leadership</a>
+                <a href="parents.html">Parent Hub & Camp Info</a>
+                <a href="support.html">Booster Support</a>
+            </div>
+            <div>
+                <h4>Contact & Location</h4>
+                <p style="margin-bottom: 0.2rem; color: #ffffff; font-weight: bold;">Mailing Address:</p>
+                <p>675 Lewis Center Rd<br>Lewis Center, OH 43035</p>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            &copy; 2026 Olentangy Girls Cross Country Booster Club. All rights reserved.
+        </div>
     </footer>
     
     <script src="./assets/js/main.js"></script>

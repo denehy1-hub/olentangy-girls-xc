@@ -39,6 +39,9 @@ body {
 header {
     background: #ffffff;
     border-bottom: 3px solid var(--primary-gold);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 .nav-container {
     max-width: 1200px;

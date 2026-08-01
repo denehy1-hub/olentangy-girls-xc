@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+    <!-- Utility Bar -->
     <div class="utility-bar">
         <span>Need Help? <a href="mailto:ohsgxctreasurer@gmail.com">Contact Booster Treasurer</a></span>
         <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank">FinalForms</a></span>
     </div>
 
+    <!-- Header & Navigation -->
     <header>
         <div class="nav-container">
             <div class="brand">
@@ -21,7 +23,6 @@
                     <span>Athletic Booster Club</span>
                 </div>
             </div>
-            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
             <nav>
                 <ul id="navMenu">
                     <li><a href="index.html">Home</a></li>
@@ -34,47 +35,72 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <div class="container">
         <div class="section-box">
-            <div class="section-header">
+            
+            <!-- Section Header -->
+            <div class="section-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem;">
                 <h2>Coaching Staff & Team Leadership</h2>
-                <span class="badge">Olentangy Braves</span>
+                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase;">Olentangy Braves</span>
             </div>
+            
             <p style="color: var(--text-muted); margin-bottom: 2rem;">
                 Meet the dedicated coaching staff guiding our student-athletes toward athletic excellence, personal growth, and team unity.
             </p>
 
-            <div class="coach-grid">
-                <div class="coach-card">
-                    <h3>Dwight Dewese</h3>
-                    <span class="title">Head Coach</span>
-                    <p><strong>Email:</strong> <a href="mailto:dwight_dewese@olsd.us" style="color: var(--blue-accent);">dwight_dewese@olsd.us</a></p>
-                    <p>Coach Dewese leads the program with an emphasis on discipline, race strategy, and building a supportive team culture where every runner can thrive.</p>
+            <!-- Coaches Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                
+                <!-- Coach Card: Dwight Dewese -->
+                <div style="border: 1px solid var(--border-color); border-top: 4px solid var(--primary-navy); border-radius: 8px; padding: 2rem; background: var(--bg-light);">
+                    <h3 style="color: var(--primary-navy); margin: 0 0 0.5rem 0; font-size: 1.4rem;">Dwight Dewese</h3>
+                    <p style="color: var(--primary-navy); font-size: 0.95rem; margin-top: 0; font-weight: 500;">Head Coach</p>
+                    
+                    <p style="font-size: 0.95rem; margin: 1.5rem 0; color: var(--text-main);">
+                        <strong>Email:</strong> <a href="mailto:dwight_dewese@olsd.us" style="color: var(--text-muted); text-decoration: underline;">dwight_dewese@olsd.us</a>
+                    </p>
+                    
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
+                        Coach Dewese leads the program with an emphasis on discipline, race strategy, and building a supportive team culture where every runner can thrive.
+                    </p>
                 </div>
 
-                <div class="coach-card gold-top">
-                    <h3>Jennifer Sosa</h3>
-                    <span class="title">Assistant Coach</span>
-                    <p><strong>Email:</strong> <a href="mailto:jennifer_sosa@olsd.us" style="color: var(--blue-accent);">jennifer_sosa@olsd.us</a></p>
-                    <p>Coach Sosa focuses on conditioning, technique refinement, and motivating athletes to achieve their personal bests throughout the cross country season.</p>
+                <!-- Coach Card: Jennifer Sosa -->
+                <div style="border: 1px solid var(--border-color); border-top: 4px solid var(--primary-gold); border-radius: 8px; padding: 2rem; background: var(--bg-light);">
+                    <h3 style="color: var(--primary-navy); margin: 0 0 0.5rem 0; font-size: 1.4rem;">Jennifer Sosa</h3>
+                    <p style="color: var(--primary-navy); font-size: 0.95rem; margin-top: 0; font-weight: 500;">Assistant Coach</p>
+                    
+                    <p style="font-size: 0.95rem; margin: 1.5rem 0; color: var(--text-main);">
+                        <strong>Email:</strong> <a href="mailto:jennifer_sosa@olsd.us" style="color: var(--text-muted); text-decoration: underline;">jennifer_sosa@olsd.us</a>
+                    </p>
+                    
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
+                        Coach Sosa focuses on conditioning, technique refinement, and motivating athletes to achieve their personal bests throughout the cross country season.
+                    </p>
                 </div>
+
             </div>
 
-            <div style="background: #F8FAFC; padding: 2rem; border-radius: 8px; border-left: 4px solid var(--navy); margin-top: 2rem;">
-                <h3 style="color: var(--navy); margin-bottom: 0.75rem;">Program Philosophy: "Above the Line" &amp; "Ohana"</h3>
-                <p style="color: var(--text-muted); margin-bottom: 0.75rem;">
+            <!-- Program Philosophy Panel -->
+            <div style="border: 1px solid var(--border-color); border-left: 5px solid var(--primary-navy); border-radius: 8px; padding: 2rem; background: var(--bg-light); margin-top: 1.5rem;">
+                <h3 style="color: var(--primary-navy); margin: 0 0 1rem 0; font-size: 1.2rem;">Program Philosophy: "Above the Line" & "Ohana"</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
                     Our program operates on the principle of being <strong>"Above the Line"</strong>—making intentional, positive choices that elevate ourselves and those around us.
                 </p>
-                <p style="color: var(--text-muted);">
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0; margin-top: 1rem;">
                     We also embrace the concept of <strong>"Ohana"</strong>, meaning family. No runner stands alone; we train together and support one another on and off the course.
                 </p>
             </div>
+
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
-        <div class="footer-bottom"><p>&copy; 2026 Olentangy Girls Cross Country Booster Club.</p></div>
+        <p>&copy; 2026 Olentangy Girls Cross Country Booster Club.</p>
     </footer>
+    
     <script src="./assets/js/main.js"></script>
 </body>
 </html>
