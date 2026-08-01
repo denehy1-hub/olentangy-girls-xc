@@ -487,16 +487,16 @@
         </div>
     </div>
 
-    <!-- ================= PAGE 2: SCHEDULE ================= -->
+    <!-- ================= PAGE 2: SCHEDULE (Dynamic Google Sheet Fetcher) ================= -->
     <div id="schedule-page" class="page-view">
         <div class="container">
             <div class="section-box">
                 <div class="section-header">
                     <h2>2026 Season Master Schedule</h2>
-                    <span class="badge badge-race">Season Active</span>
+                    <span class="badge badge-race">Live Data Feed</span>
                 </div>
                 <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.95rem;">
-                    Filter events below by category or sync the entire calendar directly to your personal phone or computer.
+                    This schedule pulls directly from our secure master tracker. Filter events by category or sync to your personal calendar.
                 </p>
 
                 <div class="filter-tabs">
@@ -516,84 +516,9 @@
                                 <th>Date</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr data-category="practice">
-                                <td><span class="badge badge-practice">Practice</span></td>
-                                <td><strong>Team Camp (Day 1)</strong></td>
-                                <td>Camp Lazarus (4422 Columbus Pike)</td>
-                                <td>July 30, 2026</td>
-                            </tr>
-                            <tr data-category="practice">
-                                <td><span class="badge badge-practice">Practice</span></td>
-                                <td><strong>Team Camp (Day 2) &amp; Parent Night</strong></td>
-                                <td>Camp Lazarus &amp; OHS</td>
-                                <td>July 31, 2026</td>
-                            </tr>
-                            <tr data-category="race">
-                                <td><span class="badge badge-race">Race</span></td>
-                                <td><strong>Big Walnut Eagle Twilight Invitational</strong></td>
-                                <td>Big Walnut High School</td>
-                                <td>August 29, 2026</td>
-                            </tr>
-                            <tr data-category="race">
-                                <td><span class="badge badge-race">Race</span></td>
-                                <td><strong>Westerville Invitational</strong></td>
-                                <td>Westerville North High School</td>
-                                <td>September 5, 2026</td>
-                            </tr>
-                            <tr data-category="social">
-                                <td><span class="badge badge-social">Social</span></td>
-                                <td><strong>Team Pasta Dinner</strong></td>
-                                <td>Hosted at Team Member Home</td>
-                                <td>Weekly on Thursdays</td>
-                            </tr>
-                            <tr data-category="race">
-                                <td><span class="badge badge-race">Race</span></td>
-                                <td><strong>McGowan Invitational</strong></td>
-                                <td>Watkins Memorial High School</td>
-                                <td>September 12, 2026</td>
-                            </tr>
-                            <tr data-category="race">
-                                <td><span class="badge badge-race">Race</span></td>
-                                <td><strong>Celtic Clash</strong></td>
-                                <td>Dublin Jerome High School</td>
-                                <td>September 19, 2026</td>
-                            </tr>
-                            <tr data-category="race">
-                                <td><span class="badge badge-race">Race</span></td>
-                                <td><strong>Lancaster "Bob Reall" Invitational</strong></td>
-                                <td>Lancaster High School</td>
-                                <td>September 26, 2026</td>
-                            </tr>
-                            <tr data-category="race">
-                                <td><span class="badge badge-race">Race</span></td>
-                                <td><strong>London High School XC Invitational</strong></td>
-                                <td>London High School</td>
-                                <td>October 3, 2026</td>
-                            </tr>
-                            <tr data-category="race">
-                                <td><span class="badge badge-race">Race</span></td>
-                                <td><strong>Les Eisenhart Invitational</strong></td>
-                                <td>Thomas Worthington High School</td>
-                                <td>October 10, 2026</td>
-                            </tr>
-                            <tr data-category="race">
-                                <td><span class="badge badge-race">Race</span></td>
-                                <td><strong>O.C.C. Cardinal Division League Meet</strong></td>
-                                <td>Hilliard Bradley High School</td>
-                                <td>October 17, 2026</td>
-                            </tr>
-                            <tr data-category="race">
-                                <td><span class="badge badge-race">Race</span></td>
-                                <td><strong>Division I Regional Meet</strong></td>
-                                <td>Pickerington North High School</td>
-                                <td>October 31, 2026</td>
-                            </tr>
-                            <tr data-category="race">
-                                <td><span class="badge badge-race">Championship</span></td>
-                                <td><strong>Division I State Meet</strong></td>
-                                <td>Fortress Obetz, Groveport, OH</td>
-                                <td>November 7, 2026</td>
+                        <tbody id="scheduleBody">
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">Loading live schedule from Google Drive...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -773,7 +698,7 @@
         </div>
     </footer>
 
-    <!-- Scripts: Multi-Page Switching, Accordions & Schedule Filtering -->
+    <!-- Scripts: Multi-Page Switching, Accordions & Dynamic Sheet Fetcher -->
     <script>
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const navMenu = document.getElementById('navMenu');
@@ -815,6 +740,53 @@
             });
         });
 
+        // Global variable to hold fetched schedule data
+        let masterScheduleData = [];
+
+        // Fetch Schedule Data from Google Apps Script Web App URL
+        async function loadMasterSchedule() {
+            const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'; // Replace with your web app URL
+            
+            if (scriptURL.includes('YOUR_GOOGLE_APPS_SCRIPT')) {
+                return; // Exit if URL hasn't been updated yet
+            }
+
+            try {
+                const response = await fetch(scriptURL);
+                masterScheduleData = await response.json();
+                renderScheduleTable(masterScheduleData);
+            } catch (error) {
+                console.error('Error fetching schedule:', error);
+                document.getElementById('scheduleBody').innerHTML = `<tr><td colspan="4" style="text-align: center; color: #DC2626; padding: 2rem;">Failed to load live schedule data.</td></tr>`;
+            }
+        }
+
+        function renderScheduleTable(data) {
+            const tbody = document.getElementById('scheduleBody');
+            tbody.innerHTML = '';
+
+            data.forEach(item => {
+                let badgeClass = 'badge-race';
+                let displayCategory = item.Category;
+                
+                if (item.Category.toLowerCase() === 'practice') {
+                    badgeClass = 'badge-practice';
+                } else if (item.Category.toLowerCase() === 'social') {
+                    badgeClass = 'badge-social';
+                }
+
+                const tr = document.createElement('tr');
+                tr.setAttribute('data-category', item.Category.toLowerCase());
+                tr.innerHTML = `
+                    <td><span class="badge ${badgeClass}">${displayCategory}</span></td>
+                    <td><strong>${item.EventName}</strong></td>
+                    <td>${item.Location}</td>
+                    <td>${item.Date}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
         // Schedule Category Filter Script
         function filterSchedule(category) {
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -831,6 +803,9 @@
                 }
             });
         }
+
+        // Run fetch on load
+        window.addEventListener('DOMContentLoaded', loadMasterSchedule);
     </script>
 
 </body>
