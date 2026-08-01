@@ -5,7 +5,6 @@ import os
 from datetime import datetime
 
 SHEET_ID = "1LV2fQMbzmrn6rvsrRhM33DyDH_ox0FF79s4mP9-SKUs"
-# Replace '0' below with the actual gid numbers from your Google Sheet URL if it's not the first tab
 CSV_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv&gid=0"
 OUTPUT_DIR = "assets/data"
 JSON_FILE = f"{OUTPUT_DIR}/schedule.json"
@@ -84,6 +83,8 @@ def fetch_and_convert():
         ics_content = generate_ics(schedule_data)
         with open(ICS_FILE, 'w', encoding='utf-8') as f:
             f.write(ics_content)
+            
+        print("Successfully generated schedule.json and schedule.ics")
             
     except Exception as e:
         print(f"Error in pipeline: {e}")
