@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+    <!-- Utility Bar -->
     <div class="utility-bar">
         <span>Need Help? <a href="mailto:ohsgxctreasurer@gmail.com">Contact Booster Treasurer</a></span>
         <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank">FinalForms</a></span>
     </div>
 
+    <!-- Header & Navigation -->
     <header>
         <div class="nav-container">
             <div class="brand">
@@ -21,7 +23,6 @@
                     <span>Athletic Booster Club</span>
                 </div>
             </div>
-            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
             <nav>
                 <ul id="navMenu">
                     <li><a href="index.html">Home</a></li>
@@ -34,23 +35,29 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <div class="container">
         <div class="section-box">
-            <div class="section-header">
+            
+            <!-- Section Header (Label Removed Here) -->
+            <div class="section-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem;">
                 <h2>2026 Season Master Schedule</h2>
-                <span class="badge badge-race">Live Data Feed</span>
+                <!-- The "Live Data Feed" badge has been removed -->
             </div>
-            <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.95rem;">
+            
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">
                 This schedule pulls directly from our secure master tracker. Filter events below by category.
             </p>
 
+            <!-- Filter Tabs -->
             <div class="filter-tabs">
                 <button class="filter-btn active-filter" onclick="filterSchedule('all')">All Events</button>
-                <button class="filter-btn" onclick="filterSchedule('race')">🏁 Races &amp; Meets</button>
-                <button class="filter-btn" onclick="filterSchedule('practice')">🏃‍♀️ Practices &amp; Camp</button>
-                <button class="filter-btn" onclick="filterSchedule('social')">🍝 Socials &amp; Dinners</button>
+                <button class="filter-btn" onclick="filterSchedule('race')">🏁 Races & Meets</button>
+                <button class="filter-btn" onclick="filterSchedule('practice')">🏃‍♀️ Practices & Camp</button>
+                <button class="filter-btn" onclick="filterSchedule('social')">🍝 Socials & Dinners</button>
             </div>
 
+            <!-- Schedule Table -->
             <div class="table-responsive">
                 <table id="scheduleTable">
                     <thead>
@@ -62,18 +69,22 @@
                         </tr>
                     </thead>
                     <tbody id="scheduleBody">
+                        <!-- JavaScript will inject rows here -->
                         <tr>
-                            <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">Loading live schedule from Google Drive...</td>
+                            <td colspan="4" style="text-align: center; padding: 2rem;">Loading latest schedule data...</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
-        <div class="footer-bottom"><p>&copy; 2026 Olentangy Girls Cross Country Booster Club.</p></div>
+        <p>&copy; 2026 Olentangy Girls Cross Country Booster Club.</p>
     </footer>
+    
     <script src="./assets/js/main.js"></script>
 </body>
 </html>
