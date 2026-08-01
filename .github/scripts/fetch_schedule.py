@@ -48,25 +48,32 @@ def fetch_and_convert():
             CSV_URL,
             headers={'User-Agent': 'Mozilla/5.0'}
         )
-        response = urllib.request.urlopen(req)
-        content = response.read().decode('utf-8-sig')
         
+        with urllib.request.urlopen(req) as response:
+            content = response.read().decode('utf-8-sig')
+        
+        # Verify we didn't accidentally get an HTML login page from Google
+        if "<html" in content.lower():
+            raise RuntimeError("Google Sheets returned an HTML page instead of CSV. Check sheet sharing permissions.")
+            
         lines = content.splitlines()
         print(f"Total lines fetched: {len(lines)}")
+        
+        if len(lines) <= 1:
+            raise ValueError("The fetched CSV file is empty or only contains headers.")
         
         reader = csv.DictReader(lines)
         print(f"Detected Headers: {reader.fieldnames}")
         
         schedule_data = []
         for row in reader:
-            # Map exact header names from your Google Sheet
             category = row.get("Category", "").strip()
             event_name = row.get("EventName", "").strip()
             location = row.get("Location", "").strip()
             date = row.get("Date", "").strip()
             address = row.get("Address", "").strip()
             
-            # Combine location and address if address exists for richer details
+            # Combine location and address if address exists
             full_location = f"{location} - {address}" if address and location else (location or address)
             
             if event_name:
@@ -79,9 +86,14 @@ def fetch_and_convert():
                 
         print(f"Total successfully parsed events: {len(schedule_data)}")
         
+        if len(schedule_data) == 0:
+            raise ValueError("Parsed 0 events! Check if your column headers match 'Category', 'EventName', 'Location', 'Date'.")
+        
+        # Save JSON
         with open(JSON_FILE, 'w', encoding='utf-8') as f:
             json.dump(schedule_data, f, indent=4)
             
+        # Save ICS
         ics_content = generate_ics(schedule_data)
         with open(ICS_FILE, 'w', encoding='utf-8') as f:
             f.write(ics_content)
