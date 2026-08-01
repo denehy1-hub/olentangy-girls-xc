@@ -4,7 +4,8 @@ import urllib.request
 import os
 
 SHEET_ID = "1LV2fQMbzmrn6rvsrRhM33DyDH_ox0FF79s4mP9-SKUs"
-CSV_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
+# Targeting the specific gid=0 for the first tab "Schedule"
+CSV_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv&gid=0"
 OUTPUT_DIR = "assets/data"
 OUTPUT_FILE = f"{OUTPUT_DIR}/schedule.json"
 
@@ -21,16 +22,17 @@ def fetch_and_convert():
         content = response.read().decode('utf-8')
         
         lines = content.splitlines()
+        print(f"Total lines fetched: {len(lines)}")
+        
         reader = csv.DictReader(lines)
         print(f"Detected Headers: {reader.fieldnames}")
         
         schedule_data = []
         for row in reader:
-            # Clean keys by stripping spaces and lowercasing
+            print(f"Read row: {row}")
             clean_row = {k.strip().lower(): (v.strip() if v else "") for k, v in row.items() if k}
             
             category = clean_row.get("category", "")
-            # Look for 'eventname' (matching your column) as well as fallbacks
             event_name = clean_row.get("eventname", "") or clean_row.get("event name", "") or clean_row.get("event", "")
             location = clean_row.get("location", "") or clean_row.get("location / details", "")
             date = clean_row.get("date", "")
