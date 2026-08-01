@@ -17,16 +17,17 @@ def fetch_and_convert():
         lines = [l.decode('utf-8') for l in response.readlines()]
         
         reader = csv.DictReader(lines)
-        schedule_data = []
+        print(f"Detected Column Headers: {reader.fieldnames}")
         
+        schedule_data = []
         for row in reader:
-            # Clean keys by stripping spaces so minor typos don't break it
-            clean_row = {k.strip().lower(): v.strip() for k, v in row.items() if k}
+            # Clean keys and values
+            clean_row = {k.strip().lower(): (v.strip() if v else "") for k, v in row.items() if k}
             
-            # Look up fields flexibly
+            # Extract fields based on common column name variations
             category = clean_row.get("category", "")
-            event_name = clean_row.get("event name", "") or clean_row.get("event", "")
-            location = clean_row.get("location / details", "") or clean_row.get("location", "")
+            event_name = clean_row.get("event name", "") or clean_row.get("event", "") or clean_row.get("meet", "")
+            location = clean_row.get("location / details", "") or clean_row.get("location", "") or clean_row.get("details", "")
             date = clean_row.get("date", "")
             
             if event_name:
@@ -37,10 +38,12 @@ def fetch_and_convert():
                     "date": date
                 })
                 
+        print(f"Parsed {len(schedule_data)} valid events.")
+        
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
             json.dump(schedule_data, f, indent=4)
             
-        print(f"Successfully saved {len(schedule_data)} events to {OUTPUT_FILE}")
+        print(f"Successfully saved to {OUTPUT_FILE}")
         
     except Exception as e:
         print(f"Error in pipeline: {e}")
