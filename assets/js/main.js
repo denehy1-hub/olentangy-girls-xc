@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let masterScheduleData = [];
 
 async function loadMasterSchedule() {
-    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'; // Replace with your web app URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyUpWY9jk6kNZ5Mnjfeui6IqJtW4Igh_nVuhKo-bGHwZ5Tbo1ALcOyQ8bktY5frQGiD/exec';
     
     if (scriptURL.includes('YOUR_GOOGLE_APPS_SCRIPT')) {
         return; 
@@ -48,21 +48,22 @@ function renderScheduleTable(data) {
 
     data.forEach(item => {
         let badgeClass = 'badge-race';
-        let displayCategory = item.Category;
+        let displayCategory = item.Category || '';
         
-        if (item.Category.toLowerCase() === 'practice') {
+        const catLower = (item.Category || '').toLowerCase();
+        if (catLower === 'practice') {
             badgeClass = 'badge-practice';
-        } else if (item.Category.toLowerCase() === 'social') {
+        } else if (catLower === 'social') {
             badgeClass = 'badge-social';
         }
 
         const tr = document.createElement('tr');
-        tr.setAttribute('data-category', item.Category.toLowerCase());
+        tr.setAttribute('data-category', catLower);
         tr.innerHTML = `
             <td><span class="badge ${badgeClass}">${displayCategory}</span></td>
-            <td><strong>${item.EventName}</strong></td>
-            <td>${item.Location}</td>
-            <td>${item.Date}</td>
+            <td><strong>${item.EventName || ''}</strong></td>
+            <td>${item.Location || ''}</td>
+            <td>${item.Date || ''}</td>
         `;
         tbody.appendChild(tr);
     });
