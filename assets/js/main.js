@@ -18,23 +18,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Dynamic Schedule Fetcher (for schedule.html)
+// Dynamic Schedule Fetcher with Caching for instant load
 let masterScheduleData = [];
 
 async function loadMasterSchedule() {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzBMZ6CvUu9PNUc3cTlvhJjOuwV36ZC';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzBMZ6CvUu9PNUc3cTlvhJjOuwV36ZC...'; // Keep your new URL here
+    const cacheKey = 'ohs_xc_schedule_cache_2026';
+    const cacheTimeKey = 'ohs_xc_schedule_time_2026';
+    const cacheDuration = 10 * 60 * 1000; // Cache valid for 10 minutes
+
+    const tbody = document.getElementById('scheduleBody');
     
-    if (scriptURL.includes('YOUR_GOOGLE_APPS_SCRIPT')) {
-        return; 
+    // 1. Check if we have cached data to show INSTANTLY
+    const cachedData = localStorage.getItem(cacheKey);
+    const cachedTime = localStorage.getItem(cacheTimeKey);
+    
+    if (cachedData && cachedTime && (new Date().getTime() - cachedTime < cacheDuration)) {
+        masterScheduleData = JSON.parse(cachedData);
+        renderScheduleTable(masterScheduleData);
+        return; // Skip the slow network wait if cache is fresh!
     }
 
+    // 2. Otherwise fetch live data in the background
     try {
         const response = await fetch(scriptURL);
         masterScheduleData = await response.json();
+        
+        // Save to cache
+        localStorage.setItem(cacheKey, JSON.stringify(masterScheduleData));
+        localStorage.setItem(cacheTimeKey, new Date().getTime());
+
         renderScheduleTable(masterScheduleData);
     } catch (error) {
         console.error('Error fetching schedule:', error);
-        const tbody = document.getElementById('scheduleBody');
+        // Fallback to expired cache if offline/error
+        if (cachedData) {
+            masterScheduleData = JSON.parse(cachedData);
+            renderScheduleTable(masterScheduleData);
+            return;
+        }
         if (tbody) {
             tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #DC2626; padding: 2rem;">Failed to load live schedule data.</td></tr>`;
         }
