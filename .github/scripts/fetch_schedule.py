@@ -49,8 +49,6 @@ def fetch_and_convert():
             headers={'User-Agent': 'Mozilla/5.0'}
         )
         response = urllib.request.urlopen(req)
-        
-        # Use utf-8-sig to automatically strip invisible BOM characters
         content = response.read().decode('utf-8-sig')
         
         lines = content.splitlines()
@@ -61,32 +59,21 @@ def fetch_and_convert():
         
         schedule_data = []
         for row in reader:
-            # Clean keys by stripping symbols, whitespace, and lowercasing
-            clean_row = {}
-            for k, v in row.items():
-                if k:
-                    clean_key = ''.join(c for c in k.strip().lower() if c.isalnum() or c == ' ')
-                    clean_row[clean_key] = v.strip() if v else ""
+            # Map exact header names from your Google Sheet
+            category = row.get("Category", "").strip()
+            event_name = row.get("EventName", "").strip()
+            location = row.get("Location", "").strip()
+            date = row.get("Date", "").strip()
+            address = row.get("Address", "").strip()
             
-            category = clean_row.get("category", "")
-            event_name = (
-                clean_row.get("eventname", "") or 
-                clean_row.get("event name", "") or 
-                clean_row.get("event", "") or
-                clean_row.get("meet", "")
-            )
-            location = (
-                clean_row.get("location", "") or 
-                clean_row.get("location details", "") or 
-                clean_row.get("details", "")
-            )
-            date = clean_row.get("date", "")
+            # Combine location and address if address exists for richer details
+            full_location = f"{location} - {address}" if address and location else (location or address)
             
             if event_name:
                 schedule_data.append({
                     "category": category,
                     "eventName": event_name,
-                    "location": location,
+                    "location": full_location,
                     "date": date
                 })
                 
