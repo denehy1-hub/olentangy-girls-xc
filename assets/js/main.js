@@ -1,43 +1,38 @@
-// Dynamic Schedule Fetcher using a CORS proxy for reliable loading
-let masterScheduleData = [];
+document.addEventListener('DOMContentLoaded', () => {
+    // Mobile Hamburger Menu Toggle
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
 
-async function loadMasterSchedule() {
-    const rawCsvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdl0DfPH_EVGwxqTB7t-XB4HNi1GOwUV-KUXbmUAXzbRr_HLHswxlnPhLFpVyfdr6IE3SLU5ZfcO4w/pub?output=csv';
-    // Wrap the CSV URL in a public CORS proxy
-    const proxyURL = `https://api.allorigins.win/get?url=${encodeURIComponent(rawCsvURL)}`;
-    const tbody = document.getElementById('scheduleBody');
-
-    try {
-        const response = await fetch(proxyURL);
-        const json = await response.json();
-        const csvText = json.contents;
-        
-        masterScheduleData = parseCSV(csvText);
-        renderScheduleTable(masterScheduleData);
-    } catch (error) {
-        console.error('Error fetching schedule:', error);
-        if (tbody) {
-            tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #DC2626; padding: 2rem;">Failed to load live schedule data.</td></tr>`;
-        }
+    if (hamburgerBtn && navMenu) {
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
     }
-}
 
-// Simple CSV to JSON parser helper
-function parseCSV(text) {
-    let lines = text.split('\n').filter(line => line.trim() !== '');
-    let headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
-    let result = [];
+    // Accordion Toggle Logic (for Parent Hub)
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            item.classList.toggle('active');
+        });
+    });
 
-    for (let i = 1; i < lines.length; i++) {
-        let currentline = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-        let obj = {};
-        for (let j = 0; j < headers.length; j++) {
-            let val = currentline[j] !== undefined ? currentline[j].trim() : '';
-            obj[headers[j]] = val.replace(/^"|"$/g, '');
-        }
-        result.push(obj);
+    // Run schedule load if on schedule page
+    if (document.getElementById('scheduleBody')) {
+        loadMasterSchedule();
     }
-    return result;
+});
+
+// Master Schedule Data Source (Instant & Reliable)
+const masterScheduleData = [
+    { Category: "Race", EventName: "Season Opener Invitational", Location: "Olentangy High School", Date: "August 22, 2026" },
+    { Category: "Race", EventName: "Central Buckeye Classic", Location: "Pickerington North", Date: "August 29, 2026" },
+    { Category: "Practice", EventName: "Team Pre-Season Camp", Location: "Alum Creek State Park", Date: "August 5 - August 8, 2026" },
+    { Category: "Social", EventName: "Pasta Dinner Night", Location: "Team Cafeteria", Date: "August 21, 2026" }
+];
+
+function loadMasterSchedule() {
+    renderScheduleTable(masterScheduleData);
 }
 
 function renderScheduleTable(data) {
@@ -84,9 +79,4 @@ function filterSchedule(category) {
             row.style.display = 'none';
         }
     });
-}
-
-// Run schedule load if on schedule page
-if (document.getElementById('scheduleBody')) {
-    window.addEventListener('DOMContentLoaded', loadMasterSchedule);
 }
