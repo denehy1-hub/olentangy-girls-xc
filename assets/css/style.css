@@ -56,14 +56,11 @@ header {
     align-items: center;
     gap: 1rem;
 }
-.brand-logo {
-    background: var(--primary-navy);
-    color: var(--primary-gold);
-    font-weight: 800;
-    padding: 0.5rem 0.75rem;
-    border-radius: 6px;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
+.brand-logo-img {
+    height: 55px;
+    width: auto;
+    display: block;
+    object-fit: contain;
 }
 .brand-text h1 {
     font-size: 1.25rem;
