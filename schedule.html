@@ -303,14 +303,23 @@
                     return;
                 }
 
-                tableBody.innerHTML = events.map(event => `
-                    <tr>
-                        <td><span class="cat-badge ${getCategoryClass(event.category)}">${event.category || 'Event'}</span></td>
-                        <td><strong>${event.eventName || ''}</strong></td>
-                        <td>${event.location || 'TBD'}</td>
-                        <td>${event.date || ''}</td>
-                    </tr>
-                `).join('');
+                tableBody.innerHTML = events.map(event => {
+                    // Create hyperlink for location using address if available
+                    let locationHtml = event.location || 'TBD';
+                    if (event.address) {
+                        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address)}`;
+                        locationHtml = `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-navy); text-decoration: underline;" title="${event.address}">${event.location}</a>`;
+                    }
+
+                    return `
+                        <tr>
+                            <td><span class="cat-badge ${getCategoryClass(event.category)}">${event.category || 'Event'}</span></td>
+                            <td><strong>${event.eventName || ''}</strong></td>
+                            <td>${locationHtml}</td>
+                            <td>${event.date || ''}</td>
+                        </tr>
+                    `;
+                }).join('');
             }
 
             fetch("./assets/data/schedule.json")

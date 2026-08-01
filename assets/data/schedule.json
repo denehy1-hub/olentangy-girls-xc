@@ -1,1 +1,98 @@
-[]
+[
+    {
+        "category": "Practice",
+        "eventName": "Team Camp (Day 1)",
+        "location": "Camp Lazarus",
+        "date": "July 30, 2026",
+        "address": "4422 Columbus Pike, Delaware, OH 43015",
+        "season": "2026"
+    },
+    {
+        "category": "Practice",
+        "eventName": "Team Camp (Day 2) & Parent Night",
+        "location": "Camp Lazarus",
+        "date": "July 31, 2026",
+        "address": "4422 Columbus Pike, Delaware, OH 43015",
+        "season": "2026"
+    },
+    {
+        "category": "Race",
+        "eventName": "Big Walnut Eagle Twilight Invitational",
+        "location": "Big Walnut High School",
+        "date": "August 29, 2026",
+        "address": "713 Miller Dr, Sunbury, OH 43074",
+        "season": "2026"
+    },
+    {
+        "category": "Race",
+        "eventName": "Westerville Invitational",
+        "location": "Westerville North High School",
+        "date": "September 5, 2026",
+        "address": "950 County Line Rd, Westerville, OH 43081",
+        "season": "2026"
+    },
+    {
+        "category": "Race",
+        "eventName": "McGowan Invitational",
+        "location": "Watkins Memorial High School",
+        "date": "September 12, 2026",
+        "address": "1954 Warrior Way SW, Etna, OH 43062",
+        "season": "2026"
+    },
+    {
+        "category": "Race",
+        "eventName": "Celtic Clash",
+        "location": "Dublin Jerome High School",
+        "date": "September 19, 2026",
+        "address": "4RMG+5G, 8300 Hyland-Croy Rd, Dublin, OH 43016",
+        "season": "2026"
+    },
+    {
+        "category": "Race",
+        "eventName": "Lancaster \"Bob Reall\" Invitational",
+        "location": "Lancaster High School",
+        "date": "September 26, 2026",
+        "address": "1312 Granville Pike, Lancaster, OH 43130",
+        "season": "2026"
+    },
+    {
+        "category": "Race",
+        "eventName": "London High School XC Invitational",
+        "location": "London High School",
+        "date": "October 3, 2026",
+        "address": "336 Elm St, London, OH 43140",
+        "season": "2026"
+    },
+    {
+        "category": "Race",
+        "eventName": "Les Eisenhart Invitational",
+        "location": "Thomas Worthington High School",
+        "date": "October 10, 2026",
+        "address": "300 W Dublin-Granville Rd, Worthington, OH 43085",
+        "season": "2026"
+    },
+    {
+        "category": "Race",
+        "eventName": "O.C.C. Cardinal Division League Meet",
+        "location": "Hilliard Bradley High School",
+        "date": "October 17, 2026",
+        "address": "2800 Walker Rd, Hilliard, OH 43026",
+        "season": "2026"
+    },
+    {
+        "category": "Race",
+        "eventName": "Division I Regional Meet",
+        "location": "Pickerington North High School",
+        "date": "October 31, 2026",
+        "address": "7800 Refugee Rd, Pickerington, OH 43147",
+        "season": "2026"
+    },
+    {
+        "category": "Race",
+        "eventName": "Division I State Meet",
+        "location": "Fortress Obetz, Groveport, OH",
+        "date": "November 7, 2026",
+        "address": "2015 Recreation Trl, Obetz, OH 43207",
+        "season": "2026"
+    }
+]
