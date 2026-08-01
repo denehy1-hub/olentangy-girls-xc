@@ -49,7 +49,9 @@ def fetch_and_convert():
             headers={'User-Agent': 'Mozilla/5.0'}
         )
         response = urllib.request.urlopen(req)
-        content = response.read().decode('utf-8')
+        
+        # Use utf-8-sig to automatically strip invisible BOM characters
+        content = response.read().decode('utf-8-sig')
         
         lines = content.splitlines()
         print(f"Total lines fetched: {len(lines)}")
@@ -59,12 +61,25 @@ def fetch_and_convert():
         
         schedule_data = []
         for row in reader:
-            print(f"Processing row: {row}")
-            clean_row = {k.strip().lower(): (v.strip() if v else "") for k, v in row.items() if k}
+            # Clean keys by stripping symbols, whitespace, and lowercasing
+            clean_row = {}
+            for k, v in row.items():
+                if k:
+                    clean_key = ''.join(c for c in k.strip().lower() if c.isalnum() or c == ' ')
+                    clean_row[clean_key] = v.strip() if v else ""
             
             category = clean_row.get("category", "")
-            event_name = clean_row.get("eventname", "") or clean_row.get("event name", "") or clean_row.get("event", "")
-            location = clean_row.get("location", "") or clean_row.get("location / details", "")
+            event_name = (
+                clean_row.get("eventname", "") or 
+                clean_row.get("event name", "") or 
+                clean_row.get("event", "") or
+                clean_row.get("meet", "")
+            )
+            location = (
+                clean_row.get("location", "") or 
+                clean_row.get("location details", "") or 
+                clean_row.get("details", "")
+            )
             date = clean_row.get("date", "")
             
             if event_name:
