@@ -14,17 +14,18 @@ def fetch_and_convert():
     
     try:
         response = urllib.request.urlopen(CSV_URL)
-        lines = [l.decode('utf-8') for l in response.readlines()]
+        content = response.read().decode('utf-8')
+        print(f"Raw CSV content snippet: {content[:300]}")
         
+        lines = content.splitlines()
         reader = csv.DictReader(lines)
-        print(f"Detected Column Headers: {reader.fieldnames}")
+        print(f"Detected Headers: {reader.fieldnames}")
         
         schedule_data = []
         for row in reader:
-            # Clean keys and values
+            print(f"Processing row: {row}")
             clean_row = {k.strip().lower(): (v.strip() if v else "") for k, v in row.items() if k}
             
-            # Extract fields based on common column name variations
             category = clean_row.get("category", "")
             event_name = clean_row.get("event name", "") or clean_row.get("event", "") or clean_row.get("meet", "")
             location = clean_row.get("location / details", "") or clean_row.get("location", "") or clean_row.get("details", "")
@@ -38,13 +39,11 @@ def fetch_and_convert():
                     "date": date
                 })
                 
-        print(f"Parsed {len(schedule_data)} valid events.")
+        print(f"Total parsed events: {len(schedule_data)}")
         
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
             json.dump(schedule_data, f, indent=4)
             
-        print(f"Successfully saved to {OUTPUT_FILE}")
-        
     except Exception as e:
         print(f"Error in pipeline: {e}")
         exit(1)
