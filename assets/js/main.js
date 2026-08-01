@@ -1,66 +1,43 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Mobile Hamburger Menu Toggle
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const navMenu = document.getElementById('navMenu');
-
-    if (hamburgerBtn && navMenu) {
-        hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('show');
-        });
-    }
-
-    // Accordion Toggle Logic (for Parent Hub)
-    document.querySelectorAll('.accordion-header').forEach(header => {
-        header.addEventListener('click', () => {
-            const item = header.parentElement;
-            item.classList.toggle('active');
-        });
-    });
-});
-
-// Dynamic Schedule Fetcher with Caching for instant load
+// Dynamic Schedule Fetcher using a CORS proxy for reliable loading
 let masterScheduleData = [];
 
 async function loadMasterSchedule() {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzBMZ6CvUu9PNUc3cTlvhJjOuwV36ZC...'; // Keep your new URL here
-    const cacheKey = 'ohs_xc_schedule_cache_2026';
-    const cacheTimeKey = 'ohs_xc_schedule_time_2026';
-    const cacheDuration = 10 * 60 * 1000; // Cache valid for 10 minutes
-
+    const rawCsvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdl0DfPH_EVGwxqTB7t-XB4HNi1GOwUV-KUXbmUAXzbRr_HLHswxlnPhLFpVyfdr6IE3SLU5ZfcO4w/pub?output=csv';
+    // Wrap the CSV URL in a public CORS proxy
+    const proxyURL = `https://api.allorigins.win/get?url=${encodeURIComponent(rawCsvURL)}`;
     const tbody = document.getElementById('scheduleBody');
-    
-    // 1. Check if we have cached data to show INSTANTLY
-    const cachedData = localStorage.getItem(cacheKey);
-    const cachedTime = localStorage.getItem(cacheTimeKey);
-    
-    if (cachedData && cachedTime && (new Date().getTime() - cachedTime < cacheDuration)) {
-        masterScheduleData = JSON.parse(cachedData);
-        renderScheduleTable(masterScheduleData);
-        return; // Skip the slow network wait if cache is fresh!
-    }
 
-    // 2. Otherwise fetch live data in the background
     try {
-        const response = await fetch(scriptURL);
-        masterScheduleData = await response.json();
+        const response = await fetch(proxyURL);
+        const json = await response.json();
+        const csvText = json.contents;
         
-        // Save to cache
-        localStorage.setItem(cacheKey, JSON.stringify(masterScheduleData));
-        localStorage.setItem(cacheTimeKey, new Date().getTime());
-
+        masterScheduleData = parseCSV(csvText);
         renderScheduleTable(masterScheduleData);
     } catch (error) {
         console.error('Error fetching schedule:', error);
-        // Fallback to expired cache if offline/error
-        if (cachedData) {
-            masterScheduleData = JSON.parse(cachedData);
-            renderScheduleTable(masterScheduleData);
-            return;
-        }
         if (tbody) {
             tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #DC2626; padding: 2rem;">Failed to load live schedule data.</td></tr>`;
         }
     }
+}
+
+// Simple CSV to JSON parser helper
+function parseCSV(text) {
+    let lines = text.split('\n').filter(line => line.trim() !== '');
+    let headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+    let result = [];
+
+    for (let i = 1; i < lines.length; i++) {
+        let currentline = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+        let obj = {};
+        for (let j = 0; j < headers.length; j++) {
+            let val = currentline[j] !== undefined ? currentline[j].trim() : '';
+            obj[headers[j]] = val.replace(/^"|"$/g, '');
+        }
+        result.push(obj);
+    }
+    return result;
 }
 
 function renderScheduleTable(data) {
