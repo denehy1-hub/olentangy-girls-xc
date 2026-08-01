@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 
 SHEET_ID = "1LV2fQMbzmrn6rvsrRhM33DyDH_ox0FF79s4mP9-SKUs"
-CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdl0DfPH_EVGwxqTB7t-XB4HNi1GOwUV-KUXbmUAXzbRr_HLHswxlnPhLFpVyfdr6IE3SLU5ZfcO4w/pub?output=csv"
+CSV_URL = "https://docs.google.com/spreadsheets/d/1LV2fQMbzmrn6rvsrRhM33DyDH_ox0FF79s4mP9-SKUs/export?format=csv&gid=0"
 OUTPUT_DIR = "assets/data"
 JSON_FILE = f"{OUTPUT_DIR}/schedule.json"
 ICS_FILE = f"{OUTPUT_DIR}/schedule.ics"
@@ -104,6 +104,6 @@ def fetch_and_convert():
     except Exception as e:
         print(f"Error in pipeline: {e}")
         exit(1)
-
+	
 if __name__ == "__main__":
     fetch_and_convert()
