@@ -51,29 +51,32 @@ def fetch_and_convert():
         
         with urllib.request.urlopen(req) as response:
             content = response.read().decode('utf-8-sig')
-        
-        # Verify we didn't accidentally get an HTML login page from Google
+            
         if "<html" in content.lower():
-            raise RuntimeError("Google Sheets returned an HTML page instead of CSV. Check sheet sharing permissions.")
+            raise RuntimeError("Google Sheets returned an HTML login page instead of CSV data.")
             
         lines = content.splitlines()
         print(f"Total lines fetched: {len(lines)}")
         
-        if len(lines) <= 1:
-            raise ValueError("The fetched CSV file is empty or only contains headers.")
-        
         reader = csv.DictReader(lines)
-        print(f"Detected Headers: {reader.fieldnames}")
+        print(f"Raw Detected Headers: {reader.fieldnames}")
         
         schedule_data = []
         for row in reader:
-            category = row.get("Category", "").strip()
-            event_name = row.get("EventName", "").strip()
-            location = row.get("Location", "").strip()
-            date = row.get("Date", "").strip()
-            address = row.get("Address", "").strip()
+            # Normalize all keys: lowercase and strip all spaces/special characters
+            normalized_row = {}
+            for k, v in row.items():
+                if k:
+                    norm_key = "".join(char for char in str(k).lower() if char.isalnum())
+                    normalized_row[norm_key] = str(v).strip() if v else ""
             
-            # Combine location and address if address exists
+            # Map against normalized keys (e.g., "eventname", "category", "location", "date", "address")
+            category = normalized_row.get("category", "")
+            event_name = normalized_row.get("eventname", "")
+            location = normalized_row.get("location", "")
+            date = normalized_row.get("date", "")
+            address = normalized_row.get("address", "")
+            
             full_location = f"{location} - {address}" if address and location else (location or address)
             
             if event_name:
@@ -87,13 +90,11 @@ def fetch_and_convert():
         print(f"Total successfully parsed events: {len(schedule_data)}")
         
         if len(schedule_data) == 0:
-            raise ValueError("Parsed 0 events! Check if your column headers match 'Category', 'EventName', 'Location', 'Date'.")
+            raise ValueError("Parsed 0 events! Check your Google Sheet content and ensure rows are filled.")
         
-        # Save JSON
         with open(JSON_FILE, 'w', encoding='utf-8') as f:
             json.dump(schedule_data, f, indent=4)
             
-        # Save ICS
         ics_content = generate_ics(schedule_data)
         with open(ICS_FILE, 'w', encoding='utf-8') as f:
             f.write(ics_content)
