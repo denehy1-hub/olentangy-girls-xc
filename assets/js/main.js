@@ -1,15 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Mobile Hamburger Menu Toggle
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const navMenu = document.getElementById('navMenu');
-
-    if (hamburgerBtn && navMenu) {
-        hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('show');
-        });
-    }
-
-    // Accordion Toggle Logic (for Parent Hub)
+    // Accordion Toggle Logic
     document.querySelectorAll('.accordion-header').forEach(header => {
         header.addEventListener('click', () => {
             const item = header.parentElement;
@@ -23,22 +13,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Master Schedule Data Source (Instant & Reliable)
-const masterScheduleData = [
+// Built-in fallback data in case the GitHub Action JSON isn't generated yet
+const fallbackData = [
     { Category: "Race", EventName: "Season Opener Invitational", Location: "Olentangy High School", Date: "August 22, 2026" },
     { Category: "Race", EventName: "Central Buckeye Classic", Location: "Pickerington North", Date: "August 29, 2026" },
     { Category: "Practice", EventName: "Team Pre-Season Camp", Location: "Alum Creek State Park", Date: "August 5 - August 8, 2026" },
     { Category: "Social", EventName: "Pasta Dinner Night", Location: "Team Cafeteria", Date: "August 21, 2026" }
 ];
 
-function loadMasterSchedule() {
-    renderScheduleTable(masterScheduleData);
+async function loadMasterSchedule() {
+    const tbody = document.getElementById('scheduleBody');
+    const cacheBuster = new Date().getTime();
+    const jsonURL = `./data/schedule.json?t=${cacheBuster}`; 
+
+    try {
+        const response = await fetch(jsonURL);
+        if (!response.ok) throw new Error('JSON not found yet');
+        
+        const masterScheduleData = await response.json();
+        renderScheduleTable(masterScheduleData);
+    } catch (error) {
+        console.warn('Pipeline JSON missing. Using local fallback data.');
+        renderScheduleTable(fallbackData);
+    }
 }
 
 function renderScheduleTable(data) {
     const tbody = document.getElementById('scheduleBody');
     if (!tbody) return;
     tbody.innerHTML = '';
+
+    if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem;">No events currently scheduled.</td></tr>`;
+        return;
+    }
 
     data.forEach(item => {
         let badgeClass = 'badge-race';
