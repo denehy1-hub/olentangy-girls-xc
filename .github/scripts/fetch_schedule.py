@@ -2,12 +2,42 @@ import csv
 import json
 import urllib.request
 import os
+from datetime import datetime
 
 SHEET_ID = "1LV2fQMbzmrn6rvsrRhM33DyDH_ox0FF79s4mP9-SKUs"
-# Targeting the specific gid=0 for the first tab "Schedule"
 CSV_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv&gid=0"
 OUTPUT_DIR = "assets/data"
-OUTPUT_FILE = f"{OUTPUT_DIR}/schedule.json"
+JSON_FILE = f"{OUTPUT_DIR}/schedule.json"
+ICS_FILE = f"{OUTPUT_DIR}/schedule.ics"
+
+def generate_ics(events):
+    ics_lines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Olentangy Girls XC//Schedule Sync//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH"
+    ]
+    
+    for event in events:
+        try:
+            dt = datetime.strptime(event["date"].strip(), "%B %d, %Y")
+            date_str = dt.strftime("%Y%m%d")
+            
+            ics_lines.extend([
+                "BEGIN:VEVENT",
+                f"SUMMARY:{event['eventName']}",
+                f"LOCATION:{event['location']}",
+                f"DESCRIPTION:Category: {event['category']}",
+                f"DTSTART;VALUE=DATE:{date_str}",
+                f"DTEND;VALUE=DATE:{date_str}",
+                "END:VEVENT"
+            ])
+        except Exception as e:
+            print(f"Skipping ICS for event due to date format: {event['eventName']} ({e})")
+            
+    ics_lines.append("END:VCALENDAR")
+    return "\r\n".join(ics_lines)
 
 def fetch_and_convert():
     print("Fetching data from Google Sheets...")
@@ -29,7 +59,6 @@ def fetch_and_convert():
         
         schedule_data = []
         for row in reader:
-            print(f"Read row: {row}")
             clean_row = {k.strip().lower(): (v.strip() if v else "") for k, v in row.items() if k}
             
             category = clean_row.get("category", "")
@@ -47,8 +76,16 @@ def fetch_and_convert():
                 
         print(f"Total parsed events: {len(schedule_data)}")
         
-        with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
+        # Save JSON
+        with open(JSON_FILE, 'w', encoding='utf-8') as f:
             json.dump(schedule_data, f, indent=4)
+            
+        # Save ICS
+        ics_content = generate_ics(schedule_data)
+        with open(ICS_FILE, 'w', encoding='utf-8') as f:
+            f.write(ics_content)
+            
+        print("Successfully generated schedule.json and schedule.ics")
             
     except Exception as e:
         print(f"Error in pipeline: {e}")

@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedule | Olentangy Girls Cross Country</title>
+    <title>2026 Master Schedule - Olentangy Girls XC</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+
     <!-- Utility Bar -->
     <div class="utility-bar">
         <span>Need Help? <a href="mailto:ohsgxctreasurer@gmail.com">Contact Booster Treasurer</a></span>
-        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank">FinalForms</a></span>
+        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank">FinalForms</a> | <a href="https://oyaa.org/cross-country/" target="_blank">OYAA</a></span>
     </div>
 
     <!-- Header & Navigation -->
@@ -27,7 +28,7 @@
                 <ul id="navMenu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="schedule.html" class="active">Schedule</a></li>
-                    <li><a href="team.html">Coaches & Team</a></li>
+                    <li><a href="team.html">Coaches &amp; Team</a></li>
                     <li><a href="parents.html">Parent Hub</a></li>
                     <li><a href="support.html">Support</a></li>
                 </ul>
@@ -39,42 +40,49 @@
     <div class="container">
         <div class="section-box">
             
-            <!-- Section Header (Label Removed Here) -->
-            <div class="section-header" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+            <div class="section-header">
                 <h2>2026 Season Master Schedule</h2>
-                <!-- The "Live Data Feed" badge has been removed -->
+                <span class="badge badge-race">LIVE TRACKER</span>
             </div>
             
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                 This schedule pulls directly from our secure master tracker. Filter events below by category.
             </p>
 
-            <!-- Filter Tabs -->
+            <!-- Filter Buttons -->
             <div class="filter-tabs">
                 <button class="filter-btn active-filter" onclick="filterSchedule('all')">All Events</button>
-                <button class="filter-btn" onclick="filterSchedule('race')">🏁 Races & Meets</button>
-                <button class="filter-btn" onclick="filterSchedule('practice')">🏃‍♀️ Practices & Camp</button>
-                <button class="filter-btn" onclick="filterSchedule('social')">🍝 Socials & Dinners</button>
+                <button class="filter-btn" onclick="filterSchedule('race')">🏁 Races &amp; Meets</button>
+                <button class="filter-btn" onclick="filterSchedule('practice')">🏃‍♀️ Practices &amp; Camp</button>
+                <button class="filter-btn" onclick="filterSchedule('social')">🍲 Socials &amp; Dinners</button>
             </div>
 
             <!-- Schedule Table -->
-            <div class="table-responsive">
-                <table id="scheduleTable">
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Event Name</th>
-                            <th>Location / Details</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody id="scheduleBody">
-                        <!-- JavaScript will inject rows here -->
-                        <tr>
-                            <td colspan="4" style="text-align: center; padding: 2rem;">Loading latest schedule data...</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <table id="scheduleTable">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Event Name</th>
+                        <th>Location / Details</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleBody">
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: var(--text-muted);">Loading schedule data...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Calendar Sync Widget -->
+            <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <h3 style="margin: 0 0 0.25rem 0; font-size: 1.1rem; color: var(--primary-navy);">📅 Sync with Your Personal Calendar</h3>
+                    <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Download the official <code>.ics</code> schedule file or sync directly to Apple, Google, or Outlook calendars.</p>
+                </div>
+                <div>
+                    <a href="./assets/data/schedule.ics" download="olentangy_girls_xc_2026.ics" style="background: var(--primary-gold); color: var(--primary-navy); padding: 0.75rem 1.25rem; border-radius: 6px; font-weight: bold; text-decoration: none; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">Download .ics File</a>
+                </div>
             </div>
 
         </div>
@@ -82,7 +90,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Olentangy Girls Cross Country Booster Club.</p>
+        <p>© 2026 Olentangy Girls Cross Country Booster Club.</p>
     </footer>
     
     <script src="./assets/js/main.js"></script>
