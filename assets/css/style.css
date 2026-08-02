@@ -24,30 +24,6 @@ body {
 }
 
 /* ==========================================
-   Utility Bar
-   ========================================== */
-.utility-bar {
-    background-color: #001b3a;
-    color: #cbd5e1;
-    font-size: 0.85rem;
-    padding: 0.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.utility-bar a {
-    color: var(--primary-gold);
-    text-decoration: none;
-}
-
-.utility-bar a:hover {
-    text-decoration: underline;
-}
-
-/* ==========================================
    Header & Navigation
    ========================================== */
 header {
@@ -200,7 +176,7 @@ nav ul li a.active::after {
 }
 
 .btn-outline:hover {
-    background-color: var(--white);
+    background-color: white;
     color: var(--primary-navy);
 }
 
@@ -350,31 +326,33 @@ nav ul li a.active::after {
     }
     
     .nav-container {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        padding: 1rem;
     }
     
     .brand {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
-    /* Show hamburger menu toggle and structure mobile drawer */
+    /* Show hamburger menu toggle cleanly inside mobile flex layout */
     .menu-toggle {
         display: block;
-        position: absolute;
-        top: 1.25rem;
-        right: 2rem;
-    }
-
-    .nav-container {
-        position: relative;
+        background: none;
+        border: none;
+        font-size: 1.75rem;
+        color: var(--primary-navy);
+        cursor: pointer;
     }
     
     nav {
         display: none;
         width: 100%;
         margin-top: 1rem;
+        flex-basis: 100%;
     }
 
     nav.active {
