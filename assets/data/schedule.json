@@ -151,5 +151,14 @@
         "address": "2015 Recreation Trl, Obetz, OH 43207",
         "season": "2026",
         "details": ""
+    },
+    {
+        "category": "Practice",
+        "eventname": "Condtioning",
+        "location": "High Banks Big Meadows",
+        "date": "August 3, 2026",
+        "address": "40\u00b009'08.2\"N 83\u00b002'32.3\"W",
+        "season": "2026",
+        "details": "7:30am to 9:30am"
     }
 ]
