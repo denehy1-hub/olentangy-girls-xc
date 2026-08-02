@@ -268,25 +268,25 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            fetch("header.html").then(res => res.text()).then(data => document.getElementById("site-header").innerHTML = data);
-            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
-
-            const accordionHeaders = document.querySelectorAll(".accordion-header");
-            
-            accordionHeaders.forEach(header => {
-                header.addEventListener("click", function () {
-                    const item = this.closest(".accordion-item");
-                    const content = item.querySelector(".accordion-content");
+            // Load shared header and automatically apply the 'active' class to the current page link
+            fetch("header.html")
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById("site-header").innerHTML = data;
                     
-                    item.classList.toggle("active");
+                    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+                    const navLinks = document.querySelectorAll("nav ul li a");
                     
-                    if (item.classList.contains("active")) {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    } else {
-                        content.style.maxHeight = null;
-                    }
+                    navLinks.forEach(link => {
+                        const linkHref = link.getAttribute("href");
+                        if (linkHref === currentPath || (currentPath === "" && linkHref === "index.html")) {
+                            link.classList.add("active");
+                        }
+                    });
                 });
-            });
+
+            // Load shared footer component
+            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
         });
     </script>
 </body>

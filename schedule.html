@@ -11,7 +11,7 @@
     <style>
         /* ========================================================================== */
         /* Page Specific Overrides & Layout Styling                                 */
-        /* ========================================================================== -->
+        /* ========================================================================== */
         .hero-section {
             background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover-photo.jpg') no-repeat center center;
             background-size: cover;
@@ -258,8 +258,24 @@
     <!-- ========================================================================== -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Load shared layout components
-            fetch("header.html").then(res => res.text()).then(data => document.getElementById("site-header").innerHTML = data);
+            // Load shared header and automatically apply the 'active' class to the current page link
+            fetch("header.html")
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById("site-header").innerHTML = data;
+                    
+                    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+                    const navLinks = document.querySelectorAll("nav ul li a");
+                    
+                    navLinks.forEach(link => {
+                        const linkHref = link.getAttribute("href");
+                        if (linkHref === currentPath || (currentPath === "" && linkHref === "index.html")) {
+                            link.classList.add("active");
+                        }
+                    });
+                });
+
+            // Load shared footer component
             fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
 
             let allEvents = [];

@@ -159,7 +159,7 @@
         <p>Welcome to the official digital headquarters for Olentangy High School Girls Cross Country. Streamlined navigation, schedules, and resources for athletes, families, and supporters.</p>
         <div class="hero-buttons">
             <a href="schedule.html" class="btn-gold">View 2026 Schedule</a>
-            <a href="parents.html" class="btn-outline">Access Parent & Camp Info</a>
+            <a href="parents.html" class="btn-outline">Access Parent &amp; Camp Info</a>
         </div>
     </div>
 
@@ -178,7 +178,7 @@
 
             <!-- Parent Hub Card -->
             <div class="section-box" style="padding: 2rem; display: flex; flex-direction: column; height: 100%; border: none; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: var(--primary-navy); margin: 0 0 1rem 0; font-size: 1.25rem;">📋 Parent Hub & Camp</h3>
+                <h3 style="color: var(--primary-navy); margin: 0 0 1rem 0; font-size: 1.25rem;">📋 Parent Hub &amp; Camp</h3>
                 <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0;">Access camp schedules, pasta dinner sign-ups, fees, and required FinalForms.</p>
                 <a href="parents.html" class="card-link">View Parent Info &rarr;</a>
             </div>
@@ -213,7 +213,24 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            fetch("header.html").then(res => res.text()).then(data => document.getElementById("site-header").innerHTML = data);
+            // Load shared header and automatically apply the 'active' class to the current page link
+            fetch("header.html")
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById("site-header").innerHTML = data;
+                    
+                    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+                    const navLinks = document.querySelectorAll("nav ul li a");
+                    
+                    navLinks.forEach(link => {
+                        const linkHref = link.getAttribute("href");
+                        if (linkHref === currentPath || (currentPath === "" && linkHref === "index.html")) {
+                            link.classList.add("active");
+                        }
+                    });
+                });
+
+            // Load shared footer component
             fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
         });
     </script>
