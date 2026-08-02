@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results &amp; Records | Olentangy Girls Cross Country</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover-photo.jpg') no-repeat center center;
+            background-size: cover;
+            padding: 6rem 2rem 10rem 2rem;
+            text-align: center;
+            color: #ffffff;
+        }
+        .hero-section h2 {
+            font-size: 2.75rem;
+            margin: 0 0 1rem 0;
+            color: #ffffff;
+        }
+        .hero-section p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+        .overlap-container {
+            margin-top: -6rem;
+            position: relative;
+            z-index: 10;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .filter-btn {
+            background-color: #f1f5f9;
+            color: var(--text-dark);
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-navy);
+            color: var(--white);
+            border-color: var(--primary-navy);
+        }
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .event-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .event-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .event-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin: 0 0 12px 0;
+        }
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: var(--primary-navy);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-navy {
+            background-color: var(--primary-navy);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body style="background-color: #f1f5f9;">
+
+    <!-- Dynamic Header Injection -->
+    <header id="site-header"></header>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h2>Results &amp; Records Archive</h2>
+        <p>Browse historical meet results, official PDF summaries, and external timing platform links across past seasons.</p>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="container overlap-container">
+        <div class="section-box" style="padding: 2.5rem; background: #fff; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+            
+            <!-- Season Year Selector Tabs -->
+            <div class="filter-buttons" id="yearFilterButtons">
+                <button class="filter-btn active" data-year="2026">2026 Season</button>
+                <button class="filter-btn" data-year="2025">2025 Archive</button>
+                <button class="filter-btn" data-year="2024">2024 Archive</button>
+            </div>
+
+            <!-- Results Feed Container -->
+            <div id="resultsContainer" class="results-container">
+                <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                    Loading results data...
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Dynamic Footer Injection -->
+    <footer class="expanded-footer" id="site-footer"></footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Load shared header and apply active highlighter script
+            fetch("header.html")
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById("site-header").innerHTML = data;
+                    
+                    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+                    const navLinks = document.querySelectorAll("nav ul li a");
+                    
+                    navLinks.forEach(link => {
+                        const linkHref = link.getAttribute("href");
+                        if (linkHref === currentPath || (currentPath === "" && linkHref === "index.html")) {
+                            link.classList.add("active");
+                        }
+                    });
+                });
+
+            // Load shared footer
+            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
+
+            let allResults = [];
+            const resultsContainer = document.getElementById("resultsContainer");
+            const yearButtons = document.querySelectorAll("#yearFilterButtons .filter-btn");
+
+            function renderResults(results) {
+                if (!results || results.length === 0) {
+                    resultsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--text-muted);">No meet results found for this year.</div>`;
+                    return;
+                }
+
+                resultsContainer.innerHTML = results.map(meet => {
+                    let actionButtons = '';
+                    if (meet.pdfUrl) {
+                        actionButtons += `<a href="${meet.pdfUrl}" target="_blank" class="btn-navy">📄 View PDF Results</a>`;
+                    }
+                    if (meet.externalUrl) {
+                        actionButtons += `<a href="${meet.externalUrl}" target="_blank" class="btn-gold">🔗 Meet Site / Athletic.net</a>`;
+                    }
+
+                    return `
+                        <div class="event-card">
+                            <div class="card-header">
+                                <span class="event-date">${meet.date || ''}</span>
+                                <span style="font-size: 0.85rem; color: var(--text-muted);">${meet.location || ''}</span>
+                            </div>
+                            <h3 class="event-title">${meet.meetName || ''}</h3>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                                ${actionButtons}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Fetch data from assets/data/results.json
+            fetch("./assets/data/results.json")
+                .then(response => {
+                    if (!response.ok) throw new Error("Could not load results data");
+                    return response.json();
+                })
+                .then(data => {
+                    allResults = data;
+                    const currentYearResults = allResults.filter(r => r.year === "2026");
+                    renderResults(currentYearResults);
+                })
+                .catch(error => {
+                    console.error("Error loading results:", error);
+                    resultsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #dc2626;">Unable to load results data at this moment.</div>`;
+                });
+
+            // Year Tab Click Logic
+            yearButtons.forEach(btn => {
+                btn.addEventListener("click", function () {
+                    yearButtons.forEach(b => b.classList.remove("active"));
+                    this.classList.add("active");
+
+                    const selectedYear = this.getAttribute("data-year");
+                    const filteredResults = allResults.filter(r => r.year === selectedYear);
+                    renderResults(filteredResults);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
