@@ -288,39 +288,12 @@
     <!-- Dynamic Footer Injection -->
     <footer class="expanded-footer" id="site-footer"></footer>
     
-    <!-- Scripts for Bio Accordion, Layout Injection & Dynamic Roster Loading -->
+    <!-- Central JavaScript handling dynamic header/footer, mobile nav, and links -->
+    <script src="./assets/js/main.js"></script>
+
+    <!-- Page-Specific Script for Coach Bio Accordions and Dynamic Roster Grouping -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Load shared header and automatically apply the 'active' class to the current page link
-            fetch("header.html")
-                .then(res => res.text())
-                .then(data => {
-                    document.getElementById("site-header").innerHTML = data;
-                    
-                    const currentPath = window.location.pathname.split("/").pop() || "index.html";
-                    const navLinks = document.querySelectorAll("nav ul li a");
-                    
-                    navLinks.forEach(link => {
-                        const linkHref = link.getAttribute("href");
-                        if (linkHref === currentPath || (currentPath === "" && linkHref === "index.html")) {
-                            link.classList.add("active");
-                        }
-                    });
-
-                    // Mobile Hamburger Menu Toggle Logic
-                    const menuToggle = document.getElementById("menuToggle");
-                    const siteNav = document.getElementById("siteNav");
-
-                    if (menuToggle && siteNav) {
-                        menuToggle.addEventListener("click", function () {
-                            siteNav.classList.toggle("active");
-                        });
-                    }
-                });
-
-            // Load shared footer component
-            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
-
             // Bio Accordion Logic
             const bioHeaders = document.querySelectorAll(".bio-header");
             bioHeaders.forEach(header => {
@@ -341,7 +314,7 @@
                 });
             });
 
-            // Dynamic Roster Loader
+            // Dynamic Roster Loader & Grade Grouping
             const rosterContainer = document.getElementById("rosterContainer");
             
             fetch("./assets/data/roster.json")
@@ -369,7 +342,7 @@
                         if (gradeAthletes.length > 0) {
                             gradeAthletes.forEach(athlete => {
                                 const captainMark = athlete.isCaptain ? '<span class="captain-star" title="Captain">*</span>' : '';
-                                htmlContent += `<li><span>${athlete.name}</span> ${captainMark}</li>`;
+                                htmlContent += `<li><span>${escapeHtml(athlete.name)}</span> ${captainMark}</li>`;
                             });
                         } else {
                             htmlContent += `<li style="color: var(--text-muted); font-style: italic;">No athletes listed</li>`;

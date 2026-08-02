@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Highlight the active navigation link based on the current page path
-    highlightActiveNavLink();
+    // 1. Fetch header.html and footer.html dynamically
+    loadHeader();
+    loadFooter();
 
-    // 2. Conditionally load data depending on what page elements are present
+    // 2. Conditionally load page-specific datasets
     if (document.getElementById("roster-container")) {
         loadJsonData('assets/data/roster.json', renderRoster);
     }
@@ -17,13 +18,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3. Initialize interactive UI components (e.g., accordions)
     initAccordions();
-
-    // 4. Initialize Mobile Navigation & Search Drawer Toggle
-    initMobileNav();
 });
 
 /**
- * Automatically handles opening and closing the right-aligned mobile drawer menu.
+ * Loads header.html dynamically into <header> elements, then initializes menu listeners and active links.
+ */
+function loadHeader() {
+    const headerContainer = document.querySelector('header');
+    
+    // If the header is hardcoded in the HTML page itself rather than fetched dynamically
+    if (!headerContainer || headerContainer.children.length > 0) {
+        initMobileNav();
+        highlightActiveNavLink();
+        return;
+    }
+
+    fetch('header.html')
+        .then(response => {
+            if (!response.ok) throw new Error('Header fetch failed');
+            return response.text();
+        })
+        .then(data => {
+            headerContainer.innerHTML = data;
+            // Initialize mobile nav and link highlighting AFTER header elements exist in the DOM
+            initMobileNav();
+            highlightActiveNavLink();
+        })
+        .catch(err => {
+            console.error('Error loading header:', err);
+            initMobileNav();
+            highlightActiveNavLink();
+        });
+}
+
+/**
+ * Loads footer.html dynamically into <footer> elements if not already hardcoded.
+ */
+function loadFooter() {
+    const footerContainer = document.querySelector('footer');
+    
+    if (!footerContainer || footerContainer.children.length > 0) return;
+
+    fetch('footer.html')
+        .then(response => {
+            if (!response.ok) throw new Error('Footer fetch failed');
+            return response.text();
+        })
+        .then(data => {
+            footerContainer.innerHTML = data;
+        })
+        .catch(err => console.error('Error loading footer:', err));
+}
+
+/**
+ * Automatically handles opening and closing the mobile menu drawer.
  */
 function initMobileNav() {
     const menuToggle = document.getElementById('menuToggle');
@@ -32,13 +80,13 @@ function initMobileNav() {
 
     if (menuToggle && mobileNav) {
         menuToggle.addEventListener('click', () => {
-            mobileNav.classList.add('open');
+            mobileNav.classList.add('active'); // Matched to .active in style.css
         });
     }
 
     if (closeMenu && mobileNav) {
         closeMenu.addEventListener('click', () => {
-            mobileNav.classList.remove('open');
+            mobileNav.classList.remove('active'); // Matched to .active in style.css
         });
     }
 }
@@ -91,7 +139,6 @@ function renderRoster(data) {
     const container = document.getElementById("roster-container");
     if (!container) return;
     
-    // Map and inject roster data dynamically into the DOM
     container.innerHTML = data.map(athlete => `
         <div class="athlete-card">
             <h3>${escapeHtml(athlete.name)}</h3>
@@ -104,7 +151,6 @@ function renderSchedule(data) {
     const container = document.getElementById("schedule-container");
     if (!container) return;
 
-    // Map and inject schedule data dynamically into the DOM
     container.innerHTML = data.map(event => `
         <div class="schedule-item">
             <span class="event-date">${escapeHtml(event.date)}</span>

@@ -83,6 +83,11 @@ header {
     cursor: pointer;
 }
 
+/* Close Menu Button (Hidden on Desktop) */
+.close-menu {
+    display: none;
+}
+
 nav ul {
     list-style: none;
     display: flex;
@@ -348,17 +353,35 @@ nav ul li a.active::after {
         cursor: pointer;
         margin-left: auto;
     }
+
+    /* Top bar for close button inside mobile nav */
+    .nav-header {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 0.5rem;
+    }
+
+    .close-menu {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: var(--primary-navy);
+        cursor: pointer;
+        line-height: 1;
+    }
     
     /* Mobile Dropdown Menu Panel */
-    nav {
+    nav.mobile-nav {
         display: none;
         width: 100%;
         margin-top: 1rem;
         flex-basis: 100%;
         background-color: var(--white);
+        padding-top: 0.5rem;
     }
 
-    nav.active {
+    nav.mobile-nav.active {
         display: block;
     }
 
@@ -403,7 +426,7 @@ nav ul li a.active::after {
         border-bottom: 1px solid #e2e8f0;
     }
 
-    /* Remove item highlighting (no background block colors or underlines) */
+    /* Remove item highlighting */
     nav ul li a {
         display: block;
         padding: 12px 0;

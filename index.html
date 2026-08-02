@@ -119,39 +119,8 @@
 
     <!-- Dynamic Footer Injection -->
     <footer class="expanded-footer" id="site-footer"></footer>
-    
-<script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Load shared header and automatically apply the 'active' class to the current page link
-            fetch("header.html")
-                .then(res => res.text())
-                .then(data => {
-                    document.getElementById("site-header").innerHTML = data;
-                    
-                    const currentPath = window.location.pathname.split("/").pop() || "index.html";
-                    const navLinks = document.querySelectorAll("nav ul li a");
-                    
-                    navLinks.forEach(link => {
-                        const linkHref = link.getAttribute("href");
-                        if (linkHref === currentPath || (currentPath === "" && linkHref === "index.html")) {
-                            link.classList.add("active");
-                        }
-                    });
 
-                    // Mobile Hamburger Menu Toggle Logic (added here so the button exists)
-                    const menuToggle = document.getElementById("menuToggle");
-                    const siteNav = document.getElementById("siteNav");
-
-                    if (menuToggle && siteNav) {
-                        menuToggle.addEventListener("click", function () {
-                            siteNav.classList.toggle("active");
-                        });
-                    }
-                });
-
-            // Load shared footer component
-            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
-        });
-    </script>
+    <!-- Central JavaScript file handling dynamic header/footer loading & mobile nav -->
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>

@@ -127,7 +127,7 @@
             <!-- Tier 1: Category Filter (Times by Season vs Records & PBs) -->
             <div class="filter-section-title">Select View Type:</div>
             <div class="filter-buttons" id="categoryFilterButtons">
-                <button class="filter-btn active" data-category="results">👟 Times by Season (Meet Results)</button>
+                <button class="filter-btn active" data-category="results">📊 Times by Season (Meet Results)</button>
                 <button class="filter-btn" data-category="records">🏆 Records &amp; Personal Bests</button>
             </div>
 
@@ -157,39 +157,12 @@
     <!-- Dynamic Footer Injection -->
     <footer class="expanded-footer" id="site-footer"></footer>
 
-<!-- Scripts -->
+    <!-- Shared Main JavaScript File -->
+    <script src="./assets/js/main.js"></script>
+
+    <!-- Page-Specific Results Filtering Logic -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Load shared header and apply active highlighter script
-            fetch("header.html")
-                .then(res => res.text())
-                .then(data => {
-                    document.getElementById("site-header").innerHTML = data;
-                    
-                    const currentPath = window.location.pathname.split("/").pop() || "index.html";
-                    const navLinks = document.querySelectorAll("nav ul li a");
-                    
-                    navLinks.forEach(link => {
-                        const linkHref = link.getAttribute("href");
-                        if (linkHref === currentPath || (currentPath === "" && linkHref === "index.html")) {
-                            link.classList.add("active");
-                        }
-                    });
-
-                    // Mobile Hamburger Menu Toggle Logic
-                    const menuToggle = document.getElementById("menuToggle");
-                    const siteNav = document.getElementById("siteNav");
-
-                    if (menuToggle && siteNav) {
-                        menuToggle.addEventListener("click", function () {
-                            siteNav.classList.toggle("active");
-                        });
-                    }
-                });
-
-            // Load shared footer
-            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
-
             let allResults = [];
             let currentCategory = "results"; // default view
             let currentYear = "2026"; // default year
@@ -242,43 +215,19 @@
                 }).join('');
             }
 
-            // Fetch data from Google Sheet published CSV or local fallback
-            const sheetCsvUrl = "YOUR_PUBLISHED_GOOGLE_SHEET_CSV_URL_HERE";
-
-            fetch(sheetCsvUrl)
-                .then(response => {
-                    if (!response.ok) throw new Error("Could not load Google Sheet CSV");
-                    return response.text();
+            // Fallback to local JSON dataset
+            fetch("./assets/data/results.json")
+                .then(res => {
+                    if (!res.ok) throw new Error("Could not load local results.json");
+                    return res.json();
                 })
-                .then(csvText => {
-                    const rows = csvText.split("\n");
-                    const headers = rows[0].split(",").map(h => h.trim());
-                    
-                    allResults = rows.slice(1).map(row => {
-                        const values = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                        let obj = {};
-                        headers.forEach((header, index) => {
-                            let val = values[index] ? values[index].trim() : "";
-                            val = val.replace(/^"|"$/g, '');
-                            obj[header] = val;
-                        });
-                        return obj;
-                    }).filter(r => r.year);
-
+                .then(data => {
+                    allResults = data;
                     filterAndRender();
                 })
-                .catch(error => {
-                    console.error("Error loading via Google Sheet CSV, trying local JSON fallback:", error);
-                    // Fallback to local json if sheet url isn't configured yet
-                    fetch("./assets/data/results.json")
-                        .then(res => res.json())
-                        .then(data => {
-                            allResults = data;
-                            filterAndRender();
-                        })
-                        .catch(err => {
-                            resultsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #dc2626;">Unable to load records data. Please update the Google Sheet integration.</div>`;
-                        });
+                .catch(err => {
+                    console.error("Error loading results data:", err);
+                    resultsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #dc2626;">Unable to load records data at this time. Please check back later.</div>`;
                 });
 
             // Category Tab Click Logic
