@@ -253,7 +253,7 @@
     <!-- ========================================================================== -->
     <footer class="expanded-footer" id="site-footer"></footer>
 
-    <!-- ========================================================================== -->
+<!-- ========================================================================== -->
     <!-- Scripts: Component Loader & Schedule Table/Card Data Loader              -->
     <!-- ========================================================================== -->
     <script>
@@ -273,6 +273,16 @@
                             link.classList.add("active");
                         }
                     });
+
+                    // Mobile Hamburger Menu Toggle Logic
+                    const menuToggle = document.getElementById("menuToggle");
+                    const siteNav = document.getElementById("siteNav");
+
+                    if (menuToggle && siteNav) {
+                        menuToggle.addEventListener("click", function () {
+                            siteNav.classList.toggle("active");
+                        });
+                    }
                 });
 
             // Load shared footer component

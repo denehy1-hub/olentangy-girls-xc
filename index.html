@@ -120,7 +120,7 @@
     <!-- Dynamic Footer Injection -->
     <footer class="expanded-footer" id="site-footer"></footer>
     
-    <script>
+<script>
         document.addEventListener("DOMContentLoaded", function () {
             // Load shared header and automatically apply the 'active' class to the current page link
             fetch("header.html")
@@ -137,6 +137,16 @@
                             link.classList.add("active");
                         }
                     });
+
+                    // Mobile Hamburger Menu Toggle Logic (added here so the button exists)
+                    const menuToggle = document.getElementById("menuToggle");
+                    const siteNav = document.getElementById("siteNav");
+
+                    if (menuToggle && siteNav) {
+                        menuToggle.addEventListener("click", function () {
+                            siteNav.classList.toggle("active");
+                        });
+                    }
                 });
 
             // Load shared footer component

@@ -306,6 +306,16 @@
                             link.classList.add("active");
                         }
                     });
+
+                    // Mobile Hamburger Menu Toggle Logic
+                    const menuToggle = document.getElementById("menuToggle");
+                    const siteNav = document.getElementById("siteNav");
+
+                    if (menuToggle && siteNav) {
+                        menuToggle.addEventListener("click", function () {
+                            siteNav.classList.toggle("active");
+                        });
+                    }
                 });
 
             // Load shared footer component

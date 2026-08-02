@@ -157,7 +157,7 @@
     <!-- Dynamic Footer Injection -->
     <footer class="expanded-footer" id="site-footer"></footer>
 
-    <!-- Scripts -->
+<!-- Scripts -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Load shared header and apply active highlighter script
@@ -175,6 +175,16 @@
                             link.classList.add("active");
                         }
                     });
+
+                    // Mobile Hamburger Menu Toggle Logic
+                    const menuToggle = document.getElementById("menuToggle");
+                    const siteNav = document.getElementById("siteNav");
+
+                    if (menuToggle && siteNav) {
+                        menuToggle.addEventListener("click", function () {
+                            siteNav.classList.toggle("active");
+                        });
+                    }
                 });
 
             // Load shared footer
