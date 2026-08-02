@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * Loads header.html dynamically into <header> elements, then initializes menu listeners and active links.
+ * Loads header.html dynamically into <header> elements, then initializes menu listeners, active links, and search.
  */
 function loadHeader() {
     const headerContainer = document.querySelector('header');
@@ -30,6 +30,7 @@ function loadHeader() {
     if (!headerContainer || headerContainer.children.length > 0) {
         initMobileNav();
         highlightActiveNavLink();
+        initSearch(); // Initialize search
         return;
     }
 
@@ -40,9 +41,10 @@ function loadHeader() {
         })
         .then(data => {
             headerContainer.innerHTML = data;
-            // Initialize mobile nav and link highlighting AFTER header elements exist in the DOM
+            // Initialize mobile nav, link highlighting, and search AFTER header elements exist in the DOM
             initMobileNav();
             highlightActiveNavLink();
+            initSearch(); // Initialize search
         })
         .catch(err => {
             console.error('Error loading header:', err);
@@ -106,6 +108,49 @@ function highlightActiveNavLink() {
             link.classList.remove("active");
         }
     });
+}
+
+/**
+ * Initializes the client-side search functionality.
+ */
+function initSearch() {
+    const searchInput = document.querySelector('.search-input');
+    const searchBtn = document.querySelector('.search-btn');
+
+    function performSearch() {
+        if (!searchInput) return;
+        
+        const query = searchInput.value.toLowerCase().trim();
+        
+        // Target dynamic UI elements across different pages
+        const searchableItems = document.querySelectorAll('.desktop-table tbody tr, .event-card, .athlete-card, .result-row, .schedule-item, .board-card');
+
+        searchableItems.forEach(item => {
+            const textContent = item.textContent.toLowerCase();
+            if (textContent.includes(query)) {
+                item.style.display = ''; 
+            } else {
+                item.style.display = 'none'; 
+            }
+        });
+    }
+
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            performSearch();
+        });
+
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performSearch();
+            }
+        });
+        
+        // Real-time search as the user types
+        searchInput.addEventListener('input', performSearch);
+    }
 }
 
 /**
