@@ -97,6 +97,16 @@ header {
     text-transform: uppercase;
 }
 
+/* Hamburger Toggle Button (Hidden on Desktop) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    color: var(--primary-navy);
+    cursor: pointer;
+}
+
 nav ul {
     list-style: none;
     display: flex;
@@ -348,9 +358,52 @@ nav ul li a.active::after {
     .brand {
         justify-content: center;
     }
+
+    /* Show hamburger menu toggle and structure mobile drawer */
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1.25rem;
+        right: 2rem;
+    }
+
+    .nav-container {
+        position: relative;
+    }
     
+    nav {
+        display: none;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    nav.active {
+        display: block;
+    }
+
     nav ul {
-        justify-content: center;
+        flex-direction: column;
+        gap: 0.75rem;
+        background-color: #f8fafc;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        text-align: center;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 0.5rem 0;
+    }
+
+    nav ul li a.active::after {
+        display: none;
+    }
+    
+    nav ul li a.active {
+        color: var(--primary-gold);
+        background-color: var(--primary-navy);
+        border-radius: 4px;
     }
 
     /* Switch Views: Hide table, display mobile cards */
