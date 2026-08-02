@@ -11,11 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
         header.addEventListener("click", () => {
             const item = header.parentElement;
             
-            // Optional: Close other open accordions if you want only one open at a time
-            // document.querySelectorAll(".accordion-item").forEach(i => {
-            //     if (i !== item) i.classList.remove("active");
-            // });
-
             // Toggle active class on the clicked item
             item.classList.toggle("active");
             
@@ -25,6 +20,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 icon.textContent = item.classList.contains("active") ? "-" : "+";
             }
         });
+    });
+
+    // 3. Dynamic Active Navbar Highlighting
+    let path = window.location.pathname.split("/").pop();
+    if (path === "" || path === "/") {
+        path = "index.html";
+    }
+
+    const navLinks = document.querySelectorAll("header nav a, .navbar-nav a, nav a");
+    navLinks.forEach(link => {
+        const href = link.getAttribute("href");
+        if (href === path || (path === "index.html" && (href === "./" || href === ""))) {
+            link.classList.add("active");
+        } else {
+            link.classList.remove("active");
+        }
     });
 });
 
