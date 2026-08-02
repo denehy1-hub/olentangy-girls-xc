@@ -127,8 +127,8 @@
             <!-- Tier 1: Category Filter (Times by Season vs Records & PBs) -->
             <div class="filter-section-title">Select View Type:</div>
             <div class="filter-buttons" id="categoryFilterButtons">
-                <button class="filter-btn active" data-category="results">📊 Times by Season (Meet Results)</button>
-                <button class="filter-btn" data-category="records">🏆 Records &amp; Personal Bests</button>
+                <button class="filter-btn active" data-category="results">&#x1F4C5; Times by Season (Meet Results)</button>
+                <button class="filter-btn" data-category="records">&#x1F3C5; Records &amp; Personal Bests</button>
             </div>
 
             <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 1.5rem 0;">
@@ -165,7 +165,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             let allResults = [];
             let currentCategory = "results"; // default view
-            let currentYear = "2026"; // default year
+            let currentYear = "2025"; // CHANGED: Default to 2025 so the page doesn't load empty
 
             const resultsContainer = document.getElementById("resultsContainer");
             const categoryButtons = document.querySelectorAll("#categoryFilterButtons .filter-btn");
@@ -180,7 +180,14 @@
 
             function filterAndRender() {
                 const filtered = allResults.filter(item => {
-                    const itemCat = (item.category || "results").toLowerCase();
+                    // ADDED: Programmatic categorization since 'category' isn't in the Google Sheet
+                    let itemCat = "results";
+                    const meetName = (item.meetName || "").toLowerCase();
+                    
+                    if (meetName.includes("personal bests") || meetName.includes("season times")) {
+                        itemCat = "records";
+                    }
+
                     const itemYear = String(item.year || "").trim();
                     return itemCat === currentCategory && itemYear === currentYear;
                 });
@@ -193,11 +200,13 @@
                 resultsContainer.innerHTML = filtered.map(meet => {
                     let actionButtons = '';
                     const finalPdfUrl = formatDriveUrl(meet.pdfUrl);
+                    
+                    // ADDED: rel="noopener noreferrer" to target="_blank" links
                     if (finalPdfUrl) {
-                        actionButtons += `<a href="${finalPdfUrl}" target="_blank" class="btn-navy">📄 View Document / PDF</a>`;
+                        actionButtons += `<a href="${finalPdfUrl}" target="_blank" rel="noopener noreferrer" class="btn-navy">&#x1F4C4; View Document / PDF</a>`;
                     }
                     if (meet.externalUrl) {
-                        actionButtons += `<a href="${meet.externalUrl}" target="_blank" class="btn-gold">🔗 External Link</a>`;
+                        actionButtons += `<a href="${meet.externalUrl}" target="_blank" rel="noopener noreferrer" class="btn-gold">&#x1F517; External Link</a>`;
                     }
 
                     return `
@@ -215,7 +224,6 @@
                 }).join('');
             }
 
-            // Fallback to local JSON dataset
             fetch("./assets/data/results.json")
                 .then(res => {
                     if (!res.ok) throw new Error("Could not load local results.json");
@@ -230,7 +238,6 @@
                     resultsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #dc2626;">Unable to load records data at this time. Please check back later.</div>`;
                 });
 
-            // Category Tab Click Logic
             categoryButtons.forEach(btn => {
                 btn.addEventListener("click", function () {
                     categoryButtons.forEach(b => b.classList.remove("active"));
@@ -240,7 +247,6 @@
                 });
             });
 
-            // Year Tab Click Logic
             yearButtons.forEach(btn => {
                 btn.addEventListener("click", function () {
                     yearButtons.forEach(b => b.classList.remove("active"));
