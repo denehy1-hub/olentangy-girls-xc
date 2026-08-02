@@ -30,11 +30,17 @@
             position: relative;
             z-index: 10;
         }
+        .filter-section-title {
+            font-size: 1.1rem;
+            color: var(--primary-navy);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
         .filter-buttons {
             display: flex;
             gap: 0.75rem;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         .filter-btn {
             background-color: #f1f5f9;
@@ -111,24 +117,37 @@
     <!-- Hero Section -->
     <div class="hero-section">
         <h2>Results &amp; Records Archive</h2>
-        <p>Browse historical meet results, official PDF summaries, and external timing platform links across past seasons.</p>
+        <p>Browse historical meet results, season summaries, personal bests, and official PDF documents across past seasons.</p>
     </div>
 
     <!-- Main Content Container -->
     <div class="container overlap-container">
         <div class="section-box" style="padding: 2.5rem; background: #fff; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
             
-            <!-- Season Year Selector Tabs -->
+            <!-- Tier 1: Category Filter (Times by Season vs Records & PBs) -->
+            <div class="filter-section-title">Select View Type:</div>
+            <div class="filter-buttons" id="categoryFilterButtons">
+                <button class="filter-btn active" data-category="results">👟 Times by Season (Meet Results)</button>
+                <button class="filter-btn" data-category="records">🏆 Records &amp; Personal Bests</button>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 1.5rem 0;">
+
+            <!-- Tier 2: Season Year Selector Tabs -->
+            <div class="filter-section-title">Select Season Year:</div>
             <div class="filter-buttons" id="yearFilterButtons">
-                <button class="filter-btn active" data-year="2026">2026 Season</button>
-                <button class="filter-btn" data-year="2025">2025 Archive</button>
-                <button class="filter-btn" data-year="2024">2024 Archive</button>
+                <button class="filter-btn active" data-year="2026">2026</button>
+                <button class="filter-btn" data-year="2025">2025</button>
+                <button class="filter-btn" data-year="2024">2024</button>
+                <button class="filter-btn" data-year="2023">2023</button>
+                <button class="filter-btn" data-year="2022">2022</button>
+                <button class="filter-btn" data-year="2021">2021</button>
             </div>
 
             <!-- Results Feed Container -->
             <div id="resultsContainer" class="results-container">
                 <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
-                    Loading results data...
+                    Loading records data...
                 </div>
             </div>
 
@@ -162,22 +181,40 @@
             fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
 
             let allResults = [];
+            let currentCategory = "results"; // default view
+            let currentYear = "2026"; // default year
+
             const resultsContainer = document.getElementById("resultsContainer");
+            const categoryButtons = document.querySelectorAll("#categoryFilterButtons .filter-btn");
             const yearButtons = document.querySelectorAll("#yearFilterButtons .filter-btn");
 
-            function renderResults(results) {
-                if (!results || results.length === 0) {
-                    resultsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--text-muted);">No meet results found for this year.</div>`;
+            function formatDriveUrl(url) {
+                if (url && url.includes("drive.google.com")) {
+                    return url.replace(/\/view\?usp=sharing|\/view.*/, "/preview");
+                }
+                return url;
+            }
+
+            function filterAndRender() {
+                const filtered = allResults.filter(item => {
+                    const itemCat = (item.category || "results").toLowerCase();
+                    const itemYear = String(item.year || "").trim();
+                    return itemCat === currentCategory && itemYear === currentYear;
+                });
+
+                if (filtered.length === 0) {
+                    resultsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--text-muted);">No records found for ${currentYear} under this category.</div>`;
                     return;
                 }
 
-                resultsContainer.innerHTML = results.map(meet => {
+                resultsContainer.innerHTML = filtered.map(meet => {
                     let actionButtons = '';
-                    if (meet.pdfUrl) {
-                        actionButtons += `<a href="${meet.pdfUrl}" target="_blank" class="btn-navy">📄 View PDF Results</a>`;
+                    const finalPdfUrl = formatDriveUrl(meet.pdfUrl);
+                    if (finalPdfUrl) {
+                        actionButtons += `<a href="${finalPdfUrl}" target="_blank" class="btn-navy">📄 View Document / PDF</a>`;
                     }
                     if (meet.externalUrl) {
-                        actionButtons += `<a href="${meet.externalUrl}" target="_blank" class="btn-gold">🔗 Meet Site / Athletic.net</a>`;
+                        actionButtons += `<a href="${meet.externalUrl}" target="_blank" class="btn-gold">🔗 External Link</a>`;
                     }
 
                     return `
@@ -195,31 +232,62 @@
                 }).join('');
             }
 
-            // Fetch data from assets/data/results.json
-            fetch("./assets/data/results.json")
+            // Fetch data from Google Sheet published CSV or local fallback
+            const sheetCsvUrl = "YOUR_PUBLISHED_GOOGLE_SHEET_CSV_URL_HERE";
+
+            fetch(sheetCsvUrl)
                 .then(response => {
-                    if (!response.ok) throw new Error("Could not load results data");
-                    return response.json();
+                    if (!response.ok) throw new Error("Could not load Google Sheet CSV");
+                    return response.text();
                 })
-                .then(data => {
-                    allResults = data;
-                    const currentYearResults = allResults.filter(r => r.year === "2026");
-                    renderResults(currentYearResults);
+                .then(csvText => {
+                    const rows = csvText.split("\n");
+                    const headers = rows[0].split(",").map(h => h.trim());
+                    
+                    allResults = rows.slice(1).map(row => {
+                        const values = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                        let obj = {};
+                        headers.forEach((header, index) => {
+                            let val = values[index] ? values[index].trim() : "";
+                            val = val.replace(/^"|"$/g, '');
+                            obj[header] = val;
+                        });
+                        return obj;
+                    }).filter(r => r.year);
+
+                    filterAndRender();
                 })
                 .catch(error => {
-                    console.error("Error loading results:", error);
-                    resultsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #dc2626;">Unable to load results data at this moment.</div>`;
+                    console.error("Error loading via Google Sheet CSV, trying local JSON fallback:", error);
+                    // Fallback to local json if sheet url isn't configured yet
+                    fetch("./assets/data/results.json")
+                        .then(res => res.json())
+                        .then(data => {
+                            allResults = data;
+                            filterAndRender();
+                        })
+                        .catch(err => {
+                            resultsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #dc2626;">Unable to load records data. Please update the Google Sheet integration.</div>`;
+                        });
                 });
+
+            // Category Tab Click Logic
+            categoryButtons.forEach(btn => {
+                btn.addEventListener("click", function () {
+                    categoryButtons.forEach(b => b.classList.remove("active"));
+                    this.classList.add("active");
+                    currentCategory = this.getAttribute("data-category");
+                    filterAndRender();
+                });
+            });
 
             // Year Tab Click Logic
             yearButtons.forEach(btn => {
                 btn.addEventListener("click", function () {
                     yearButtons.forEach(b => b.classList.remove("active"));
                     this.classList.add("active");
-
-                    const selectedYear = this.getAttribute("data-year");
-                    const filteredResults = allResults.filter(r => r.year === selectedYear);
-                    renderResults(filteredResults);
+                    currentYear = this.getAttribute("data-year");
+                    filterAndRender();
                 });
             });
         });
