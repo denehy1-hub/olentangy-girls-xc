@@ -73,6 +73,13 @@ header {
     text-transform: uppercase;
 }
 
+/* ADDED: Hide search container on desktop and tablet landscapes */
+@media (min-width: 769px) {
+    .search-container {
+        display: none;
+    }
+}
+
 /* Hamburger Toggle Button (Hidden on Desktop) */
 .menu-toggle {
     display: none;
@@ -391,6 +398,9 @@ nav ul li a.active::after {
         gap: 8px;
         margin-bottom: 1.25rem;
         width: 100%;
+        /* ADDED: Fix for unclickable search bar on mobile */
+        position: relative; 
+        z-index: 9999; 
     }
 
     .search-input {
