@@ -1,20 +1,92 @@
 [
-  { "name": "Emma Buday", "grade": 12, "isCaptain": false },
-  { "name": "Addison Conkling", "grade": 12, "isCaptain": true },
-  { "name": "Keira Mason", "grade": 12, "isCaptain": true },
-  { "name": "Elena Wanek", "grade": 12, "isCaptain": false },
-  { "name": "Elaine Bracone", "grade": 11, "isCaptain": false },
-  { "name": "Bella Coyle", "grade": 11, "isCaptain": false },
-  { "name": "Layla Hayes", "grade": 11, "isCaptain": false },
-  { "name": "Sophie Herbert", "grade": 11, "isCaptain": false },
-  { "name": "Ifrah Jama", "grade": 11, "isCaptain": false },
-  { "name": "JJ Jenishaj", "grade": 11, "isCaptain": false },
-  { "name": "Kya Sander", "grade": 11, "isCaptain": false },
-  { "name": "Linnea Sheaf", "grade": 11, "isCaptain": false },
-  { "name": "Tessa Davis", "grade": 10, "isCaptain": false },
-  { "name": "Evelynn Denehy", "grade": 10, "isCaptain": false },
-  { "name": "Raksha Ravi", "grade": 10, "isCaptain": false },
-  { "name": "Carmen Russ", "grade": 10, "isCaptain": false },
-  { "name": "Gianna Squillace", "grade": 10, "isCaptain": false },
-  { "name": "Olivia Zhang", "grade": 10, "isCaptain": false }
+    {
+        "name": "Emma Buday",
+        "grade": "12",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Addison Conkling",
+        "grade": "12",
+        "iscaptain": "TRUE"
+    },
+    {
+        "name": "Keira Mason",
+        "grade": "12",
+        "iscaptain": "TRUE"
+    },
+    {
+        "name": "Elena Wanek",
+        "grade": "12",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Elaine Bracone",
+        "grade": "11",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Bella Coyle",
+        "grade": "11",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Layla Hayes",
+        "grade": "11",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Sophie Herbert",
+        "grade": "11",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Ifrah Jama",
+        "grade": "11",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "JJ Jenishaj",
+        "grade": "11",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Kya Sander",
+        "grade": "11",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Linnea Sheaf",
+        "grade": "11",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Tessa Davis",
+        "grade": "10",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Evelynn Denehy",
+        "grade": "10",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Raksha Ravi",
+        "grade": "10",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Carmen Russ",
+        "grade": "10",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Gianna Squillace",
+        "grade": "10",
+        "iscaptain": "FALSE"
+    },
+    {
+        "name": "Olivia Zhang",
+        "grade": "10",
+        "iscaptain": "FALSE"
+    }
 ]

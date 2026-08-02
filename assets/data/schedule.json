@@ -1,7 +1,7 @@
 [
     {
         "category": "Practice",
-        "eventName": "Team Camp (Day 1)",
+        "eventname": "Team Camp (Day 1)",
         "location": "Camp Lazarus",
         "date": "July 30, 2026",
         "address": "4422 Columbus Pike, Delaware, OH 43015",
@@ -10,7 +10,7 @@
     },
     {
         "category": "Practice",
-        "eventName": "Team Camp (Day 2) & Parent Night",
+        "eventname": "Team Camp (Day 2) & Parent Night",
         "location": "Camp Lazarus",
         "date": "July 31, 2026",
         "address": "4422 Columbus Pike, Delaware, OH 43015",
@@ -19,7 +19,7 @@
     },
     {
         "category": "Social",
-        "eventName": "Team Campout",
+        "eventname": "Team Campout",
         "location": "Elena Wanek's House",
         "date": "August 14, 2026",
         "address": "",
@@ -28,7 +28,7 @@
     },
     {
         "category": "Race",
-        "eventName": "Big Walnut Eagle Twilight Invitational",
+        "eventname": "Big Walnut Eagle Twilight Invitational",
         "location": "Big Walnut High School",
         "date": "August 29, 2026",
         "address": "713 Miller Dr, Sunbury, OH 43074",
@@ -37,7 +37,7 @@
     },
     {
         "category": "Social",
-        "eventName": "Donuts and Coffee with Families",
+        "eventname": "Donuts and Coffee with Families",
         "location": "Westerville North High School",
         "date": "September 5, 2026",
         "address": "950 County Line Rd, Westerville, OH 43081",
@@ -46,7 +46,7 @@
     },
     {
         "category": "Race",
-        "eventName": "Westerville Invitational",
+        "eventname": "Westerville Invitational",
         "location": "Westerville North High School",
         "date": "September 5, 2026",
         "address": "950 County Line Rd, Westerville, OH 43081",
@@ -55,7 +55,7 @@
     },
     {
         "category": "Race",
-        "eventName": "McGowan Invitational",
+        "eventname": "McGowan Invitational",
         "location": "Watkins Memorial High School",
         "date": "September 12, 2026",
         "address": "1954 Warrior Way SW, Etna, OH 43062",
@@ -64,7 +64,7 @@
     },
     {
         "category": "Social",
-        "eventName": "Parent Tailgate",
+        "eventname": "Parent Tailgate",
         "location": "Dublin Jerome High School (Celtic Clash)",
         "date": "September 19, 2026",
         "address": "4RMG+5G, 8300 Hyland-Croy Rd, Dublin, OH 43016",
@@ -73,7 +73,7 @@
     },
     {
         "category": "Race",
-        "eventName": "Celtic Clash",
+        "eventname": "Celtic Clash",
         "location": "Dublin Jerome High School",
         "date": "September 19, 2026",
         "address": "4RMG+5G, 8300 Hyland-Croy Rd, Dublin, OH 43016",
@@ -82,7 +82,7 @@
     },
     {
         "category": "Race",
-        "eventName": "Lancaster \"Bob Reall\" Invitational",
+        "eventname": "Lancaster \"Bob Reall\" Invitational",
         "location": "Lancaster High School",
         "date": "September 26, 2026",
         "address": "1312 Granville Pike, Lancaster, OH 43130",
@@ -91,7 +91,7 @@
     },
     {
         "category": "Race",
-        "eventName": "London High School XC Invitational",
+        "eventname": "London High School XC Invitational",
         "location": "London High School",
         "date": "October 3, 2026",
         "address": "336 Elm St, London, OH 43140",
@@ -100,7 +100,7 @@
     },
     {
         "category": "Race",
-        "eventName": "Les Eisenhart Invitational",
+        "eventname": "Les Eisenhart Invitational",
         "location": "Thomas Worthington High School",
         "date": "October 10, 2026",
         "address": "300 W Dublin-Granville Rd, Worthington, OH 43085",
@@ -109,7 +109,7 @@
     },
     {
         "category": "Social",
-        "eventName": "Senior Night",
+        "eventname": "Senior Night",
         "location": "Highbanks Northern Shelter House",
         "date": "October 15, 2026",
         "address": "9466 Columbus Pike, Lewis Center, OH 43035",
@@ -118,7 +118,7 @@
     },
     {
         "category": "Race",
-        "eventName": "O.C.C. Cardinal Division League Meet",
+        "eventname": "O.C.C. Cardinal Division League Meet",
         "location": "Hilliard Bradley High School",
         "date": "October 17, 2026",
         "address": "2800 Walker Rd, Hilliard, OH 43026",
@@ -127,7 +127,7 @@
     },
     {
         "category": "Social",
-        "eventName": "Team Banquet",
+        "eventname": "Team Banquet",
         "location": "Little Bear Golf Club",
         "date": "October 26, 2026",
         "address": "1940 Cheshire Rd, Delaware, OH 43015",
@@ -136,7 +136,7 @@
     },
     {
         "category": "Race",
-        "eventName": "Division I Regional Meet",
+        "eventname": "Division I Regional Meet",
         "location": "Pickerington North High School",
         "date": "October 31, 2026",
         "address": "7800 Refugee Rd, Pickerington, OH 43147",
@@ -145,7 +145,7 @@
     },
     {
         "category": "Race",
-        "eventName": "Division I State Meet",
+        "eventname": "Division I State Meet",
         "location": "Fortress Obetz, Groveport, OH",
         "date": "November 7, 2026",
         "address": "2015 Recreation Trl, Obetz, OH 43207",
