@@ -136,8 +136,9 @@
             <!-- Tier 2: Season Year Selector Tabs -->
             <div class="filter-section-title">Select Season Year:</div>
             <div class="filter-buttons" id="yearFilterButtons">
-                <button class="filter-btn active" data-year="2026">2026</button>
-                <button class="filter-btn" data-year="2025">2025</button>
+                <button class="filter-btn" data-year="2026">2026</button>
+                <!-- UI BUG FIX: 2025 is now the active UI tab to match the JS default -->
+                <button class="filter-btn active" data-year="2025">2025</button>
                 <button class="filter-btn" data-year="2024">2024</button>
                 <button class="filter-btn" data-year="2023">2023</button>
                 <button class="filter-btn" data-year="2022">2022</button>
@@ -165,7 +166,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             let allResults = [];
             let currentCategory = "results"; // default view
-            let currentYear = "2025"; // CHANGED: Default to 2025 so the page doesn't load empty
+            let currentYear = "2025"; // default year
 
             const resultsContainer = document.getElementById("resultsContainer");
             const categoryButtons = document.querySelectorAll("#categoryFilterButtons .filter-btn");
@@ -180,9 +181,9 @@
 
             function filterAndRender() {
                 const filtered = allResults.filter(item => {
-                    // ADDED: Programmatic categorization since 'category' isn't in the Google Sheet
                     let itemCat = "results";
-                    const meetName = (item.meetName || "").toLowerCase();
+                    // JS FIX: target 'meetname' exactly as output by the ETL script
+                    const meetName = (item.meetname || "").toLowerCase();
                     
                     if (meetName.includes("personal bests") || meetName.includes("season times")) {
                         itemCat = "records";
@@ -199,14 +200,15 @@
 
                 resultsContainer.innerHTML = filtered.map(meet => {
                     let actionButtons = '';
-                    const finalPdfUrl = formatDriveUrl(meet.pdfUrl);
+                    // JS FIX: target 'pdfurl' exactly as output by the ETL script
+                    const finalPdfUrl = formatDriveUrl(meet.pdfurl);
                     
-                    // ADDED: rel="noopener noreferrer" to target="_blank" links
                     if (finalPdfUrl) {
                         actionButtons += `<a href="${finalPdfUrl}" target="_blank" rel="noopener noreferrer" class="btn-navy">&#x1F4C4; View Document / PDF</a>`;
                     }
-                    if (meet.externalUrl) {
-                        actionButtons += `<a href="${meet.externalUrl}" target="_blank" rel="noopener noreferrer" class="btn-gold">&#x1F517; External Link</a>`;
+                    // JS FIX: target 'externalurl' exactly as output by the ETL script
+                    if (meet.externalurl) {
+                        actionButtons += `<a href="${meet.externalurl}" target="_blank" rel="noopener noreferrer" class="btn-gold">&#x1F517; External Link</a>`;
                     }
 
                     return `
@@ -215,7 +217,8 @@
                                 <span class="event-date">${meet.date || ''}</span>
                                 <span style="font-size: 0.85rem; color: var(--text-muted);">${meet.location || ''}</span>
                             </div>
-                            <h3 class="event-title">${meet.meetName || ''}</h3>
+                            <!-- JS FIX: target 'meetname' exactly as output by the ETL script -->
+                            <h3 class="event-title">${meet.meetname || ''}</h3>
                             <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                                 ${actionButtons}
                             </div>
@@ -224,6 +227,7 @@
                 }).join('');
             }
 
+            // Fallback to local JSON dataset
             fetch("./assets/data/results.json")
                 .then(res => {
                     if (!res.ok) throw new Error("Could not load local results.json");
@@ -238,6 +242,7 @@
                     resultsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #dc2626;">Unable to load records data at this time. Please check back later.</div>`;
                 });
 
+            // Category Tab Click Logic
             categoryButtons.forEach(btn => {
                 btn.addEventListener("click", function () {
                     categoryButtons.forEach(b => b.classList.remove("active"));
@@ -247,6 +252,7 @@
                 });
             });
 
+            // Year Tab Click Logic
             yearButtons.forEach(btn => {
                 btn.addEventListener("click", function () {
                     yearButtons.forEach(b => b.classList.remove("active"));
