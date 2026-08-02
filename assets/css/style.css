@@ -111,6 +111,8 @@ nav ul li a {
     font-weight: 600;
     font-size: 0.95rem;
     transition: color 0.2s;
+    position: relative;
+    padding-bottom: 0.2rem;
 }
 
 nav ul li a:hover,
@@ -118,9 +120,14 @@ nav ul li a.active {
     color: var(--primary-navy);
 }
 
-nav ul li a.active {
-    border-bottom: 2px solid var(--primary-gold);
-    padding-bottom: 0.2rem;
+nav ul li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-gold);
 }
 
 /* ==========================================

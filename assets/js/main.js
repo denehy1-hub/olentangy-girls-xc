@@ -22,16 +22,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 3. Dynamic Active Navbar Highlighting
-    let path = window.location.pathname.split("/").pop();
-    if (path === "" || path === "/") {
-        path = "index.html";
+    // 3. Dynamic Active Navbar Highlighting for Common Header
+    let currentPath = window.location.pathname.split("/").pop();
+    if (currentPath === "" || currentPath === "/") {
+        currentPath = "index.html";
     }
 
-    const navLinks = document.querySelectorAll("header nav a, .navbar-nav a, nav a");
+    const navLinks = document.querySelectorAll("nav ul li a, header nav a");
     navLinks.forEach(link => {
         const href = link.getAttribute("href");
-        if (href === path || (path === "index.html" && (href === "./" || href === ""))) {
+        if (href === currentPath || (currentPath === "index.html" && (href === "./" || href === ""))) {
             link.classList.add("active");
         } else {
             link.classList.remove("active");
