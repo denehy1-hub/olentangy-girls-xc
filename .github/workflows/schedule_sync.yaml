@@ -1,4 +1,4 @@
-name: Sync Schedule Data
+name: Sync Team Data
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  update-schedule:
+  update-data:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -20,15 +20,18 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Prep Git & Pull Latest
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git pull origin main --rebase || true
+
       - name: Run ETL Script
         run: python .github/scripts/fetch_schedule.py
 
       - name: Commit and Push Changes
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git reset --hard
-          git pull origin main --rebase || true
-          git add assets/data/schedule.json assets/data/schedule.ics
-          git diff --quiet && git diff --staged --quiet || git commit -m "chore: auto-update schedule data [skip ci]"
+          # The wildcard ensures all updated JSON files are grabbed
+          git add assets/data/*.json assets/data/schedule.ics
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: auto-update team data [skip ci]"
           git push
