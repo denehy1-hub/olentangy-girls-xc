@@ -17,7 +17,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3. Initialize interactive UI components (e.g., accordions)
     initAccordions();
+
+    // 4. Initialize Mobile Navigation & Search Drawer Toggle
+    initMobileNav();
 });
+
+/**
+ * Automatically handles opening and closing the right-aligned mobile drawer menu.
+ */
+function initMobileNav() {
+    const menuToggle = document.getElementById('menuToggle');
+    const closeMenu = document.getElementById('closeMenu');
+    const mobileNav = document.getElementById('mobileNav');
+
+    if (menuToggle && mobileNav) {
+        menuToggle.addEventListener('click', () => {
+            mobileNav.classList.add('open');
+        });
+    }
+
+    if (closeMenu && mobileNav) {
+        closeMenu.addEventListener('click', () => {
+            mobileNav.classList.remove('open');
+        });
+    }
+}
 
 /**
  * Automatically highlights the correct navigation menu item matching the current URL.

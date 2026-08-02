@@ -9,12 +9,23 @@
             </div>
         </div>
         
-        <!-- Mobile Hamburger Menu Button -->
+        <!-- Mobile Hamburger Menu Button on the Right -->
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
             &#9776;
         </button>
 
-        <nav id="siteNav">
+        <!-- Dropdown Navigation Panel -->
+        <nav id="mobileNav" class="mobile-nav">
+            <div class="nav-header">
+                <button class="close-menu" id="closeMenu" aria-label="Close Menu">&times;</button>
+            </div>
+
+            <!-- Search Bar Section -->
+            <div class="search-container">
+                <input type="text" placeholder="Search" class="search-input">
+                <button class="search-btn">GO</button>
+            </div>
+
             <ul id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="schedule.html">Schedule</a></li>

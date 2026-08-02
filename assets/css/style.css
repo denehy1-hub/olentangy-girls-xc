@@ -314,7 +314,7 @@ nav ul li a.active::after {
 }
 
 /* ==========================================
-   Responsive adjustments & View Switcher
+   Responsive adjustments & Mobile Menu
    ========================================== */
 @media (max-width: 768px) {
     .hero-section {
@@ -338,7 +338,7 @@ nav ul li a.active::after {
         justify-content: flex-start;
     }
 
-    /* Show hamburger menu toggle cleanly inside mobile flex layout */
+    /* Show hamburger menu toggle cleanly on the right */
     .menu-toggle {
         display: block;
         background: none;
@@ -346,42 +346,82 @@ nav ul li a.active::after {
         font-size: 1.75rem;
         color: var(--primary-navy);
         cursor: pointer;
+        margin-left: auto;
     }
     
+    /* Mobile Dropdown Menu Panel */
     nav {
         display: none;
         width: 100%;
         margin-top: 1rem;
         flex-basis: 100%;
+        background-color: var(--white);
     }
 
     nav.active {
         display: block;
     }
 
-    nav ul {
-        flex-direction: column;
-        gap: 0.75rem;
-        background-color: #f8fafc;
-        padding: 1rem;
-        border-radius: 8px;
-        border: 1px solid #e2e8f0;
-        text-align: center;
+    /* Search Bar Layout inside Mobile Menu */
+    .search-container {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 1.25rem;
+        width: 100%;
     }
 
+    .search-input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        font-size: 0.95rem;
+        outline: none;
+    }
+
+    .search-btn {
+        padding: 8px 16px;
+        background-color: var(--primary-navy);
+        color: var(--white);
+        border: none;
+        border-radius: 4px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0;
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        text-align: left;
+    }
+
+    nav ul li {
+        width: 100%;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* Remove item highlighting (no background block colors or underlines) */
     nav ul li a {
         display: block;
-        padding: 0.5rem 0;
+        padding: 12px 0;
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        color: var(--text-dark);
     }
 
     nav ul li a.active::after {
         display: none;
     }
     
-    nav ul li a.active {
-        color: var(--primary-gold);
-        background-color: var(--primary-navy);
-        border-radius: 4px;
+    nav ul li a.active,
+    nav ul li a:hover {
+        color: var(--primary-navy);
+        background-color: transparent !important;
     }
 
     /* Switch Views: Hide table, display mobile cards */
