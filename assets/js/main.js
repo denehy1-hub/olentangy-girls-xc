@@ -183,15 +183,36 @@ function showErrorMessage(path) {
 function renderRoster(data) {
     const container = document.getElementById("roster-container");
     if (!container) return;
-    
-    container.innerHTML = data.map(athlete => `
-        <div class="athlete-card">
-            <h3>${escapeHtml(athlete.name)}</h3>
-            <p>Grade: ${escapeHtml(athlete.grade)}</p>
-        </div>
-    `).join('');
-}
 
+    // Group athletes by their grade string ('12', '11', '10', '9')
+    const grades = ["12", "11", "10", "9"];
+    
+    container.innerHTML = grades.map(gradeLevel => {
+        // Filter athletes matching this grade (using lowercase 'grade' from ETL)
+        const gradeAthletes = data.filter(athlete => String(athlete.grade).trim() === gradeLevel);
+
+        const athleteListHtml = gradeAthletes.length > 0 ? 
+            gradeAthletes.map(athlete => {
+                // Check lowercase 'iscaptain' and handle string values ("TRUE" or "true")
+                const isCap = String(athlete.iscaptain).toLowerCase() === 'true';
+                const captainBadge = isCap ? ' <span style="color: var(--primary-gold); font-weight: bold;">*</span>' : '';
+                
+                return `<div class="roster-athlete-item">${escapeHtml(athlete.name)}${captainBadge}</div>`;
+            .join('') : `<p style="color: var(--text-muted); font-style: italic;">No athletes listed</p>`;
+
+        return `
+            <div class="grade-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-navy); padding-bottom: 8px; margin-bottom: 12px;">
+                    <h3 style="margin: 0; color: var(--primary-navy);">Grade</h3>
+                    <span style="background-color: var(--primary-gold); color: var(--primary-navy); font-weight: bold; padding: 2px 8px; border-radius: 4px;">${gradeLevel}</span>
+                </div>
+                <div class="athlete-list">
+                    ${athleteListHtml}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
 function renderSchedule(data) {
     const container = document.getElementById("schedule-container");
     if (!container) return;
