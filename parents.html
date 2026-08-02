@@ -283,10 +283,40 @@
                             link.classList.add("active");
                         }
                     });
+
+                    // Mobile Hamburger Menu Toggle Logic
+                    const menuToggle = document.getElementById("menuToggle");
+                    const siteNav = document.getElementById("siteNav");
+
+                    if (menuToggle && siteNav) {
+                        menuToggle.addEventListener("click", function () {
+                            siteNav.classList.toggle("active");
+                        });
+                    }
                 });
 
             // Load shared footer component
             fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
+
+            // ==========================================
+            // Parent Hub Accordion Toggle Logic
+            // ==========================================
+            const accordionHeaders = document.querySelectorAll(".accordion-header");
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener("click", function () {
+                    const item = this.parentElement;
+                    const content = this.nextElementSibling;
+                    
+                    item.classList.toggle("active");
+                    
+                    if (item.classList.contains("active")) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.maxHeight = null;
+                    }
+                });
+            });
         });
     </script>
 </body>
