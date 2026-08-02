@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ========================================================================== -->
+    <!-- Document Metadata & Stylesheets                                          -->
+    <!-- ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule | Olentangy Girls Cross Country</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <style>
-        /* Specific Page Overrides matching Home Page Design */
+        <!-- ========================================================================== -->
+        <!-- Page Specific Overrides & Layout Styling                                 -->
+        <!-- ========================================================================== -->
         .hero-section {
             background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover-photo.jpg') no-repeat center center;
             background-size: cover;
@@ -35,7 +40,7 @@
             z-index: 10;
         }
 
-        /* Filter Buttons */
+        <!-- Filter Buttons Styling -->
         .filter-buttons {
             display: flex;
             gap: 0.75rem;
@@ -59,7 +64,7 @@
             border-color: var(--primary-navy);
         }
 
-        /* Schedule Table Style */
+        <!-- Schedule Table Layout & Interactions -->
         .schedule-table-wrapper {
             overflow-x: auto;
             margin-bottom: 2.5rem;
@@ -84,6 +89,8 @@
         .schedule-table tr:hover {
             background-color: #f8fafc;
         }
+        
+        <!-- Category Badges -->
         .cat-badge {
             display: inline-block;
             padding: 0.3rem 0.65rem;
@@ -96,7 +103,14 @@
         .cat-practice { background-color: #dcfce7; color: #166534; }
         .cat-social { background-color: #fef3c7; color: #92400e; }
         
-        /* ICS Calendar Card */
+        .details-note {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        <!-- ICS Calendar Sync Card -->
         .ics-card {
             background-color: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -134,7 +148,7 @@
             opacity: 0.95;
         }
 
-        /* Expanded Footer */
+        <!-- Expanded Footer Layout -->
         .expanded-footer {
             background-color: var(--primary-navy);
             color: #e2e8f0;
@@ -145,8 +159,8 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
             text-align: left;
         }
         .footer-grid h4 {
@@ -178,15 +192,13 @@
     </style>
 </head>
 <body style="background-color: #f1f5f9;">
-    <!-- Utility Bar -->
-    <div class="utility-bar">
-        <span>Need Help? <a href="mailto:ohsgxctreasurer@gmail.com">Contact Booster Treasurer</a></span>
-        <span>Quick Links: <a href="https://olentangy-oh.finalforms.com" target="_blank" rel="noopener noreferrer">FinalForms</a> | <a href="#">OYAA</a></span>
-    </div>
 
-    <!-- Header & Navigation -->
+    <!-- ========================================================================== -->
+    <!-- Original Header & Navigation Bar Style                                   -->
+    <!-- ========================================================================== -->
     <header>
         <div class="nav-container">
+            <!-- Brand Logo and Name with Subtitle -->
             <div class="brand">
                 <img src="./assets/img/logo.jpg" alt="Olentangy Braves Logo" class="brand-logo-img">
                 <div class="brand-text">
@@ -194,6 +206,7 @@
                     <span>Athletic Booster Club</span>
                 </div>
             </div>
+            <!-- Main Navigation Links -->
             <nav>
                 <ul id="navMenu">
                     <li><a href="index.html">Home</a></li>
@@ -206,17 +219,21 @@
         </div>
     </header>
 
-    <!-- Full-Width Hero Section -->
+    <!-- ========================================================================== -->
+    <!-- Full-Width Hero Section                                                  -->
+    <!-- ========================================================================== -->
     <div class="hero-section">
         <h2>2026 Season Master Schedule</h2>
-        <p>View upcoming invitationals, departure times, and location maps. Filter by category or sync directly to your personal calendar feed.</p>
+        <p>View upcoming races, practices, and community social events. Filter by category or sync directly to your personal calendar feed.</p>
     </div>
 
-    <!-- Main Content (Overlapping Container) -->
+    <!-- ========================================================================== -->
+    <!-- Main Content Container (Overlapping Hero)                                -->
+    <!-- ========================================================================== -->
     <div class="container overlap-container">
         <div class="section-box" style="padding: 2.5rem; border: none; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
             
-            <!-- Filters -->
+            <!-- Category Filter Controls -->
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="all">All Events</button>
                 <button class="filter-btn" data-filter="race">🏁 Races &amp; Meets</button>
@@ -224,18 +241,19 @@
                 <button class="filter-btn" data-filter="social">🍔 Socials &amp; Dinners</button>
             </div>
 
-            <!-- Schedule Table -->
+            <!-- Dynamic Schedule Table Wrapper -->
             <div class="schedule-table-wrapper">
                 <table class="schedule-table">
                     <thead>
                         <tr>
-                            <th style="width: 20%;">Category</th>
-                            <th style="width: 30%;">Event Name</th>
-                            <th style="width: 35%;">Location / Details</th>
-                            <th style="width: 15%;">Date</th>
+                            <th style="width: 18%;">Category</th>
+                            <th style="width: 28%;">Event Name</th>
+                            <th style="width: 38%;">Location / Details</th>
+                            <th style="width: 16%;">Date</th>
                         </tr>
                     </thead>
                     <tbody id="scheduleTableBody">
+                        <!-- Populated dynamically via JavaScript fetch -->
                         <tr>
                             <td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">
                                 Loading schedule data...
@@ -245,7 +263,7 @@
                 </table>
             </div>
 
-            <!-- Calendar Sync Widget -->
+            <!-- Personal Calendar Sync Widget Component -->
             <div class="ics-card">
                 <div>
                     <h3>📅 Sync with Your Personal Calendar</h3>
@@ -257,39 +275,69 @@
         </div>
     </div>
 
-    <!-- Expanded Footer -->
+    <!-- ========================================================================== -->
+    <!-- Expanded Footer (Includes Social Section, Boosters, Quick Links)           -->
+    <!-- ========================================================================== -->
     <footer class="expanded-footer">
         <div class="footer-grid">
+            <!-- Organization Overview -->
             <div>
                 <h4>Olentangy Girls XC Boosters</h4>
                 <p>A non-profit booster organization dedicated to supporting student-athlete development, equipment needs, team meals, and memorable seasonal events.</p>
             </div>
+            
+            <!-- Boosters & Community Engagement Section -->
+            <div>
+                <h4>Boosters &amp; Community</h4>
+                <a href="https://www.signupgenius.com" target="_blank" rel="noopener noreferrer">Volunteer Sign-Up Genius</a>
+                <a href="mailto:ohsgxctreasurer@gmail.com?subject=GroupMe%20Access%20Request">Request GroupMe Access</a>
+                <a href="support.html">Support &amp; Donors</a>
+            </div>
+
+            <!-- Social Section (Including GroupMe & Instagram) -->
+            <div>
+                <h4>Social &amp; Hubs</h4>
+                <a href="https://groupme.com/join_group/111771054/YQ2G3u5J" target="_blank" rel="noopener noreferrer">GroupMe</a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </div>
+
+            <!-- Quick Navigation & Links (Including Parent Hub) -->
             <div>
                 <h4>Quick Navigation</h4>
                 <a href="index.html">Home Dashboard</a>
                 <a href="schedule.html">Meet Schedule</a>
                 <a href="team.html">Coaches &amp; Team</a>
-                <a href="parents.html">Parent Hub &amp; Camp Info</a>
-                <a href="support.html">Booster Support</a>
+                <a href="parents.html">Parent Hub</a>
+                <a href="https://olentangy-oh.finalforms.com" target="_blank" rel="noopener noreferrer">FinalForms Portal</a>
             </div>
+
+            <!-- Contact & Mailing Location -->
             <div>
                 <h4>Contact &amp; Location</h4>
                 <p style="margin-bottom: 0.2rem; color: #ffffff; font-weight: bold;">Mailing Address:</p>
                 <p>675 Lewis Center Rd<br>Lewis Center, OH 43035</p>
             </div>
         </div>
+
+        <!-- GitHub Metadata / About Me Section Credit -->
         <div class="footer-bottom-bar">
-            &copy; 2026 Olentangy Girls Cross Country Booster Club. All rights reserved.
+            <p>&copy; 2026 Olentangy Girls Cross Country Booster Club. All rights reserved.</p>
+            <p style="margin-top: 0.4rem; font-size: 0.8rem; color: #94a3b8;">
+                Website maintained by Data Strategy &amp; Analytics Professional | Powered by GitHub Pages &amp; Automated ETL Pipelines.
+            </p>
         </div>
     </footer>
 
-    <!-- Schedule Data Loader Script -->
+    <!-- ========================================================================== -->
+    <!-- Client-Side Schedule Data Loader Script                                  -->
+    <!-- ========================================================================== -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let allEvents = [];
             const tableBody = document.getElementById("scheduleTableBody");
             const filterButtons = document.querySelectorAll(".filter-btn");
 
+            <!-- Helper function to map category strings to corresponding CSS style badges -->
             function getCategoryClass(category) {
                 const catLower = (category || "").toLowerCase();
                 if (catLower.includes("race") || catLower.includes("meet")) return "cat-race";
@@ -297,18 +345,22 @@
                 return "cat-social";
             }
 
+            <!-- Function to render event rows into the table DOM -->
             function renderTable(events) {
                 if (!events || events.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">No schedule events found. Please check back shortly or run the data sync workflow.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">No schedule events found. Please check back shortly.</td></tr>`;
                     return;
                 }
 
                 tableBody.innerHTML = events.map(event => {
-                    // Create hyperlink for location using address if available
                     let locationHtml = event.location || 'TBD';
                     if (event.address) {
                         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address)}`;
                         locationHtml = `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-navy); text-decoration: underline;" title="${event.address}">${event.location}</a>`;
+                    }
+
+                    if (event.details) {
+                        locationHtml += `<span class="details-note">${event.details}</span>`;
                     }
 
                     return `
@@ -322,6 +374,7 @@
                 }).join('');
             }
 
+            <!-- Asynchronously fetch JSON schedule data generated by backend ETL pipeline -->
             fetch("./assets/data/schedule.json")
                 .then(response => {
                     if (!response.ok) throw new Error("Network response was not ok");
@@ -336,6 +389,7 @@
                     tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: #dc2626;">Syncing latest schedule data. Please check back shortly.</td></tr>`;
                 });
 
+            <!-- Event listener setup for interactive category filters -->
             filterButtons.forEach(btn => {
                 btn.addEventListener("click", function () {
                     filterButtons.forEach(b => b.classList.remove("active"));
