@@ -11,7 +11,7 @@
     <style>
         /* ========================================================================== */
         /* Page Specific Overrides & Layout Styling                                 */
-        /* ========================================================================== */
+        /* ========================================================================== -->
         .hero-section {
             background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover-photo.jpg') no-repeat center center;
             background-size: cover;
@@ -200,13 +200,13 @@
             <!-- Category Filter Controls -->
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="all">All Events</button>
-                <button class="filter-btn" data-filter="race">🏁 Races &amp; Meets</button>
-                <button class="filter-btn" data-filter="practice">🏃 Practices &amp; Camp</button>
-                <button class="filter-btn" data-filter="social">🍔 Socials &amp; Dinners</button>
+                <button class="filter-btn" data-filter="race">Races &amp; Meets</button>
+                <button class="filter-btn" data-filter="practice">Practices &amp; Camp</button>
+                <button class="filter-btn" data-filter="social">Socials &amp; Dinners</button>
             </div>
 
-            <!-- Dynamic Schedule Table Wrapper -->
-            <div class="schedule-table-wrapper">
+            <!-- Desktop Schedule Table Wrapper -->
+            <div class="schedule-table-wrapper desktop-table">
                 <table class="schedule-table">
                     <thead>
                         <tr>
@@ -217,7 +217,6 @@
                         </tr>
                     </thead>
                     <tbody id="scheduleTableBody">
-                        <!-- Populated dynamically via JavaScript fetch -->
                         <tr>
                             <td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">
                                 Loading schedule data...
@@ -227,10 +226,17 @@
                 </table>
             </div>
 
+            <!-- Mobile Card Layout Wrapper -->
+            <div class="mobile-cards" id="mobileCardsContainer">
+                <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                    Loading schedule data...
+                </div>
+            </div>
+
             <!-- Dual-Action Personal Calendar Sync Card Component -->
             <div class="ics-card">
                 <div class="ics-card-content">
-                    <h3>📅 Sync with Your Personal Calendar</h3>
+                    <h3>Sync with Your Personal Calendar</h3>
                     <p>Download the official <code>.ics</code> schedule file or sync directly to Apple, Google, or Outlook calendars.</p>
                 </div>
                 <div class="ics-actions">
@@ -248,7 +254,7 @@
     <footer class="expanded-footer" id="site-footer"></footer>
 
     <!-- ========================================================================== -->
-    <!-- Scripts: Component Loader & Schedule Table Data Loader                   -->
+    <!-- Scripts: Component Loader & Schedule Table/Card Data Loader              -->
     <!-- ========================================================================== -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -258,6 +264,7 @@
 
             let allEvents = [];
             const tableBody = document.getElementById("scheduleTableBody");
+            const mobileCardsContainer = document.getElementById("mobileCardsContainer");
             const filterButtons = document.querySelectorAll(".filter-btn");
 
             function getCategoryClass(category) {
@@ -267,19 +274,21 @@
                 return "cat-social";
             }
 
-            function renderTable(events) {
+            function renderSchedule(events) {
                 if (!events || events.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">No schedule events found. Please check back shortly.</td></tr>`;
+                    const emptyHtml = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">No schedule events found. Please check back shortly.</td></tr>`;
+                    tableBody.innerHTML = emptyHtml;
+                    mobileCardsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--text-muted);">No schedule events found.</div>`;
                     return;
                 }
 
+                // 1. Render Desktop Table Rows
                 tableBody.innerHTML = events.map(event => {
                     let locationHtml = event.location || 'TBD';
                     if (event.address) {
                         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address)}`;
                         locationHtml = `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-navy); text-decoration: underline;" title="${event.address}">${event.location}</a>`;
                     }
-
                     if (event.details) {
                         locationHtml += `<span class="details-note">${event.details}</span>`;
                     }
@@ -293,6 +302,29 @@
                         </tr>
                     `;
                 }).join('');
+
+                // 2. Render Mobile Cards
+                mobileCardsContainer.innerHTML = events.map(event => {
+                    let locationHtml = event.location || 'TBD';
+                    if (event.address) {
+                        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address)}`;
+                        locationHtml = `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-navy); text-decoration: underline;" title="${event.address}">${event.location}</a>`;
+                    }
+                    if (event.details) {
+                        locationHtml += `<span class="details-note">${event.details}</span>`;
+                    }
+
+                    return `
+                        <div class="event-card">
+                            <div class="card-header">
+                                <span class="cat-badge ${getCategoryClass(event.category)}">${event.category || 'Event'}</span>
+                                <span class="event-date">${event.date || ''}</span>
+                            </div>
+                            <h3 class="event-title">${event.eventName || ''}</h3>
+                            <p class="event-location"><strong>Location:</strong> ${locationHtml}</p>
+                        </div>
+                    `;
+                }).join('');
             }
 
             fetch("./assets/data/schedule.json")
@@ -302,11 +334,13 @@
                 })
                 .then(data => {
                     allEvents = data;
-                    renderTable(allEvents);
+                    renderSchedule(allEvents);
                 })
                 .catch(error => {
                     console.error("Error loading schedule:", error);
-                    tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: #dc2626;">Syncing latest schedule data. Please check back shortly.</td></tr>`;
+                    const errorHtml = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: #dc2626;">Syncing latest schedule data. Please check back shortly.</td></tr>`;
+                    tableBody.innerHTML = errorHtml;
+                    mobileCardsContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #dc2626;">Syncing latest schedule data.</div>`;
                 });
 
             filterButtons.forEach(btn => {
@@ -316,13 +350,13 @@
 
                     const filter = this.getAttribute("data-filter");
                     if (filter === "all") {
-                        renderTable(allEvents);
+                        renderSchedule(allEvents);
                     } else {
                         const filtered = allEvents.filter(event => {
                             const cat = (event.category || "").toLowerCase();
                             return cat.includes(filter);
                         });
-                        renderTable(filtered);
+                        renderSchedule(filtered);
                     }
                 });
             });

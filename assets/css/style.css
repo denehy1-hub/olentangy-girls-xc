@@ -235,6 +235,50 @@ nav ul li a.active::after {
 }
 
 /* ==========================================
+   Mobile Card Layout Styles
+   ========================================== */
+.mobile-cards {
+    display: none; /* Hidden by default on desktop screens */
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 2.5rem;
+}
+
+.event-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.event-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.event-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary-navy);
+    margin: 0 0 6px 0;
+}
+
+.event-location {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+/* ==========================================
    Expanded Footer
    ========================================== */
 .expanded-footer {
@@ -284,7 +328,7 @@ nav ul li a.active::after {
 }
 
 /* ==========================================
-   Responsive adjustments
+   Responsive adjustments & View Switcher
    ========================================== */
 @media (max-width: 768px) {
     .hero-section {
@@ -307,5 +351,14 @@ nav ul li a.active::after {
     
     nav ul {
         justify-content: center;
+    }
+
+    /* Switch Views: Hide table, display mobile cards */
+    .desktop-table {
+        display: none !important;
+    }
+    
+    .mobile-cards {
+        display: flex !important;
     }
 }
