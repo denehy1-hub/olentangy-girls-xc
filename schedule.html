@@ -9,9 +9,9 @@
     <title>Schedule | Olentangy Girls Cross Country</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <style>
-        <!-- ========================================================================== -->
-        <!-- Page Specific Overrides & Layout Styling                                 -->
-        <!-- ========================================================================== -->
+        /* ========================================================================== */
+        /* Page Specific Overrides & Layout Styling                                 */
+        /* ========================================================================== */
         .hero-section {
             background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('./assets/img/cover-photo.jpg') no-repeat center center;
             background-size: cover;
@@ -40,7 +40,7 @@
             z-index: 10;
         }
 
-        <!-- Filter Buttons Styling -->
+        /* Filter Buttons Styling */
         .filter-buttons {
             display: flex;
             gap: 0.75rem;
@@ -64,7 +64,7 @@
             border-color: var(--primary-navy);
         }
 
-        <!-- Schedule Table Layout & Interactions -->
+        /* Schedule Table Layout & Interactions */
         .schedule-table-wrapper {
             overflow-x: auto;
             margin-bottom: 2.5rem;
@@ -90,7 +90,7 @@
             background-color: #f8fafc;
         }
         
-        <!-- Category Badges -->
+        /* Category Badges */
         .cat-badge {
             display: inline-block;
             padding: 0.3rem 0.65rem;
@@ -110,120 +110,84 @@
             margin-top: 0.25rem;
         }
 
-        <!-- ICS Calendar Sync Card -->
+        /* ICS Calendar Sync Card - Dual-button layout */
         .ics-card {
             background-color: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
-            padding: 1.75rem 2rem;
+            padding: 1.25rem 1.75rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1.5rem;
         }
-        .ics-card h3 {
+        .ics-card-content h3 {
             color: var(--primary-navy);
-            font-size: 1.2rem;
-            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
         }
-        .ics-card p {
+        .ics-card-content p {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin: 0;
         }
         
+        .ics-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
         .btn-gold {
             background-color: var(--primary-gold);
             color: var(--primary-navy);
-            padding: 0.8rem 1.75rem;
+            padding: 0.65rem 1.25rem;
             border-radius: 6px;
             font-weight: 700;
+            font-size: 0.9rem;
             text-decoration: none;
             transition: all 0.2s ease;
             display: inline-block;
+            border: none;
+            cursor: pointer;
         }
         .btn-gold:hover {
             background-color: #e6c547;
             opacity: 0.95;
         }
 
-        <!-- Expanded Footer Layout -->
-        .expanded-footer {
+        .btn-navy {
             background-color: var(--primary-navy);
-            color: #e2e8f0;
-            padding: 4rem 2rem 2rem 2rem;
-            margin-top: 4rem;
-        }
-        .footer-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2.5rem;
-            text-align: left;
-        }
-        .footer-grid h4 {
-            color: var(--primary-gold);
-            margin: 0 0 1.25rem 0;
-            font-size: 1.1rem;
-        }
-        .footer-grid p, .footer-grid a {
+            color: var(--white);
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 700;
             font-size: 0.9rem;
-            color: #cbd5e1;
-            line-height: 1.6;
-            margin: 0 0 0.5rem 0;
             text-decoration: none;
-            display: block;
-            transition: color 0.2s ease;
+            transition: all 0.2s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
         }
-        .footer-grid a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-        .footer-bottom-bar {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 3rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.85rem;
-            color: #94a3b8;
+        .btn-navy:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
 <body style="background-color: #f1f5f9;">
 
     <!-- ========================================================================== -->
-    <!-- Original Header & Navigation Bar Style                                   -->
+    <!-- Dynamic Header Injection Point                                           -->
     <!-- ========================================================================== -->
-    <header>
-        <div class="nav-container">
-            <!-- Brand Logo and Name with Subtitle -->
-            <div class="brand">
-                <img src="./assets/img/logo.jpg" alt="Olentangy Braves Logo" class="brand-logo-img">
-                <div class="brand-text">
-                    <h1>Olentangy Girls XC</h1>
-                    <span>Athletic Booster Club</span>
-                </div>
-            </div>
-            <!-- Main Navigation Links -->
-            <nav>
-                <ul id="navMenu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="schedule.html" class="active">Schedule</a></li>
-                    <li><a href="team.html">Coaches &amp; Team</a></li>
-                    <li><a href="parents.html">Parent Hub</a></li>
-                    <li><a href="support.html">Support</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <header id="site-header"></header>
 
     <!-- ========================================================================== -->
     <!-- Full-Width Hero Section                                                  -->
     <!-- ========================================================================== -->
     <div class="hero-section">
-        <h2>2026 Season Master Schedule</h2>
+        <h2>2026 Season Schedule</h2>
         <p>View upcoming races, practices, and community social events. Filter by category or sync directly to your personal calendar feed.</p>
     </div>
 
@@ -263,81 +227,39 @@
                 </table>
             </div>
 
-            <!-- Personal Calendar Sync Widget Component -->
+            <!-- Dual-Action Personal Calendar Sync Card Component -->
             <div class="ics-card">
-                <div>
+                <div class="ics-card-content">
                     <h3>📅 Sync with Your Personal Calendar</h3>
                     <p>Download the official <code>.ics</code> schedule file or sync directly to Apple, Google, or Outlook calendars.</p>
                 </div>
-                <a href="./assets/data/schedule.ics" class="btn-gold" style="white-space: nowrap; text-align: center;">Download .ics File</a>
+                <div class="ics-actions">
+                    <a href="./assets/data/schedule.ics" class="btn-gold">Download .ics File</a>
+                    <a href="webcal://olentangygirlsxc.com/assets/data/schedule.ics" class="btn-navy">Subscribe Live Feed</a>
+                </div>
             </div>
 
         </div>
     </div>
 
     <!-- ========================================================================== -->
-    <!-- Expanded Footer (Includes Social Section, Boosters, Quick Links)           -->
+    <!-- Dynamic Footer Injection Point                                           -->
     <!-- ========================================================================== -->
-    <footer class="expanded-footer">
-        <div class="footer-grid">
-            <!-- Organization Overview -->
-            <div>
-                <h4>Olentangy Girls XC Boosters</h4>
-                <p>A non-profit booster organization dedicated to supporting student-athlete development, equipment needs, team meals, and memorable seasonal events.</p>
-            </div>
-            
-            <!-- Boosters & Community Engagement Section -->
-            <div>
-                <h4>Boosters &amp; Community</h4>
-                <a href="https://www.signupgenius.com" target="_blank" rel="noopener noreferrer">Volunteer Sign-Up Genius</a>
-                <a href="mailto:ohsgxctreasurer@gmail.com?subject=GroupMe%20Access%20Request">Request GroupMe Access</a>
-                <a href="support.html">Support &amp; Donors</a>
-            </div>
-
-            <!-- Social Section (Including GroupMe & Instagram) -->
-            <div>
-                <h4>Social &amp; Hubs</h4>
-                <a href="https://groupme.com/join_group/111771054/YQ2G3u5J" target="_blank" rel="noopener noreferrer">GroupMe</a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-            </div>
-
-            <!-- Quick Navigation & Links (Including Parent Hub) -->
-            <div>
-                <h4>Quick Navigation</h4>
-                <a href="index.html">Home Dashboard</a>
-                <a href="schedule.html">Meet Schedule</a>
-                <a href="team.html">Coaches &amp; Team</a>
-                <a href="parents.html">Parent Hub</a>
-                <a href="https://olentangy-oh.finalforms.com" target="_blank" rel="noopener noreferrer">FinalForms Portal</a>
-            </div>
-
-            <!-- Contact & Mailing Location -->
-            <div>
-                <h4>Contact &amp; Location</h4>
-                <p style="margin-bottom: 0.2rem; color: #ffffff; font-weight: bold;">Mailing Address:</p>
-                <p>675 Lewis Center Rd<br>Lewis Center, OH 43035</p>
-            </div>
-        </div>
-
-        <!-- GitHub Metadata / About Me Section Credit -->
-        <div class="footer-bottom-bar">
-            <p>&copy; 2026 Olentangy Girls Cross Country Booster Club. All rights reserved.</p>
-            <p style="margin-top: 0.4rem; font-size: 0.8rem; color: #94a3b8;">
-                Website maintained by Data Strategy &amp; Analytics Professional | Powered by GitHub Pages &amp; Automated ETL Pipelines.
-            </p>
-        </div>
-    </footer>
+    <footer class="expanded-footer" id="site-footer"></footer>
 
     <!-- ========================================================================== -->
-    <!-- Client-Side Schedule Data Loader Script                                  -->
+    <!-- Scripts: Component Loader & Schedule Table Data Loader                   -->
     <!-- ========================================================================== -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            // Load shared layout components
+            fetch("header.html").then(res => res.text()).then(data => document.getElementById("site-header").innerHTML = data);
+            fetch("footer.html").then(res => res.text()).then(data => document.getElementById("site-footer").innerHTML = data);
+
             let allEvents = [];
             const tableBody = document.getElementById("scheduleTableBody");
             const filterButtons = document.querySelectorAll(".filter-btn");
 
-            <!-- Helper function to map category strings to corresponding CSS style badges -->
             function getCategoryClass(category) {
                 const catLower = (category || "").toLowerCase();
                 if (catLower.includes("race") || catLower.includes("meet")) return "cat-race";
@@ -345,7 +267,6 @@
                 return "cat-social";
             }
 
-            <!-- Function to render event rows into the table DOM -->
             function renderTable(events) {
                 if (!events || events.length === 0) {
                     tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">No schedule events found. Please check back shortly.</td></tr>`;
@@ -374,7 +295,6 @@
                 }).join('');
             }
 
-            <!-- Asynchronously fetch JSON schedule data generated by backend ETL pipeline -->
             fetch("./assets/data/schedule.json")
                 .then(response => {
                     if (!response.ok) throw new Error("Network response was not ok");
@@ -389,7 +309,6 @@
                     tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: #dc2626;">Syncing latest schedule data. Please check back shortly.</td></tr>`;
                 });
 
-            <!-- Event listener setup for interactive category filters -->
             filterButtons.forEach(btn => {
                 btn.addEventListener("click", function () {
                     filterButtons.forEach(b => b.classList.remove("active"));
