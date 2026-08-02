@@ -5,7 +5,8 @@
         "location": "Camp Lazarus",
         "date": "July 30, 2026",
         "address": "4422 Columbus Pike, Delaware, OH 43015",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
     },
     {
         "category": "Practice",
@@ -13,7 +14,17 @@
         "location": "Camp Lazarus",
         "date": "July 31, 2026",
         "address": "4422 Columbus Pike, Delaware, OH 43015",
-        "season": "2026"
+        "season": "2026",
+        "details": "Dinner 6:00 PM | Parent Meeting 6:30 PM | Camp Skits 7:30 PM"
+    },
+    {
+        "category": "Social",
+        "eventName": "Team Campout",
+        "location": "Elena Wanek's House",
+        "date": "August 14, 2026",
+        "address": "",
+        "season": "2026",
+        "details": "Starts at 6:30 PM"
     },
     {
         "category": "Race",
@@ -21,7 +32,17 @@
         "location": "Big Walnut High School",
         "date": "August 29, 2026",
         "address": "713 Miller Dr, Sunbury, OH 43074",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
+    },
+    {
+        "category": "Social",
+        "eventName": "Donuts and Coffee with Families",
+        "location": "Westerville North High School",
+        "date": "September 5, 2026",
+        "address": "950 County Line Rd, Westerville, OH 43081",
+        "season": "2026",
+        "details": "Meet under Parent Tent at 8:30 AM"
     },
     {
         "category": "Race",
@@ -29,7 +50,8 @@
         "location": "Westerville North High School",
         "date": "September 5, 2026",
         "address": "950 County Line Rd, Westerville, OH 43081",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
     },
     {
         "category": "Race",
@@ -37,7 +59,17 @@
         "location": "Watkins Memorial High School",
         "date": "September 12, 2026",
         "address": "1954 Warrior Way SW, Etna, OH 43062",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
+    },
+    {
+        "category": "Social",
+        "eventName": "Parent Tailgate",
+        "location": "Dublin Jerome High School (Celtic Clash)",
+        "date": "September 19, 2026",
+        "address": "4RMG+5G, 8300 Hyland-Croy Rd, Dublin, OH 43016",
+        "season": "2026",
+        "details": "Tailgate at 6:00 PM under Parent Tent"
     },
     {
         "category": "Race",
@@ -45,7 +77,8 @@
         "location": "Dublin Jerome High School",
         "date": "September 19, 2026",
         "address": "4RMG+5G, 8300 Hyland-Croy Rd, Dublin, OH 43016",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
     },
     {
         "category": "Race",
@@ -53,7 +86,8 @@
         "location": "Lancaster High School",
         "date": "September 26, 2026",
         "address": "1312 Granville Pike, Lancaster, OH 43130",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
     },
     {
         "category": "Race",
@@ -61,7 +95,8 @@
         "location": "London High School",
         "date": "October 3, 2026",
         "address": "336 Elm St, London, OH 43140",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
     },
     {
         "category": "Race",
@@ -69,7 +104,17 @@
         "location": "Thomas Worthington High School",
         "date": "October 10, 2026",
         "address": "300 W Dublin-Granville Rd, Worthington, OH 43085",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
+    },
+    {
+        "category": "Social",
+        "eventName": "Senior Night",
+        "location": "Highbanks Northern Shelter House",
+        "date": "October 15, 2026",
+        "address": "9466 Columbus Pike, Lewis Center, OH 43035",
+        "season": "2026",
+        "details": "Starts at 5:00 PM"
     },
     {
         "category": "Race",
@@ -77,7 +122,17 @@
         "location": "Hilliard Bradley High School",
         "date": "October 17, 2026",
         "address": "2800 Walker Rd, Hilliard, OH 43026",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
+    },
+    {
+        "category": "Social",
+        "eventName": "Team Banquet",
+        "location": "Little Bear Golf Club",
+        "date": "October 26, 2026",
+        "address": "1940 Cheshire Rd, Delaware, OH 43015",
+        "season": "2026",
+        "details": "Starts at 7:00 PM"
     },
     {
         "category": "Race",
@@ -85,7 +140,8 @@
         "location": "Pickerington North High School",
         "date": "October 31, 2026",
         "address": "7800 Refugee Rd, Pickerington, OH 43147",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
     },
     {
         "category": "Race",
@@ -93,6 +149,7 @@
         "location": "Fortress Obetz, Groveport, OH",
         "date": "November 7, 2026",
         "address": "2015 Recreation Trl, Obetz, OH 43207",
-        "season": "2026"
+        "season": "2026",
+        "details": ""
     }
 ]
