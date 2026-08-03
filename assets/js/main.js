@@ -198,7 +198,7 @@ function renderRoster(data) {
                 const captainBadge = isCap ? ' <span style="color: var(--primary-gold); font-weight: bold;">*</span>' : '';
                 
                 return `<div class="roster-athlete-item">${escapeHtml(athlete.name)}${captainBadge}</div>`;
-            .join('') : `<p style="color: var(--text-muted); font-style: italic;">No athletes listed</p>`;
+            }).join('') : `<p style="color: var(--text-muted); font-style: italic;">No athletes listed</p>`;
 
         return `
             <div class="grade-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
@@ -213,6 +213,7 @@ function renderRoster(data) {
         `;
     }).join('');
 }
+
 function renderSchedule(data) {
     const container = document.getElementById("schedule-container");
     if (!container) return;
