@@ -323,12 +323,12 @@
                     return response.json();
                 })
                 .then(athletes => {
-                    const grades = [12, 11, 10, 9];
+                    const grades = ["12", "11", "10", "9"];
                     let htmlContent = "";
 
                     grades.forEach(grade => {
-                        const gradeAthletes = athletes.filter(a => a.grade === grade);
-                        gradeAthletes.sort((a, b) => a.name.localeCompare(b.name));
+                        const gradeAthletes = athletes.filter(a => String(a.grade).trim() === grade);
+                        gradeAthletes.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
                         htmlContent += `
                             <div class="roster-grade-box">
@@ -341,7 +341,8 @@
 
                         if (gradeAthletes.length > 0) {
                             gradeAthletes.forEach(athlete => {
-                                const captainMark = athlete.isCaptain ? '<span class="captain-star" title="Captain">*</span>' : '';
+                                const isCap = String(athlete.iscaptain).toLowerCase() === 'true';
+                                const captainMark = isCap ? '<span class="captain-star" title="Captain">*</span>' : '';
                                 htmlContent += `<li><span>${escapeHtml(athlete.name)}</span> ${captainMark}</li>`;
                             });
                         } else {
